@@ -6,6 +6,8 @@
 #include "../func/Global.h"
 #include <iostream>
 #include <nlohmann/json_fwd.hpp>
+
+#include "ResourceManager/CImageManager.h"
 using json = nlohmann::json;
 
 // CUnit::CUnit() {

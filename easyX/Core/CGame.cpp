@@ -4,6 +4,7 @@
 #include "EKey.h"
 #include "Scene/CScene.h"
 #include "../survivor/func/Global.h"
+#include "ResourceManager/CThinkerManager.h"
 
 CGame::CGame(int _width, int _height) {
     mWidth = _width;

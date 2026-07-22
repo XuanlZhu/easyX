@@ -2,6 +2,7 @@
 #include "../easyX/Core/EKey.h"
 #include "func/Global.h"
 #include "map/CScene1.h"
+#include "ResourceManager/CImageManager.h"
 #include "ResourceManager/CThinkerManager.h"
 #include "Scene/CScene.h"
 #include "unit/CPlayer.h"

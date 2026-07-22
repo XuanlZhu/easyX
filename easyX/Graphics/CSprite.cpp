@@ -4,6 +4,7 @@
 #include "CSprite.h"
 
 #include "../../survivor/func/Global.h"
+#include "ResourceManager/CImageManager.h"
 #pragma comment(lib, "MSIMG32.LIB") // 链接库
 
 // 透明贴图函数

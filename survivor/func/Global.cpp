@@ -6,6 +6,9 @@
 #include <fstream>
 #include <iostream>
 
+#include "Core/CVector2.h"
+
+
 json LoadJson(std::string _path)
 {
 

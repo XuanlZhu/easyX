@@ -4,16 +4,14 @@
 
 #pragma once
 #include <string>
-
-#include "Core/CVector2.h"
-#include "../unit/CUnit.h"
 #include <nlohmann/json.hpp>
 #include <memory>
-//
-#include "Core/CGame.h"
-#include "ResourceManager/CImageManager.h"
-#include "ResourceManager/CThinkerManager.h"
+#include "../unit/CUnit.h"
 
+class CVector2;
+class CImageManager;
+class CScene;
+class CGame;
 class CThinkerManager;
 
 class CPlayer;

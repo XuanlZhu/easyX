@@ -21,8 +21,7 @@ public:
 
     std::function<float()> mFunc = []{return 0;};
     bool mIsDead = false;
-    float mCreateTime = 0;
-    // float mCreateTime = GetNowTime();
+    float mCreateTime = GetNowTime();
     float mElapsedTime = 0;
     float mInterval = 0;
 };

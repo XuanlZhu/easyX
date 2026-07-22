@@ -1,0 +1,73 @@
+cmake_minimum_required(VERSION 4.2)
+project(easyX)
+
+add_definitions(-DUNICODE -D_UNICODE)
+
+#set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include_directories(easyX)
+
+add_executable(easyX
+        easyX/Core/CGame.cpp
+        easyX/Core/CGame.h
+        survivor/CMyGame.cpp
+        survivor/CMyGame.h
+        survivor/start.cpp
+        easyX/Core/CInput.cpp
+        easyX/Core/CInput.h
+        easyX/Core/CTime.cpp
+        easyX/Core/CTime.h
+        easyX/Graphics/CCamera.cpp
+        easyX/Graphics/CCamera.h
+        easyX/Graphics/CSprite.cpp
+        easyX/Graphics/CSprite.h
+        easyX/Graphics/CTexture.cpp
+        easyX/Graphics/CTexture.h
+        easyX/Scene/CScene.cpp
+        easyX/Scene/CScene.h
+        easyX/Scene/SpriteList.cpp
+        easyX/Scene/SpriteList.h
+        easyX/Core/CVector2.cpp
+        easyX/Core/CVector2.h
+        easyX/Map/CTileMap.cpp
+        easyX/Map/CTileMap.h
+        easyX/Core/EKey.h
+        survivor/map/CScene1.cpp
+        survivor/map/CScene1.h
+        survivor/unit/CPlayer.cpp
+        survivor/unit/CPlayer.h
+        survivor/func/Global.cpp
+        survivor/func/Global.h
+        survivor/unit/CUnit.cpp
+        survivor/unit/CUnit.h
+        easyX/ResourceManager/CImageManager.cpp
+        easyX/ResourceManager/CImageManager.h
+        easyX/ResourceManager/CThinkerManager.cpp
+        easyX/ResourceManager/CThinkerManager.h
+        easyX/Core/CThinker.cpp
+        easyX/Core/CThinker.h
+        easyX/Core/CEntity.cpp
+        easyX/Core/CEntity.h
+)
+
+# EasyX库路径
+target_link_directories(easyX PRIVATE
+        "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Auxiliary/VS/lib/x64"
+)
+
+include(FetchContent)
+
+FetchContent_Declare(
+        json
+        URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+)
+
+FetchContent_MakeAvailable(json)
+
+# 链接EasyX
+target_link_libraries(easyX
+        EasyXw
+        nlohmann_json::nlohmann_json
+)

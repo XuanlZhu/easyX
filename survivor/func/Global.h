@@ -1,0 +1,34 @@
+//
+// Created by admin on 2026/7/20.
+//
+
+#pragma once
+#include <string>
+
+#include "Core/CVector2.h"
+#include "../unit/CUnit.h"
+#include <nlohmann/json.hpp>
+#include <memory>
+//
+#include "Core/CGame.h"
+#include "ResourceManager/CImageManager.h"
+#include "ResourceManager/CThinkerManager.h"
+
+class CThinkerManager;
+
+class CPlayer;
+using json = nlohmann::json;
+
+class Global {
+public:
+    inline static CGame* game = nullptr;//游戏
+    inline static CScene* scene = nullptr;//场景
+    inline static std::shared_ptr<CPlayer> player = nullptr;//玩家
+    inline static json unitJson = {};//unitJson
+    inline static CImageManager* imgManager = nullptr;//图片管理器
+    inline static CThinkerManager* thinkerManager = nullptr;//thinker管理器
+};
+
+json LoadJson(std::string _path);
+std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName,CVector2 _location,CUnit* _owner,int _team);
+float GetNowTime();

@@ -1,0 +1,9 @@
+﻿  start.cpp
+start.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl CGame::CGame(int,int)" (??0CGame@@QEAA@HH@Z)，函数 main 中引用了该符号
+start.obj : error LNK2019: 无法解析的外部符号 "public: virtual __cdecl CGame::~CGame(void)" (??1CGame@@UEAA@XZ)，函数 main 中引用了该符号
+start.obj : error LNK2019: 无法解析的外部符号 "public: void __cdecl CGame::Run(void)" (?Run@CGame@@QEAAXXZ)，函数 main 中引用了该符号
+start.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl CSprite::CSprite(void)" (??0CSprite@@QEAA@XZ)，函数 main 中引用了该符号
+start.obj : error LNK2019: 无法解析的外部符号 "public: bool __cdecl CSprite::LoadImageW(wchar_t const *)" (?LoadImageW@CSprite@@QEAA_NPEB_W@Z)，函数 main 中引用了该符号
+start.obj : error LNK2019: 无法解析的外部符号 "public: virtual void __cdecl CSprite::Draw(void)" (?Draw@CSprite@@UEAAXXZ)，函数 main 中引用了该符号
+start.obj : error LNK2019: 无法解析的外部符号 "public: void __cdecl CSprite::SetPosition(int,int)" (?SetPosition@CSprite@@QEAAXHH@Z)，函数 main 中引用了该符号
+D:\project\easyX\x64\Debug\easyX.exe : fatal error LNK1120: 7 个无法解析的外部命令

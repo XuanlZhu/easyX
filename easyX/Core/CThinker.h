@@ -15,13 +15,16 @@ public:
     virtual void Think();
 
     virtual void Update(float _deltaTime);
-    void Destroy(){mIsDead = true;}
+    void Destroy();
     bool IsDead(){return mIsDead;}
+    void ChangeFunc(std::function<float()> _func, float _interval);
 
 
     std::function<float()> mFunc = []{return 0;};
-    bool mIsDead = false;
+    std::string mName;
     float mCreateTime = GetNowTime();
     float mElapsedTime = 0;
     float mInterval = 0;
+private:
+    bool mIsDead = false;
 };

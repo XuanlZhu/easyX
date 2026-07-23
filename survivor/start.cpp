@@ -7,17 +7,22 @@
 #include "func/Global.h"
 #include "unit/CPlayer.h"
 
+
 int main()
 {
+
     Global::game = new CMyGame();
     Global::game->Run();
 
     auto plyer = Global::player;
 
-    plyer->SetContextThink("123",[] {
+    plyer->SetContextThink("123",[&] {
         std::cout << "Init Graphics Success" << std::endl;
+        CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3);
         return 1;
     },0);
+
+    // CVector2(5000,5000)+RandomVector(600);
 
 
     // CreateUnitByName("creep", CVector2(5000,5100), nullptr, 3);

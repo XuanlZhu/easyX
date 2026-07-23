@@ -7,14 +7,14 @@
 #include <vector>
 
 #include "Core/CEntity.h"
-#include "Core/CThinker.h"
+// #include "Core/CThinker.h"
 
 class CThinker;
 
 class CThinkerManager
 {
 public:
-    void CreateThinker(CEntity* _owner,std::function<float()> _func, int _interval);//创建thinker
+    std::weak_ptr<CThinker> CreateThinker(CEntity* _owner,std::function<float()> _func, float _interval,std::string _name);//创建thinker
     void Update(float _deltaTime);//更新
 private:
     void DestroyThinkers();//销毁thinker

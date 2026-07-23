@@ -5,6 +5,8 @@
 #include "../CMyGame.h"
 #include <fstream>
 #include <iostream>
+#include <random>
+#include <cmath>
 
 #include "Core/CVector2.h"
 
@@ -35,5 +37,32 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
 float GetNowTime() {
     auto ts = std::chrono::high_resolution_clock::now();
     return std::chrono::duration<float>(ts-Global::game->mStartTime).count();
+}
+
+int RandomInt(int _min, int _max) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+
+    std::uniform_int_distribution<> dis(_min,_max);
+    return dis(gen);
+}
+
+float RandomFloat(float _min, float _max) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+
+    std::uniform_int_distribution<> dis(_min,_max);
+    return dis(gen);
+}
+
+CVector2 RandomVector(int _length)
+{
+    float angle = RandomFloat(0.0f, 360.0f);
+    float rad = angle * 3.1415926f / 180.0f;
+    CVector2 vector2;
+    vector2.x = cos(rad) * _length;
+    vector2.y = sin(rad) * _length;
+
+    return vector2;
 }
 

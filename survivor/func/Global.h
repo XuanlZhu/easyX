@@ -30,3 +30,6 @@ public:
 json LoadJson(std::string _path);
 std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName,CVector2 _location,CUnit* _owner,int _team);
 float GetNowTime();
+int RandomInt(int _min,int _max);
+float RandomFloat(float _min,float _max);
+CVector2 RandomVector(int length);

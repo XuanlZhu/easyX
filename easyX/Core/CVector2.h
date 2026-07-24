@@ -17,5 +17,6 @@ public:
     CVector2 operator-(const CVector2& _other) const;
     //乘法
     CVector2 operator*(float _value) const;
-
+    float Length() const;//长度
+    CVector2 Normalize() const;//归1化
 };

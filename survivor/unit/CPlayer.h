@@ -3,13 +3,13 @@
 //
 
 #pragma once
+#include "CUnit.h"
 #include "Scene/CScene.h"
 
 
-class CPlayer : public CSprite
+class CPlayer : public CUnit
 {
 public:
-    using CSprite::CSprite;
-    float mSpeed = 25.0f;
+    using CUnit::CUnit;
     void Update(float _deltaTime) override;
 };

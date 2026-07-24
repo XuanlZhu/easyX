@@ -17,8 +17,6 @@ add_executable(easyX
         survivor/start.cpp
         easyX/Core/CInput.cpp
         easyX/Core/CInput.h
-        easyX/Core/CTime.cpp
-        easyX/Core/CTime.h
         easyX/Graphics/CCamera.cpp
         easyX/Graphics/CCamera.h
         easyX/Graphics/CSprite.cpp

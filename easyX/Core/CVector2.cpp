@@ -4,6 +4,8 @@
 
 #include "CVector2.h"
 
+#include <cmath>
+
 CVector2::CVector2()
 {
     x = 0;
@@ -35,4 +37,18 @@ CVector2 CVector2::operator-(const CVector2& _other) const
 CVector2 CVector2::operator*(float _value) const
 {
     return CVector2(x * _value,y * _value);
+}
+
+float CVector2::Length() const {
+    return std::sqrt(x * x + y * y);
+}
+
+CVector2 CVector2::Normalize() const {
+    float len = Length();
+    //防止除0
+    if(len == 0)
+    {
+        return CVector2(0, 0);
+    }
+    return CVector2(x / len,y / len);
 }

@@ -1,6 +1,13 @@
 {
     "creep": {
         "img": "creep2",
-        "hp": 100
+        "hp": 100,
+		"mSpeed":70
+    },
+    "player": {
+        "class": "CPlayer",
+        "img": "player2",
+        "hp": 100,
+		"mSpeed":100
     }
 }

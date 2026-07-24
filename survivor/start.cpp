@@ -17,8 +17,11 @@ int main()
     auto plyer = Global::player;
 
     plyer->SetContextThink("123",[&] {
-        std::cout << "Init Graphics Success" << std::endl;
-        CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3);
+        // std::cout << "Init Graphics Success" << std::endl;
+        auto creep= CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3).lock();
+        if (creep) {
+            creep->SetAttackTarget(plyer);
+        }
         return 1;
     },0);
 

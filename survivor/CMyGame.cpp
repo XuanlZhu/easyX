@@ -25,10 +25,8 @@ void CMyGame::Setup() {
     Global::imgManager = new CImageManager();//设置图片管理器
     Global::thinkerManager = new CThinkerManager();//thinker管理器
     //生成玩家
-    Global::player = make_shared<CPlayer>("PNG/player2.png");//玩家
-    Global::game->SpriteListAppend(Global::player);//添加到精灵表
+    Global::player = CreateUnitByName("player", CVector2(5000,5000), nullptr, 1).lock();
     Global::scene->SetPlayer(Global::player.get());//设置玩家
-    Global::player->SetPosition(5000,5000);//设置初始位置
 }
 void CMyGame::Update(float _deltaTime) {
     CGame::Update(_deltaTime);//父类

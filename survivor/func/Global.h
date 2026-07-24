@@ -21,7 +21,7 @@ class Global {
 public:
     inline static CGame* game = nullptr;//游戏
     inline static CScene* scene = nullptr;//场景
-    inline static std::shared_ptr<CPlayer> player = nullptr;//玩家
+    inline static std::shared_ptr<CUnit> player = nullptr;//玩家
     inline static json unitJson = {};//unitJson
     inline static CImageManager* imgManager = nullptr;//图片管理器
     inline static CThinkerManager* thinkerManager = nullptr;//thinker管理器

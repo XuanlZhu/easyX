@@ -3,32 +3,49 @@
 //
 #include "Global.h"
 #include "../CMyGame.h"
+#include "../unit/CPlayer.h"
 #include <fstream>
 #include <iostream>
 #include <random>
 #include <cmath>
+#include <filesystem>
+
 
 #include "Core/CVector2.h"
-
+namespace fs = std::filesystem;
 
 json LoadJson(std::string _path)
 {
-
-    std::ifstream file("D:/project/easyX/survivor/"+_path);
-    if (!file.is_open())
-    {
-        std::cout << "无法打开文件: " << _path << std::endl;
-        return {};
-    }
     json data;
-    file >> data;
+    try {
+        fs::path path = fs::current_path();
+        // std::cout << path << std::endl;
+        std::ifstream file(path/_path);
+        if (!file.is_open())
+        {
+            std::cout << "无法打开文件: " << _path << std::endl;
+            return {};
+        }
+        file >> data;
+    }catch(const std::exception& e)
+    {
+        std::cout << "json文件错误" << std::endl;
+    }
     return data;
 }
 
 //创建单位
 std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location, CUnit* _owner, int _team) {
     // json data= Global::unitJson[_unitName];
-    auto unit = std::make_shared<CUnit>("creep");//共享指针
+    auto& table= Global::unitJson;
+    // std::cout<<table<<std::endl;
+    std::shared_ptr<CUnit> unit;
+    if(table[_unitName].contains("class"))//如果指定类
+    {
+        unit = std::make_shared<CPlayer>(_unitName);
+    }else {
+        unit = std::make_shared<CUnit>(_unitName);
+    }
     unit->SetPosition(_location);//设置位置
     Global::game->SpriteListAppend(unit);//添加精灵表
     return unit;

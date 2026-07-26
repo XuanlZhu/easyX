@@ -48,6 +48,12 @@ add_executable(easyX
         easyX/Core/CThinker.h
         easyX/Core/CEntity.cpp
         easyX/Core/CEntity.h
+        easyX/Graphics/CEffect.cpp
+        easyX/Graphics/CEffect.h
+        easyX/ResourceManager/CEffectManager.cpp
+        easyX/ResourceManager/CEffectManager.h
+        survivor/effects/CEffectNumber.cpp
+        survivor/effects/CEffectNumber.h
 )
 
 # EasyX库路径

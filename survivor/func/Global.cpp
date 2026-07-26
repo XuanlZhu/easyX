@@ -12,6 +12,7 @@
 
 
 #include "Core/CVector2.h"
+#include "ResourceManager/CEffectManager.h"
 namespace fs = std::filesystem;
 
 json LoadJson(std::string _path)
@@ -81,5 +82,10 @@ CVector2 RandomVector(int _length)
     vector2.y = sin(rad) * _length;
 
     return vector2;
+}
+
+std::weak_ptr<CEffect> CreateEffect(std::string _className, CVector2 _pos) {
+    // std::cout << "创建特效" << std::endl;
+    return Global::effectManager->CreateEffect(_className,_pos);
 }
 

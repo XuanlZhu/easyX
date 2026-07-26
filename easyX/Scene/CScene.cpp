@@ -5,6 +5,8 @@
 #include "CScene.h"
 // #include <string>
 // using namespace std;
+#include "../survivor/func/Global.h"
+#include "ResourceManager/CEffectManager.h"
 
 CScene::CScene() {
     // mCTileMap = CTileMap("Project/map1.csv");
@@ -33,8 +35,8 @@ void CScene::Draw()
 {
     //背景绘制
     mCTileMap.Draw(mCamera);//瓦片地图绘制
-    mSpriteList.Draw(mCamera);//精灵表绘制
-    //特效绘制
+    mSpriteList.Draw(mCamera);//精灵表绘制，还没做裁切
+    Global::effectManager->Draw(mCamera);//特效绘制
     //UI绘制
 }
 //设置玩家

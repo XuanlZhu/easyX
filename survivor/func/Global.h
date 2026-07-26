@@ -8,6 +8,8 @@
 #include <memory>
 #include "../unit/CUnit.h"
 
+class CEffect;
+class CEffectManager;
 class CVector2;
 class CImageManager;
 class CScene;
@@ -25,6 +27,7 @@ public:
     inline static json unitJson = {};//unitJson
     inline static CImageManager* imgManager = nullptr;//图片管理器
     inline static CThinkerManager* thinkerManager = nullptr;//thinker管理器
+    inline static CEffectManager* effectManager = nullptr;//特效管理器
 };
 
 json LoadJson(std::string _path);
@@ -33,3 +36,4 @@ float GetNowTime();
 int RandomInt(int _min,int _max);
 float RandomFloat(float _min,float _max);
 CVector2 RandomVector(int length);
+std::weak_ptr<CEffect> CreateEffect(std::string _className,CVector2 _pos);

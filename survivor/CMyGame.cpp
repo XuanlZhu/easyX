@@ -2,6 +2,7 @@
 #include "../easyX/Core/EKey.h"
 #include "func/Global.h"
 #include "map/CScene1.h"
+#include "ResourceManager/CEffectManager.h"
 #include "ResourceManager/CImageManager.h"
 #include "ResourceManager/CThinkerManager.h"
 #include "Scene/CScene.h"
@@ -24,6 +25,7 @@ void CMyGame::Setup() {
     Global::game->SetCurrentScene(Global::scene);//设置场景
     Global::imgManager = new CImageManager();//设置图片管理器
     Global::thinkerManager = new CThinkerManager();//thinker管理器
+    Global::effectManager = new CEffectManager();//特效管理器
     //生成玩家
     Global::player = CreateUnitByName("player", CVector2(5000,5000), nullptr, 1).lock();
     Global::scene->SetPlayer(Global::player.get());//设置玩家

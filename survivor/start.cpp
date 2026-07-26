@@ -5,6 +5,7 @@
 #include "../easyX/Core/CGame.h"
 #include "../easyX/Graphics/CSprite.h"
 #include "func/Global.h"
+#include "ResourceManager/CEffectManager.h"
 #include "unit/CPlayer.h"
 
 
@@ -17,13 +18,19 @@ int main()
     auto plyer = Global::player;
 
     plyer->SetContextThink("123",[&] {
-        // std::cout << "Init Graphics Success" << std::endl;
-        auto creep= CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3).lock();
-        if (creep) {
-            creep->SetAttackTarget(plyer);
-        }
-        return 1;
+
+        CreateEffect("CEffectNumber",plyer->GetPos());
+        return 3;
     },0);
+
+    // plyer->SetContextThink("123",[&] {
+    //     // std::cout << "Init Graphics Success" << std::endl;
+    //     auto creep= CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3).lock();
+    //     if (creep) {
+    //         creep->SetAttackTarget(plyer);
+    //     }
+    //     return 1;
+    // },0);
 
     // CVector2(5000,5000)+RandomVector(600);
 

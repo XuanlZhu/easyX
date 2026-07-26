@@ -4,6 +4,7 @@
 #include "EKey.h"
 #include "Scene/CScene.h"
 #include "../survivor/func/Global.h"
+#include "ResourceManager/CEffectManager.h"
 #include "ResourceManager/CThinkerManager.h"
 
 CGame::CGame(int _width, int _height) {
@@ -12,6 +13,7 @@ CGame::CGame(int _width, int _height) {
 
     //创建EasyX窗口
     initgraph(mWidth, mHeight);
+    setbkmode(TRANSPARENT);//透明模式
     // mInput = CInput();
 
     mInput.OnKeyDown = [this](int _key)
@@ -133,6 +135,7 @@ void CGame::Setup()
 void CGame::Update(float _deltaTime)
 {
     Global::thinkerManager->Update(_deltaTime);
+    Global::effectManager->Update(_deltaTime);
     // mCurrentScene->Update(_deltaTime);
 }
 //绘制函数

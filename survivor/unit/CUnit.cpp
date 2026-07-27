@@ -35,11 +35,27 @@ void CUnit::SetAttackTarget(std::weak_ptr<CUnit> _unit) {
 }
 
 void CUnit::Update(float _deltaTime) {
+    if (IsDeath())return;
     auto target = mAttackTarget.lock();
     if(target)
     {
-        mPos = mPos+(target->mPos-mPos).Normalize()*mSpeed*_deltaTime;
+        if (CalcDistanceBetweenEntityOBB(this,target.get())>10) {
+            mPos = mPos+(target->mPos-mPos).Normalize()*mSpeed*_deltaTime;
+        }
         // std::cout << "移动" << std::endl;
+        //如果在攻击范围内
+        if (CalcDistanceBetweenEntityOBB(this,target.get())<=mAttackRange && (GetNowTime()-mLastAttackTime)>=mAttackInterval) {
+            //攻击目标
+            ApplyDamage(DamageContext{this,target.get(),mAttackDamage});
+            mLastAttackTime = GetNowTime();
+        }
     }
+}
+
+bool CUnit::IsDeath() {
+    if(mHp<=0) {
+        mIsDeath = true;
+    }
+    return mIsDeath;
 }
 

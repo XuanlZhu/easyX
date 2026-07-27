@@ -31,6 +31,8 @@ public:
     inline static CThinkerManager* thinkerManager = nullptr;//thinker管理器
     inline static CEffectManager* effectManager = nullptr;//特效管理器
 };
+struct DamageContext { CUnit* _attacker; CUnit* _victim; float _damage; };//伤害结构体
+
 
 json LoadJson(std::string _path);
 std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName,CVector2 _location,CUnit* _owner,int _team);
@@ -39,5 +41,7 @@ int RandomInt(int _min,int _max);
 float RandomFloat(float _min,float _max);
 CVector2 RandomVector(int length);
 std::weak_ptr<CEffect> CreateEffect(std::string _className,CVector2 _pos);//创建特效
-void SendOverheadEventMessage(std::shared_ptr<CUnit>& _owner,std::string _value);//头顶文字
-float CalcDistanceBetweenEntityOBB(std::shared_ptr<CSprite>& _s1,std::shared_ptr<CSprite>& _s2);//计算两个精灵的距离
+void SendOverheadEventMessage(CSprite* _owner,std::string _value);//头顶文字
+float CalcDistanceBetweenEntityOBB(CSprite* _s1,CSprite* _s2);//计算两个精灵的距离
+void ApplyDamage(DamageContext _context);
+

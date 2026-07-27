@@ -7,6 +7,7 @@
 #include <iostream>
 
 void CPlayer::Update(float _deltaTime) {
+    if (IsDeath())return;
     mPos.x += mChangeX * _deltaTime;
     mPos.y += mChangeY * _deltaTime;
     // outtextxy(100, 100, L"Hello EasyX");

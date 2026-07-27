@@ -91,13 +91,21 @@ std::weak_ptr<CEffect> CreateEffect(std::string _className, CVector2 _pos) {
     return Global::effectManager->CreateEffect(_className,_pos);
 }
 
-void SendOverheadEventMessage(std::shared_ptr<CUnit>& _owner, std::string _value) {
+void SendOverheadEventMessage(CSprite* _owner, std::string _value) {
     std::shared_ptr<CEffect> effect = std::make_shared<CEffectNumber>(_value);
     effect->mPos = _owner->GetPos();
     Global::effectManager->mEffects.push_back(effect);
 }
 
-float CalcDistanceBetweenEntityOBB(std::shared_ptr<CSprite>& _s1, std::shared_ptr<CSprite>& _s2) {
+float CalcDistanceBetweenEntityOBB(CSprite* _s1, CSprite* _s2) {
     return (_s1->GetPos() - _s2->GetPos()).Length();
+}
+
+void ApplyDamage(DamageContext _context) {
+    //攻击力需大于0，被攻击者需要活着
+    if(_context._damage>0 && !_context._victim->IsDeath()) {
+        _context._victim->mHp -= _context._damage;
+        SendOverheadEventMessage(_context._victim,std::to_string((int)_context._damage));
+    }
 }
 

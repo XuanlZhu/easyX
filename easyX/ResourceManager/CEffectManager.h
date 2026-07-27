@@ -17,7 +17,7 @@ public:
     std::weak_ptr<CEffect> CreateEffect(std::string _className,CVector2 _pos);//创建Effect
     void Update(float _deltaTime);//更新
     void Draw(CCamera& _camera);//绘制
+    std::vector<std::shared_ptr<CEffect>> mEffects;
 private:
     void DestroyEffects();//销毁effect
-    std::vector<std::shared_ptr<CEffect>> mEffects;
 };

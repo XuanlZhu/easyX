@@ -16,4 +16,6 @@ public:
     std::weak_ptr<CUnit> mAttackTarget;//攻击对象
     void SetAttackTarget(std::weak_ptr<CUnit> _unit);//设置攻击对象
     void Update(float _deltaTime) override;
+
+    float mAttackRange=50;//攻击距离
 };

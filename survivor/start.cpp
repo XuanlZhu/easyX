@@ -17,20 +17,21 @@ int main()
 
     auto plyer = Global::player;
 
-    plyer->SetContextThink("123",[&] {
-
-        CreateEffect("CEffectNumber",plyer->GetPos());
-        return 3;
-    },0);
-
     // plyer->SetContextThink("123",[&] {
-    //     // std::cout << "Init Graphics Success" << std::endl;
-    //     auto creep= CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3).lock();
-    //     if (creep) {
-    //         creep->SetAttackTarget(plyer);
-    //     }
-    //     return 1;
+    //
+    //     // CreateEffect("CEffectNumber",plyer->GetPos());
+    //     SendOverheadEventMessage(plyer,"126");
+    //     return 3;
     // },0);
+
+    plyer->SetContextThink("123",[&] {
+        // std::cout << "Init Graphics Success" << std::endl;
+        auto creep= CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3).lock();
+        if (creep) {
+            creep->SetAttackTarget(plyer);
+        }
+        return 0;
+    },0);
 
     // CVector2(5000,5000)+RandomVector(600);
 

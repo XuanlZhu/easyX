@@ -13,6 +13,8 @@
 
 #include "Core/CVector2.h"
 #include "ResourceManager/CEffectManager.h"
+#include "../../survivor/effects/CEffectNumber.h"
+
 namespace fs = std::filesystem;
 
 json LoadJson(std::string _path)
@@ -87,5 +89,15 @@ CVector2 RandomVector(int _length)
 std::weak_ptr<CEffect> CreateEffect(std::string _className, CVector2 _pos) {
     // std::cout << "创建特效" << std::endl;
     return Global::effectManager->CreateEffect(_className,_pos);
+}
+
+void SendOverheadEventMessage(std::shared_ptr<CUnit>& _owner, std::string _value) {
+    std::shared_ptr<CEffect> effect = std::make_shared<CEffectNumber>(_value);
+    effect->mPos = _owner->GetPos();
+    Global::effectManager->mEffects.push_back(effect);
+}
+
+float CalcDistanceBetweenEntityOBB(std::shared_ptr<CSprite>& _s1, std::shared_ptr<CSprite>& _s2) {
+    return (_s1->GetPos() - _s2->GetPos()).Length();
 }
 

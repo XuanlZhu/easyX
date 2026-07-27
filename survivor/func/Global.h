@@ -6,8 +6,10 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <memory>
-#include "../unit/CUnit.h"
+// #include "../unit/CUnit.h"
 
+class CSprite;
+class CUnit;
 class CEffect;
 class CEffectManager;
 class CVector2;
@@ -36,4 +38,6 @@ float GetNowTime();
 int RandomInt(int _min,int _max);
 float RandomFloat(float _min,float _max);
 CVector2 RandomVector(int length);
-std::weak_ptr<CEffect> CreateEffect(std::string _className,CVector2 _pos);
+std::weak_ptr<CEffect> CreateEffect(std::string _className,CVector2 _pos);//创建特效
+void SendOverheadEventMessage(std::shared_ptr<CUnit>& _owner,std::string _value);//头顶文字
+float CalcDistanceBetweenEntityOBB(std::shared_ptr<CSprite>& _s1,std::shared_ptr<CSprite>& _s2);//计算两个精灵的距离

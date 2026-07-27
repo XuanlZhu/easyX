@@ -5,9 +5,15 @@
 #include "CEffectNumber.h"
 
 #include "Graphics/CCamera.h"
+#include <string>
 
 CEffectNumber::CEffectNumber(){
     mLifeTime = 0.5f;
+}
+
+CEffectNumber::CEffectNumber(std::string _value) {
+    mLifeTime = 0.5f;
+    mValue = _value;
 }
 
 void CEffectNumber::Update(float _deltaTime) {
@@ -18,5 +24,6 @@ void CEffectNumber::Update(float _deltaTime) {
 void CEffectNumber::Draw(CCamera &_camera) {
     if(IsDead())return;
     CVector2 screenPos = _camera.WorldToScreen(mPos);
-    outtextxy(screenPos.x,screenPos.y,L"你好 世界！");
+    std::wstring value(mValue.begin(), mValue.end());
+    outtextxy(screenPos.x,screenPos.y,value.c_str());
 }

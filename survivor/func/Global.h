@@ -8,6 +8,7 @@
 #include <memory>
 // #include "../unit/CUnit.h"
 
+class CSoundManager;
 class CSprite;
 class CUnit;
 class CEffect;
@@ -30,6 +31,7 @@ public:
     inline static CImageManager* imgManager = nullptr;//图片管理器
     inline static CThinkerManager* thinkerManager = nullptr;//thinker管理器
     inline static CEffectManager* effectManager = nullptr;//特效管理器
+    inline static CSoundManager* soundManager = nullptr;//音频管理器
 };
 struct DamageContext { CUnit* _attacker; CUnit* _victim; float _damage; };//伤害结构体
 
@@ -44,4 +46,5 @@ std::weak_ptr<CEffect> CreateEffect(std::string _className,CVector2 _pos);//创�
 void SendOverheadEventMessage(CSprite* _owner,std::string _value);//头顶文字
 float CalcDistanceBetweenEntityOBB(CSprite* _s1,CSprite* _s2);//计算两个精灵的距离
 void ApplyDamage(DamageContext _context);
+void EmitSoundOn(std::string _name,CSprite* _sprite);
 

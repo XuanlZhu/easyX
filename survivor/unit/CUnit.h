@@ -8,6 +8,7 @@
 #include <memory>
 
 
+class CAbility;
 
 class CUnit : public CSprite
 {
@@ -17,13 +18,15 @@ public:
     void SetAttackTarget(std::weak_ptr<CUnit> _unit);//设置攻击对象
     void Update(float _deltaTime) override;
     bool IsDeath();
+    void CastAbilityOnTarget(CUnit* _target,CAbility* _ability);
 
     float mHp = 100;//生命值
-    float mAttackRange=50;//攻击距离
+    float mAttackRange=35;//攻击距离
     float mAttackInterval = 1;//攻击间隔
-    float mAttackDamage=13;//攻击力
+    float mAttackDamage=4;//攻击力
     int mAttackType=1;//0无攻击，1近战，2远程
 
+    std::vector<std::shared_ptr<CAbility>> mAbilitys;//技能表
     bool mIsDeath = false;//是否死亡
     float mLastAttackTime = 0;//上次攻击时间
 

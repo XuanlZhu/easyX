@@ -14,6 +14,7 @@
 #include "Core/CVector2.h"
 #include "ResourceManager/CEffectManager.h"
 #include "../../survivor/effects/CEffectNumber.h"
+#include "ResourceManager/CSoundManager.h"
 
 namespace fs = std::filesystem;
 
@@ -93,7 +94,7 @@ std::weak_ptr<CEffect> CreateEffect(std::string _className, CVector2 _pos) {
 
 void SendOverheadEventMessage(CSprite* _owner, std::string _value) {
     std::shared_ptr<CEffect> effect = std::make_shared<CEffectNumber>(_value);
-    effect->mPos = _owner->GetPos();
+    effect->mPos = _owner->GetPos()+RandomVector(10);
     Global::effectManager->mEffects.push_back(effect);
 }
 
@@ -107,5 +108,9 @@ void ApplyDamage(DamageContext _context) {
         _context._victim->mHp -= _context._damage;
         SendOverheadEventMessage(_context._victim,std::to_string((int)_context._damage));
     }
+}
+
+void EmitSoundOn(std::string _name, CSprite* _sprite) {
+    Global::soundManager->Play(_name);
 }
 

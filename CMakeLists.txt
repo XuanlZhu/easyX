@@ -54,6 +54,12 @@ add_executable(easyX
         easyX/ResourceManager/CEffectManager.h
         survivor/effects/CEffectNumber.cpp
         survivor/effects/CEffectNumber.h
+        survivor/ability/CAbility.cpp
+        survivor/ability/CAbility.h
+        easyX/ResourceManager/CSoundManager.cpp
+        easyX/ResourceManager/CSoundManager.h
+        easyX/ResourceManager/CAnimaManager.cpp
+        easyX/ResourceManager/CAnimaManager.h
 )
 
 # EasyX库路径
@@ -70,8 +76,12 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(json)
 
+
+
+
 # 链接EasyX
 target_link_libraries(easyX
         EasyXw
         nlohmann_json::nlohmann_json
 )
+

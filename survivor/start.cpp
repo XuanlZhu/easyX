@@ -6,8 +6,10 @@
 #include "../easyX/Graphics/CSprite.h"
 #include "func/Global.h"
 #include "ResourceManager/CEffectManager.h"
+#include "ResourceManager/CSoundManager.h"
 #include "unit/CPlayer.h"
-
+#define MINIAUDIO_IMPLEMENTATION
+#include "../miniaudio/miniaudio.h"
 
 int main()
 {
@@ -30,9 +32,10 @@ int main()
         if (creep) {
             creep->SetAttackTarget(plyer);
         }
-        return 0;
+        return 3;
     },0);
-
+    Global::soundManager->PlayLoop("ReincarnatedEchoes");
+    
     // CVector2(5000,5000)+RandomVector(600);
 
 

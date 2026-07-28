@@ -7,7 +7,9 @@
 #include <iostream>
 #include <nlohmann/json_fwd.hpp>
 
+#include "../ability/CAbility.h"
 #include "ResourceManager/CImageManager.h"
+#include "ResourceManager/CSoundManager.h"
 using json = nlohmann::json;
 
 // CUnit::CUnit() {
@@ -44,8 +46,9 @@ void CUnit::Update(float _deltaTime) {
         }
         // std::cout << "移动" << std::endl;
         //如果在攻击范围内
-        if (CalcDistanceBetweenEntityOBB(this,target.get())<=mAttackRange && (GetNowTime()-mLastAttackTime)>=mAttackInterval) {
+        if (CalcDistanceBetweenEntityOBB(this,target.get())<=mAttackRange && (GetNowTime()-mLastAttackTime)>=mAttackInterval && !target->IsDeath()) {
             //攻击目标
+            Global::soundManager->Play("injuried");
             ApplyDamage(DamageContext{this,target.get(),mAttackDamage});
             mLastAttackTime = GetNowTime();
         }
@@ -57,5 +60,10 @@ bool CUnit::IsDeath() {
         mIsDeath = true;
     }
     return mIsDeath;
+}
+
+void CUnit::CastAbilityOnTarget(CUnit* _target, CAbility* _ability) {
+    _ability->mCastTarget = _target;
+    _ability->OnSpellStart();
 }
 

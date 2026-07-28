@@ -10,6 +10,7 @@
 class CPlayer : public CUnit
 {
 public:
-    using CUnit::CUnit;
+    // using CUnit::CUnit;
+    CPlayer(std::string _name);
     void Update(float _deltaTime) override;
 };

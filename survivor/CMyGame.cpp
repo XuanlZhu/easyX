@@ -4,6 +4,7 @@
 #include "map/CScene1.h"
 #include "ResourceManager/CEffectManager.h"
 #include "ResourceManager/CImageManager.h"
+#include "ResourceManager/CSoundManager.h"
 #include "ResourceManager/CThinkerManager.h"
 #include "Scene/CScene.h"
 #include "unit/CPlayer.h"
@@ -26,6 +27,8 @@ void CMyGame::Setup() {
     Global::imgManager = new CImageManager();//设置图片管理器
     Global::thinkerManager = new CThinkerManager();//thinker管理器
     Global::effectManager = new CEffectManager();//特效管理器
+    Global::soundManager = new CSoundManager();//音频管理器
+
     //生成玩家
     Global::player = CreateUnitByName("player", CVector2(5000,5000), nullptr, 1).lock();
     Global::scene->SetPlayer(Global::player.get());//设置玩家

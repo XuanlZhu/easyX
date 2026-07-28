@@ -50,8 +50,12 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     }else {
         unit = std::make_shared<CUnit>(_unitName);
     }
+
+    unit->mTeam = _team;//队伍1：好人，队伍2：敌对，队伍3：中立
     unit->SetPosition(_location);//设置位置
     Global::game->SpriteListAppend(unit);//添加精灵表
+
+
     return unit;
 }
 //获取当前时间 单位秒
@@ -110,7 +114,32 @@ void ApplyDamage(DamageContext _context) {
     }
 }
 
-void EmitSoundOn(std::string _name, CSprite* _sprite) {
+void EmitSoundOn(std::string _name) {
     Global::soundManager->Play(_name);
+}
+
+std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, float _radius, int _order) {
+    std::vector<std::weak_ptr<CUnit>> result;
+
+    float radiusSqr = _radius * _radius;
+    for(auto& unit : Global::scene->mSpriteList.mSprites)
+    {
+        if(!unit)continue;
+        // 阵营过滤
+        // if(unit.GetTeam() != _team)continue;
+        // // 距离判断
+        // CVector2 delta = unit->GetPos() - _pos;
+        //
+        // float distanceSqr = delta.x * delta.x + delta.y * delta.y;
+        //
+        // if(distanceSqr <= radiusSqr)
+        // {
+        //     result.push_back(unit);
+        // }
+    }
+
+
+    return result;
+
 }
 

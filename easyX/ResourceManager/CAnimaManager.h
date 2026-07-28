@@ -12,7 +12,7 @@ class CAnimaManager
 public:
     CAnimaManager();
     // 加载sprite sheet
-    void Load(std::string path,int frameWidth,int frameHeight);
+    void Load(std::string _name,int frameWidth,int frameHeight);
     // 获取某行动画
     std::vector<IMAGE>& GetAnimation(int row);
     // 获取某帧

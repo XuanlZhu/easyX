@@ -15,4 +15,5 @@ public:
     CUnit* mCastTarget = nullptr;
     float mCoolDown = 3;//冷却
     float mLastCastTime = -1000;//上次施法时间
+    CUnit* mCaster = nullptr;
 };

@@ -5,12 +5,16 @@
 #include "CAnimaManager.h"
 
 CAnimaManager::CAnimaManager() {
-
+    Load("03",64,64);
 }
-void CAnimaManager::Load(std::string path,int frameWidth,int frameHeight)
+void CAnimaManager::Load(std::string _name,int frameWidth,int frameHeight)
 {
+    std::string path = "C:/Users/admin/Documents/GitHub/easyX/survivor/animation/";
+    path = path + _name +".png";
+    std::wstring wpath(path.begin(), path.end());
+
     IMAGE sheet;
-    loadimage(&sheet,path.c_str());
+    loadimage(&sheet,wpath.c_str());
 
     int width = sheet.getwidth();
     int height = sheet.getheight();
@@ -32,4 +36,8 @@ void CAnimaManager::Load(std::string path,int frameWidth,int frameHeight)
         mAnimations.push_back(animation);
     }
     SetWorkingImage(nullptr);
+}
+
+std::vector<IMAGE>& CAnimaManager::GetAnimation(int row) {
+    return mAnimations[row];
 }

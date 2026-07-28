@@ -60,6 +60,8 @@ add_executable(easyX
         easyX/ResourceManager/CSoundManager.h
         easyX/ResourceManager/CAnimaManager.cpp
         easyX/ResourceManager/CAnimaManager.h
+        survivor/effects/CEffect_circle.cpp
+        survivor/effects/CEffect_circle.h
 )
 
 # EasyX库路径

@@ -9,7 +9,7 @@
 #include "../ability/CAbility.h"
 
 CPlayer::CPlayer(std::string _name) : CUnit(_name) {
-    mAbilitys.push_back(make_shared<CAbility>());//添加技能
+    this->AddAbility("1");
     this->SetContextThink("auto_cast",[&] {
         // std::cout << "遍历技能" << std::endl;
         for(auto& ability : mAbilitys)

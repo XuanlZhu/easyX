@@ -13,7 +13,7 @@ CGame::CGame(int _width, int _height) {
 
     //创建EasyX窗口
     initgraph(mWidth, mHeight);
-    setbkmode(TRANSPARENT);//透明模式
+    setbkmode(TRANSPARENT);//文字透明模式，
     // mInput = CInput();
 
     mInput.OnKeyDown = [this](int _key)

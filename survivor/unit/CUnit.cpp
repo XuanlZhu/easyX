@@ -5,6 +5,7 @@
 #include "CUnit.h"
 #include "../func/Global.h"
 #include <iostream>
+#include <memory>
 #include <nlohmann/json_fwd.hpp>
 
 #include "../ability/CAbility.h"
@@ -67,3 +68,9 @@ void CUnit::CastAbilityOnTarget(CUnit* _target, CAbility* _ability) {
     _ability->OnSpellStart();
 }
 
+CAbility* CUnit::AddAbility(std::string _name) {
+    std::shared_ptr<CAbility> ability = std::make_shared<CAbility>();
+    ability->mCaster = this;
+    mAbilitys.push_back(ability);//添加技能
+    return ability.get();
+}

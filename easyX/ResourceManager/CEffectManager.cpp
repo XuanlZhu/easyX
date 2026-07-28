@@ -8,6 +8,7 @@
 
 #include "../../survivor/effects/CEffectNumber.h"
 #include "Graphics/CEffect.h"
+#include "../../survivor/effects/CEffect_circle.h"
 
 
 void CEffectManager::Update(float _deltaTime) {
@@ -44,8 +45,11 @@ void CEffectManager::DestroyEffects()
 std::weak_ptr<CEffect> CEffectManager::CreateEffect(std::string _className, CVector2 _pos) {
     std::shared_ptr<CEffect> effect;
     if (_className == "CEffectNumber") {
-        effect = std::make_shared<CEffectNumber>();//创建effect
-    }else {
+        effect = std::make_shared<CEffectNumber>();//创建effecf
+    }else if (_className == "CEffect_circle") {
+        effect = std::make_shared<CEffect_circle>();
+    }
+    else {
         effect = std::make_shared<CEffect>();
     }
     effect->mPos = _pos;

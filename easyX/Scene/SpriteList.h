@@ -16,6 +16,5 @@ public:
     void Draw(CCamera& _camera);//绘制
     void Append(shared_ptr<CSprite> _sprite);//添加精灵
     void Update(float _deltaTime);//更新
-private:
     vector<shared_ptr<CSprite>> mSprites;
 };

@@ -33,6 +33,7 @@ CUnit::CUnit(std::string _name) {
     if(data.contains("mSpeed")){mSpeed = data["mSpeed"].get<float>();}
 }
 
+
 void CUnit::SetAttackTarget(std::weak_ptr<CUnit> _unit) {
     mAttackTarget = _unit;
 }
@@ -73,4 +74,11 @@ CAbility* CUnit::AddAbility(std::string _name) {
     ability->mCaster = this;
     mAbilitys.push_back(ability);//添加技能
     return ability.get();
+}
+
+void CUnit::OnDeath() {
+    if (!mCanRespawn) {//无法重生
+        this->isdraw = false;//标记精灵表删除
+    }
+    this->mIsDeath = true;//标记死亡
 }

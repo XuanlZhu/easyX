@@ -6,6 +6,7 @@
 #include "../survivor/func/Global.h"
 #include "ResourceManager/CEffectManager.h"
 #include "ResourceManager/CThinkerManager.h"
+#include "ResourceManager/CUnitManager.h"
 
 CGame::CGame(int _width, int _height) {
     mWidth = _width;
@@ -86,10 +87,7 @@ void CGame::Run()
 void CGame::SetCurrentScene(CScene* _scene) {
     mCurrentScene = _scene;
 }
-//向当前精灵列表添加元素，<<<需要去重>>>
-void CGame::SpriteListAppend(shared_ptr<CSprite> _sprite) {
-    mCurrentScene->mSpriteList.Append(_sprite);
-}
+
 //当键盘按下
 void CGame::OnKeyPress(int _key) {
     // if (!mCurrentScene->mPlayer){return;}
@@ -134,8 +132,11 @@ void CGame::Setup()
 //更新
 void CGame::Update(float _deltaTime)
 {
-    Global::thinkerManager->Update(_deltaTime);
-    Global::effectManager->Update(_deltaTime);
+    Global::thinkerManager->Update(_deltaTime);//定时器
+    Global::effectManager->Update(_deltaTime);//特效
+    mCurrentScene->mSpriteList.Update(_deltaTime);//精灵表使用裸指针,精灵表的清除要放在前面
+    Global::unitManager->Update(_deltaTime);//单位管理器清除
+
     // mCurrentScene->Update(_deltaTime);
 }
 //绘制函数

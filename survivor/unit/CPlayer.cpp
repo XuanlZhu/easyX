@@ -8,7 +8,8 @@
 
 #include "../ability/CAbility.h"
 
-CPlayer::CPlayer(std::string _name) : CUnit(_name) {
+CPlayer::CPlayer(std::string _name) : CUnit(_name){
+    mCanRespawn = true;//可以重生
     this->AddAbility("1");
     this->SetContextThink("auto_cast",[&] {
         // std::cout << "遍历技能" << std::endl;

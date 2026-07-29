@@ -7,6 +7,7 @@
 
 
 void SpriteList::Update(float _deltaTime) {
+    ClearList();//清理
     for(auto sprite : mSprites)
     {
         if(sprite)
@@ -14,6 +15,18 @@ void SpriteList::Update(float _deltaTime) {
             sprite->Update(_deltaTime);
         }
     }
+}
+
+void SpriteList::ClearList() {
+    mSprites.erase(
+        std::remove_if(mSprites.begin(),mSprites.end(),
+            [](CSprite* _sprite)
+            {
+                return !_sprite->isdraw;
+            }
+        ),
+        mSprites.end()
+    );
 }
 
 void SpriteList::Draw(CCamera& _camera)
@@ -27,6 +40,6 @@ void SpriteList::Draw(CCamera& _camera)
     }
 }
 
-void SpriteList::Append(shared_ptr<CSprite> _sprite) {
+void SpriteList::Append(CSprite* _sprite) {
     mSprites.push_back(_sprite);
 }

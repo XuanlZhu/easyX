@@ -15,6 +15,7 @@
 #include "ResourceManager/CEffectManager.h"
 #include "../../survivor/effects/CEffectNumber.h"
 #include "ResourceManager/CSoundManager.h"
+#include "ResourceManager/CUnitManager.h"
 
 namespace fs = std::filesystem;
 
@@ -53,8 +54,9 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
 
     unit->mTeam = _team;//队伍1：好人，队伍2：敌对，队伍3：中立
     unit->SetPosition(_location);//设置位置
-    Global::game->SpriteListAppend(unit);//添加精灵表
-
+    //要用单位管理器管理unit
+    Global::spriteList->Append(unit.get());//添加精灵表
+    Global::unitManager->Append(unit);//添加到单位管理器
 
     return unit;
 }

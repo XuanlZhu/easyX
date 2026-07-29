@@ -22,7 +22,6 @@ public:
     void Run();//启动游戏
     void SetCurrentScene(CScene* _scene);//设置当前场景
     CScene* mCurrentScene;//当前场景
-    void SpriteListAppend(std::shared_ptr<CSprite> _sprite);//添加精灵
     virtual void OnKeyPress(int _key);
     virtual void OnKeyRelease(int _key);
     std::chrono::time_point<std::chrono::high_resolution_clock> mStartTime = std::chrono::high_resolution_clock::now();

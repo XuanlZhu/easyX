@@ -31,6 +31,7 @@ int main()
         auto creep= CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3).lock();
         if (creep) {
             creep->SetAttackTarget(plyer);
+            // creep->OnDeath();
         }
         return 3;
     },0);

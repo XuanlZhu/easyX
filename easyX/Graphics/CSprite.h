@@ -25,6 +25,7 @@ public:
     CVector2 GetPos();// 获取位置
     virtual void Update(float _deltaTime);
 
+    bool isdraw = true;//精灵表删除标记
     float mSpeed = 5;//速度
     float mChangeX=0;//偏移
     float mChangeY=0;

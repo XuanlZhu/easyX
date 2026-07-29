@@ -33,8 +33,7 @@ void CEffect_circle::Draw(CCamera& _camera) {
     if(IsDead())return;
     CVector2 screenPos = _camera.WorldToScreen(mPos);
 
-    // putimage(screenPos.x,screenPos.y,&mAnimation[mFrame]);
-    int length = 250;
+    float length = mControlPoint0.x/0.55;
 
     putimage_alpha(screenPos.x-length/2,screenPos.y-length/2,length,length,mAnimation[mFrame]);
 }

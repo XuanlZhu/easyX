@@ -21,7 +21,7 @@ public:
     void CastAbilityOnTarget(CUnit* _target,CAbility* _ability);
     CAbility* AddAbility(std::string _name);
     int GetTeam(){return mTeam;};
-    void OnDeath();//当死亡
+    void OnDeath();//销毁
 
     float mHp = 100;//生命值
     float mAttackRange=35;//攻击距离

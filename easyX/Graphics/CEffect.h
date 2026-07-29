@@ -22,6 +22,12 @@ public:
     std::weak_ptr<CSprite> mAttacher;//附着者
     CVector2 mPos;//位置
     float mLifeTime = 1;//生命时间
+    void SetParticleControl(int _controlPoint,CVector2 _pos);
+
+    CVector2 mControlPoint0 = CVector2(0,0);
+    CVector2 mControlPoint1 = CVector2(0,0);
+    CVector2 mControlPoint2 = CVector2(0,0);
+    CVector2 mControlPoint3 = CVector2(0,0);
 private:
     float mAge = 0;//已经存在时间
     float mRadius;//半径

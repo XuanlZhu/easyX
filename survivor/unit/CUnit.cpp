@@ -39,7 +39,8 @@ void CUnit::SetAttackTarget(std::weak_ptr<CUnit> _unit) {
 }
 
 void CUnit::Update(float _deltaTime) {
-    if (IsDeath())return;
+    if (IsDeath()) {OnDeath();return;};
+    
     auto target = mAttackTarget.lock();
     if(target)
     {

@@ -123,25 +123,19 @@ void EmitSoundOn(std::string _name) {
 std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, float _radius, int _order) {
     std::vector<std::weak_ptr<CUnit>> result;
 
-    float radiusSqr = _radius * _radius;
-    for(auto& unit : Global::scene->mSpriteList.mSprites)
+    for(auto& unit : Global::unitManager->mUnits)
     {
-        if(!unit)continue;
         // 阵营过滤
-        // if(unit.GetTeam() != _team)continue;
-        // // 距离判断
-        // CVector2 delta = unit->GetPos() - _pos;
-        //
-        // float distanceSqr = delta.x * delta.x + delta.y * delta.y;
-        //
-        // if(distanceSqr <= radiusSqr)
-        // {
-        //     result.push_back(unit);
-        // }
+        if(unit->GetTeam() != _team)continue;
+        // 距离判断
+        float distance = (unit->GetPos() - _pos).Length();
+
+        if(distance <= _radius)
+        {
+            result.push_back(unit);
+        }
     }
-
-
+    //排序还没实现
     return result;
-
 }
 

@@ -36,6 +36,17 @@ bool CEffect::IsDead()
     return mIsDead;
 }
 
+void CEffect::SetParticleControl(int _controlPoint, CVector2 _pos) {
+    if (_controlPoint==0) {
+        mControlPoint0 = _pos;
+    }else if (_controlPoint==1) {
+        mControlPoint1 = _pos;
+    }else if (_controlPoint==2) {
+        mControlPoint2 = _pos;
+    }else if (_controlPoint==3) {
+        mControlPoint3 = _pos;
+    }
+}
 
 
 // void CEffect::Draw()

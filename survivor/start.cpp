@@ -33,7 +33,7 @@ int main()
             creep->SetAttackTarget(plyer);
             // creep->OnDeath();
         }
-        return 3;
+        return 1;
     },0);
     Global::soundManager->PlayLoop("ReincarnatedEchoes");
     

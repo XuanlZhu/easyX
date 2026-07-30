@@ -36,6 +36,7 @@ public:
     bool mIsDeath = false;//是否死亡
     float mLastAttackTime = 0;//上次攻击时间
     bool mCanRespawn = false;//无法重生，死亡后移除
+    bool isStunned = false;
 
     CBuffSystem mBuffSystem = CBuffSystem(this);//buff系统
     std::vector<std::shared_ptr<CAbility>> mAbilitys;//技能表

@@ -10,6 +10,7 @@
 
 void CUnitManager::Update(float _deltaTime) {
     mTime += _deltaTime;
+    // std::cout << "单位数"<<mUnits.size() << std::endl;
     ClearList();//清理表
     // if (mTime>=1) {//清理周期1秒
     //     mTime=0;

@@ -7,7 +7,6 @@
 
 
 void SpriteList::Update(float _deltaTime) {
-    ClearList();//清理
     for(auto sprite : mSprites)
     {
         if(sprite)
@@ -15,6 +14,7 @@ void SpriteList::Update(float _deltaTime) {
             sprite->Update(_deltaTime);
         }
     }
+    ClearList();//清理
 }
 
 void SpriteList::ClearList() {

@@ -18,7 +18,6 @@ void CUnitManager::Update(float _deltaTime) {
 }
 void CUnitManager::ClearList()
 {
-    std::cout << "清理单位表" << std::endl;
     mUnits.erase(
         std::remove_if(mUnits.begin(),mUnits.end(),
             [](std::shared_ptr<CUnit>& _unit)
@@ -28,7 +27,6 @@ void CUnitManager::ClearList()
         ),
         mUnits.end()
     );
-    std::cout << "清理单位表完成" << std::endl;
 }
 
 void CUnitManager::Append(std::shared_ptr<CUnit> _unit) {

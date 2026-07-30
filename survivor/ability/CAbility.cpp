@@ -27,9 +27,10 @@ void CAbility::OnSpellStart() {
     for (auto& x: units) {
         auto unit = x.lock();
         ApplyDamage(DamageContext{mCaster,unit.get(),100});
-        std::cout << "造成伤害完成，准备添加buff" << std::endl;
-        // unit->AddNewModifier(mCaster,this,"buff",json{});
-        // CreateEffect("CEffect_stunned",mCaster->GetPosw(),mCaster).lock();
+        unit->AddNewModifier(mCaster,this,"buff",json{
+            {"duration", 1}
+        });
+        // CreateEffect("CEffect_stunned",mCaster->GetPos(),mCaster);
     }
 }
 

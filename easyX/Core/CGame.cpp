@@ -134,15 +134,11 @@ void CGame::Setup()
 //更新
 void CGame::Update(float _deltaTime)
 {
-    // try{Global::thinkerManager->Update(_deltaTime);}catch(const char* msg){
-    //     std::cout << "定时器管理器报错" << std::endl;
-    // }
     Global::thinkerManager->Update(_deltaTime);//定时器
     Global::effectManager->Update(_deltaTime);//特效
-    mCurrentScene->mSpriteList.Update(_deltaTime);//精灵表使用裸指针,精灵表的清除要放在前面
-    // Global::buffManager->Update(_deltaTime);//buff更新//可能情况：buff还在，owner不在了
-    Global::buffManager->Update(_deltaTime);//buff管理器
-    Global::unitManager->Update(_deltaTime);//单位管理器
+    Global::buffManager->Update(_deltaTime);//buff管理器//可能情况：buff还在，owner不在了
+    Global::spriteList->Update(_deltaTime);//精灵表使用裸指针,精灵表的清除要放在前面
+    Global::unitManager->Update(_deltaTime);//单位管理器//只做清理
 
 }
 //绘制函数

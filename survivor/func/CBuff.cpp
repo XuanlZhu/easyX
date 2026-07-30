@@ -25,18 +25,19 @@ void CBuff::Update(float _deltaTime) {
 }
 
 void CBuff::Destroy() {
-    auto owner = mOwner.lock();
-    owner->mBuffSystem.DestroyBuff(this);//buff系统移除
+    // std::cout << "buff开始销毁" << std::endl;
+    mBuffSystem->DestroyBuff(this);//buff系统移除
     //聚合器移除
 
     OnDestroy();
     mDeath = true;
+    // std::cout << "buff销毁完成" << std::endl;
 }
 void CBuff::OnCreated() {
-    std::cout << "buff创建" << std::endl;
+    // std::cout << "buff创建" << std::endl;
     mEffect = CreateEffect("CEffect_stunned",CVector2(),mOwner.lock().get());
 }
 
 void CBuff::OnDestroy() {
-    std::cout << "buff销毁" << std::endl;
+    // std::cout << "buff销毁" << std::endl;
 }

@@ -34,11 +34,11 @@ void CBuffManager::ClearList() {
 //创建，分配
 std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster, CAbility* _ability, std::string _name, json _tab) {
     std::shared_ptr<CBuff> buff = std::make_shared<CBuff>();
-    std::cout << "进入AddNewModifier" << std::endl;
+    // std::cout << "进入AddNewModifier" << std::endl;
     buff->mOwner = Global::unitManager->GetSharedPtr(_target);
     buff->mCaster = Global::unitManager->GetSharedPtr(_caster);
     buff->mAbility = _caster->GetSharedPtrAbility(_ability);
-    std::cout << "完成buff成员赋值" << std::endl;
+    // std::cout << "完成buff成员赋值" << std::endl;
     if(_tab.contains("duration"))
     {
         buff->mDuration = _tab["duration"];//设置duration

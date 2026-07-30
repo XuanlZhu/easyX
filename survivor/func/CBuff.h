@@ -5,6 +5,8 @@
 #pragma once
 #include <memory>
 
+#include "CBuffSystem.h"
+
 class CEffect;
 class CAbility;
 class CUnit;
@@ -27,4 +29,5 @@ public:
     std::weak_ptr<CUnit> mCaster;
     std::weak_ptr<CAbility> mAbility;
     std::weak_ptr<CEffect> mEffect;
+    CBuffSystem* mBuffSystem;
 };

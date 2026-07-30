@@ -30,6 +30,7 @@ void CAbility::OnSpellStart() {
         unit->AddNewModifier(mCaster,this,"buff",json{
             {"duration", 1}
         });
+        // std::cout << "buff附加完成" << std::endl;
     }
 }
 

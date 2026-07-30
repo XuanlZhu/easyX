@@ -15,17 +15,20 @@ CBuffSystem::CBuffSystem(CUnit* _unit) {
 }
 //析构,销毁所有buff
 CBuffSystem::~CBuffSystem() {
+    // std::cout << "CBuffSystem开始析构遍历" << std::endl;
     auto buffTable = mBuffTbale; //复制一份
     for (auto buff : buffTable)
     {
         buff->Destroy();
     }
+    // std::cout << "析构遍历完成" << std::endl;
 }
 
 //记录buff
 void CBuffSystem::AddBuff(CBuff* _buff) {
+    _buff->mBuffSystem = this;
     mBuffTbale.push_back(_buff);
-    std::cout << "添加buff到单位" << std::endl;
+    // std::cout << "添加buff到单位" << std::endl;
     _buff->OnCreated();
 }
 

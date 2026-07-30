@@ -11,7 +11,7 @@
 extern void putimage_alpha(int x,int y,int dstW,int dstH,IMAGE& img);
 
 CEffect_stunned::CEffect_stunned(CSprite* _sprite){
-    mLifeTime = 10;
+    mLifeTime = 9999;
     mAttacher = _sprite;
 }
 
@@ -39,7 +39,7 @@ void CEffect_stunned::Draw(CCamera& _camera) {
     if(IsDead())return;
     CVector2 screenPos = _camera.WorldToScreen(mPos);
 
-    float length = 50;
+    float length = 65;
 
     putimage_alpha(screenPos.x-length/2,screenPos.y-length/2,length,length,mAnimation[mFrame]);
 }

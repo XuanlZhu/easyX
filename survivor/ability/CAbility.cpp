@@ -30,7 +30,6 @@ void CAbility::OnSpellStart() {
         unit->AddNewModifier(mCaster,this,"buff",json{
             {"duration", 1}
         });
-        // CreateEffect("CEffect_stunned",mCaster->GetPos(),mCaster);
     }
 }
 

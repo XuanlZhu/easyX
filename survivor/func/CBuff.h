@@ -5,12 +5,14 @@
 #pragma once
 #include <memory>
 
+class CEffect;
 class CAbility;
 class CUnit;
 
 
 class CBuff {
 public:
+    ~CBuff();
     void Update(float _deltaTime);//更新
     bool IsDead(){return mDeath;};
     void Destroy();//销毁
@@ -24,5 +26,5 @@ public:
     std::weak_ptr<CUnit> mOwner;
     std::weak_ptr<CUnit> mCaster;
     std::weak_ptr<CAbility> mAbility;
-
+    std::weak_ptr<CEffect> mEffect;
 };

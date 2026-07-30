@@ -43,7 +43,8 @@ std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster
     {
         buff->mDuration = _tab["duration"];//设置duration
     }
-    // _target->mBuffSystem.AddBuff(buff.get());//添加buff到单位
+    mBuffTable.push_back(buff);
+    _target->mBuffSystem.AddBuff(buff.get());//添加buff到单位
 
     return buff;
 }

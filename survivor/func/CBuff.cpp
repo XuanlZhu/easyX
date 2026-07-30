@@ -6,7 +6,16 @@
 
 #include <iostream>
 
+#include "Global.h"
 #include "../unit/CUnit.h"
+#include "Graphics/CEffect.h"
+
+CBuff::~CBuff() {
+    auto effect = mEffect.lock();
+    if (effect) {
+        effect->Destroy();
+    }
+}
 
 void CBuff::Update(float _deltaTime) {
     mElapsedTime += _deltaTime;
@@ -25,8 +34,9 @@ void CBuff::Destroy() {
 }
 void CBuff::OnCreated() {
     std::cout << "buff创建" << std::endl;
+    mEffect = CreateEffect("CEffect_stunned",CVector2(),mOwner.lock().get());
 }
 
 void CBuff::OnDestroy() {
-
+    std::cout << "buff销毁" << std::endl;
 }

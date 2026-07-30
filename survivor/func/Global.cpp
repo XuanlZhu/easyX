@@ -9,6 +9,7 @@
 #include <random>
 #include <cmath>
 #include <filesystem>
+// #include "./Graphics/CSprite.h"
 
 
 #include "Core/CVector2.h"
@@ -93,9 +94,9 @@ CVector2 RandomVector(int _length)
     return vector2;
 }
 
-std::weak_ptr<CEffect> CreateEffect(std::string _className, CVector2 _pos) {
+std::weak_ptr<CEffect> CreateEffect(std::string _className, CVector2 _pos,CSprite* _attacher) {
     // std::cout << "创建特效" << std::endl;
-    return Global::effectManager->CreateEffect(_className,_pos);
+    return Global::effectManager->CreateEffect(_className,_pos,_attacher);
 }
 
 void SendOverheadEventMessage(CSprite* _owner, std::string _value) {

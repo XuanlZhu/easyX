@@ -9,7 +9,7 @@
 #include "../../survivor/effects/CEffectNumber.h"
 #include "Graphics/CEffect.h"
 #include "../../survivor/effects/CEffect_circle.h"
-
+#include "../../survivor/effects/CEffect_stunned.h"
 
 void CEffectManager::Update(float _deltaTime) {
     for(auto& effect : mEffects)
@@ -42,12 +42,14 @@ void CEffectManager::DestroyEffects()
     );
 }
 //创建effect
-std::weak_ptr<CEffect> CEffectManager::CreateEffect(std::string _className, CVector2 _pos) {
+std::weak_ptr<CEffect> CEffectManager::CreateEffect(std::string _className, CVector2 _pos,CSprite* _attacher) {
     std::shared_ptr<CEffect> effect;
     if (_className == "CEffectNumber") {
         effect = std::make_shared<CEffectNumber>();//创建effecf
     }else if (_className == "CEffect_circle") {
         effect = std::make_shared<CEffect_circle>();
+    }else if (_className == "CEffect_stunned") {
+        effect = std::make_shared<CEffect_stunned>(_attacher);
     }
     else {
         effect = std::make_shared<CEffect>();

@@ -25,6 +25,7 @@ public:
     int GetTeam(){return mTeam;};
     void OnDeath();//销毁
     std::weak_ptr<CBuff> AddNewModifier(CUnit* _caster,CAbility* _ability,std::string _name, nlohmann::json _tab);
+    std::shared_ptr<CAbility> GetSharedPtrAbility(CAbility* _ability);
 
     float mHp = 100;//生命值
     float mAttackRange=35;//攻击距离

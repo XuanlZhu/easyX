@@ -89,3 +89,14 @@ void CUnit::OnDeath() {
 std::weak_ptr<CBuff> CUnit::AddNewModifier(CUnit* _caster, CAbility* _ability, std::string _name, nlohmann::json _tab) {
     return Global::buffManager->AddNewModifier(this,_caster,_ability,_name,_tab);
 }
+
+std::shared_ptr<CAbility> CUnit::GetSharedPtrAbility(CAbility *_ability) {
+    for (auto& it : mAbilitys)
+    {
+        if (it.get() == _ability)
+        {
+            return it;
+        }
+    }
+    return nullptr;
+}

@@ -10,10 +10,11 @@
 
 void CUnitManager::Update(float _deltaTime) {
     mTime += _deltaTime;
-    if (mTime>=1) {//清理周期1秒
-        mTime=0;
-        ClearList();//清理表
-    }
+    ClearList();//清理表
+    // if (mTime>=1) {//清理周期1秒
+    //     mTime=0;
+    //     ClearList();//清理表
+    // }
 }
 void CUnitManager::ClearList()
 {
@@ -27,6 +28,7 @@ void CUnitManager::ClearList()
         ),
         mUnits.end()
     );
+    std::cout << "清理单位表完成" << std::endl;
 }
 
 void CUnitManager::Append(std::shared_ptr<CUnit> _unit) {

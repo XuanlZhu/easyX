@@ -1,5 +1,6 @@
 #include "CGame.h"
 #include <chrono>
+#include <iostream>
 
 #include "EKey.h"
 #include "Scene/CScene.h"
@@ -133,14 +134,16 @@ void CGame::Setup()
 //更新
 void CGame::Update(float _deltaTime)
 {
+    // try{Global::thinkerManager->Update(_deltaTime);}catch(const char* msg){
+    //     std::cout << "定时器管理器报错" << std::endl;
+    // }
     Global::thinkerManager->Update(_deltaTime);//定时器
     Global::effectManager->Update(_deltaTime);//特效
     mCurrentScene->mSpriteList.Update(_deltaTime);//精灵表使用裸指针,精灵表的清除要放在前面
-    Global::buffManager->Update(_deltaTime);//buff更新//可能情况：buff还在，owner不在了
-    Global::unitManager->Update(_deltaTime);//单位管理器清除
+    // Global::buffManager->Update(_deltaTime);//buff更新//可能情况：buff还在，owner不在了
+    Global::buffManager->Update(_deltaTime);//buff管理器
+    Global::unitManager->Update(_deltaTime);//单位管理器
 
-
-    // mCurrentScene->Update(_deltaTime);
 }
 //绘制函数
 void CGame::Draw()

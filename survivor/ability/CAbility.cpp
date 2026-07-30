@@ -20,14 +20,16 @@ void CAbility::OnSpellStart() {
     mLastCastTime = GetNowTime();
     // std::cout << "释放技能" << std::endl;
     EmitSoundOn("hoof_stomp");
-    auto effect = CreateEffect("CEffect_circle",mCaster->GetPos()).lock();
+    auto effect = CreateEffect("CEffect_circle",mCaster->GetPos(),nullptr).lock();
     effect->SetParticleControl(0,CVector2(150,0));
 
     auto units = FindUnitsInRadius(3, mCaster->GetPos(),150,0);
     for (auto& x: units) {
         auto unit = x.lock();
-        ApplyDamage(DamageContext{mCaster,unit.get(),1});
-        unit->AddNewModifier(mCaster,this,"buff",json{});
+        ApplyDamage(DamageContext{mCaster,unit.get(),100});
+        std::cout << "造成伤害完成，准备添加buff" << std::endl;
+        // unit->AddNewModifier(mCaster,this,"buff",json{});
+        // CreateEffect("CEffect_stunned",mCaster->GetPosw(),mCaster).lock();
     }
 }
 

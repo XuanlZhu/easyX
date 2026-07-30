@@ -4,6 +4,8 @@
 
 #include "CBuffSystem.h"
 
+#include <iostream>
+
 #include "CBuffManager.h"
 #include "Global.h"
 #include "../func/CBuff.h"
@@ -23,6 +25,7 @@ CBuffSystem::~CBuffSystem() {
 //记录buff
 void CBuffSystem::AddBuff(CBuff* _buff) {
     mBuffTbale.push_back(_buff);
+    std::cout << "添加buff到单位" << std::endl;
     _buff->OnCreated();
 }
 

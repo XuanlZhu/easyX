@@ -1,5 +1,6 @@
 #include "../survivor/CMyGame.h"
 #include "../easyX/Core/EKey.h"
+#include "func/CBuffManager.h"
 #include "func/Global.h"
 #include "map/CScene1.h"
 #include "ResourceManager/CAnimaManager.h"
@@ -33,13 +34,14 @@ void CMyGame::Setup() {
     Global::animaManager = new CAnimaManager();//动画管理器
     Global::spriteList = &Global::scene->mSpriteList;//精灵表
     Global::unitManager = new CUnitManager();//单位管理器
+    Global::buffManager = new CBuffManager();//buff管理器
+
     //生成玩家
     Global::player = CreateUnitByName("player", CVector2(5000,5000), nullptr, 1).lock();
     Global::scene->SetPlayer(Global::player.get());//设置玩家
 }
 void CMyGame::Update(float _deltaTime) {
     CGame::Update(_deltaTime);//父类
-    // mCurrentScene->mSpriteList.Update(_deltaTime);//精灵更新
     //控制相机
     mCurrentScene->mCamera.SetPosition(mCurrentScene->mPlayer->GetPos()-CVector2(mWidth/2, mHeight/2));
 

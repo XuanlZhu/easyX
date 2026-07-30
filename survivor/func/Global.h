@@ -8,6 +8,7 @@
 #include <memory>
 // #include "../unit/CUnit.h"
 
+class CBuffManager;
 class CUnitManager;
 class SpriteList;
 class CAnimaManager;
@@ -38,6 +39,7 @@ public:
     inline static CAnimaManager* animaManager = nullptr;//动画管理器
     inline static SpriteList* spriteList = nullptr;//精灵表
     inline static CUnitManager* unitManager = nullptr;//单位管理器
+    inline static CBuffManager* buffManager = nullptr;//buff管理器
 };
 struct DamageContext { CUnit* _attacker; CUnit* _victim; float _damage; };//伤害结构体
 

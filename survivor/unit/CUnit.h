@@ -6,6 +6,9 @@
 #include "Graphics/CSprite.h"
 #include <string>
 #include <memory>
+#include <nlohmann/json_fwd.hpp>
+
+#include "../func/CBuffSystem.h"
 
 
 class CAbility;
@@ -14,7 +17,6 @@ class CUnit : public CSprite
 {
 public:
     CUnit(std::string _name);
-    std::weak_ptr<CUnit> mAttackTarget;//攻击对象
     void SetAttackTarget(std::weak_ptr<CUnit> _unit);//设置攻击对象
     void Update(float _deltaTime) override;
     bool IsDeath();
@@ -22,6 +24,7 @@ public:
     CAbility* AddAbility(std::string _name);
     int GetTeam(){return mTeam;};
     void OnDeath();//销毁
+    std::weak_ptr<CBuff> AddNewModifier(CUnit* _caster,CAbility* _ability,std::string _name, nlohmann::json _tab);
 
     float mHp = 100;//生命值
     float mAttackRange=35;//攻击距离
@@ -29,9 +32,11 @@ public:
     float mAttackDamage=4;//攻击力
     int mAttackType=1;//0无攻击，1近战，2远程
     int mTeam=3;//队伍
-
-    std::vector<std::shared_ptr<CAbility>> mAbilitys;//技能表
     bool mIsDeath = false;//是否死亡
     float mLastAttackTime = 0;//上次攻击时间
     bool mCanRespawn = false;//无法重生，死亡后移除
+
+    CBuffSystem mBuffSystem = CBuffSystem(this);//buff系统
+    std::vector<std::shared_ptr<CAbility>> mAbilitys;//技能表
+    std::weak_ptr<CUnit> mAttackTarget;//攻击对象
 };

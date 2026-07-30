@@ -7,6 +7,7 @@
 #include "ResourceManager/CEffectManager.h"
 #include "ResourceManager/CThinkerManager.h"
 #include "ResourceManager/CUnitManager.h"
+#include "../survivor/func/CBuffManager.h"
 
 CGame::CGame(int _width, int _height) {
     mWidth = _width;
@@ -135,7 +136,9 @@ void CGame::Update(float _deltaTime)
     Global::thinkerManager->Update(_deltaTime);//定时器
     Global::effectManager->Update(_deltaTime);//特效
     mCurrentScene->mSpriteList.Update(_deltaTime);//精灵表使用裸指针,精灵表的清除要放在前面
+    Global::buffManager->Update(_deltaTime);//buff更新//可能情况：buff还在，owner不在了
     Global::unitManager->Update(_deltaTime);//单位管理器清除
+
 
     // mCurrentScene->Update(_deltaTime);
 }

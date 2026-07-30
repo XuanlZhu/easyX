@@ -64,6 +64,12 @@ add_executable(easyX
         survivor/effects/CEffect_circle.h
         easyX/ResourceManager/CUnitManager.cpp
         easyX/ResourceManager/CUnitManager.h
+        survivor/func/CBuffSystem.cpp
+        survivor/func/CBuffSystem.h
+        survivor/func/CBuff.cpp
+        survivor/func/CBuff.h
+        survivor/func/CBuffManager.cpp
+        survivor/func/CBuffManager.h
 )
 
 # EasyX库路径

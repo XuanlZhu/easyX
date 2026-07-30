@@ -9,6 +9,7 @@
 #include <nlohmann/json_fwd.hpp>
 
 #include "../ability/CAbility.h"
+#include "../func/CBuffManager.h"
 #include "ResourceManager/CImageManager.h"
 #include "ResourceManager/CSoundManager.h"
 using json = nlohmann::json;
@@ -32,6 +33,7 @@ CUnit::CUnit(std::string _name) {
     }
     if(data.contains("mSpeed")){mSpeed = data["mSpeed"].get<float>();}
 }
+
 
 
 void CUnit::SetAttackTarget(std::weak_ptr<CUnit> _unit) {
@@ -82,4 +84,8 @@ void CUnit::OnDeath() {
         this->isdraw = false;//标记精灵表删除
     }
     this->mIsDeath = true;//标记死亡
+}
+
+std::weak_ptr<CBuff> CUnit::AddNewModifier(CUnit* _caster, CAbility* _ability, std::string _name, nlohmann::json _tab) {
+    return Global::buffManager->AddNewModifier(this,_caster,_ability,_name,_tab);
 }

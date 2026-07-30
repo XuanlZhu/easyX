@@ -32,3 +32,15 @@ void CUnitManager::ClearList()
 void CUnitManager::Append(std::shared_ptr<CUnit> _unit) {
     mUnits.push_back(_unit);
 }
+
+std::shared_ptr<CUnit> CUnitManager::GetSharedPtr(CUnit* _unit)
+{
+    for (auto& unit : mUnits)
+    {
+        if (unit.get() == _unit)
+        {
+            return unit;
+        }
+    }
+    return nullptr;
+}

@@ -23,7 +23,10 @@ void CUnitManager::ClearList()
         std::remove_if(mUnits.begin(),mUnits.end(),
             [](std::shared_ptr<CUnit>& _unit)
             {
-                return _unit->IsDeath() && !_unit->mCanRespawn;
+                if (_unit->IsDeath() && !_unit->mCanRespawn) {
+                    _unit->OnDestroy();
+                    return true;
+                }
             }
         ),
         mUnits.end()

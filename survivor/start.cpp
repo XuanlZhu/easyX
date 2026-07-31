@@ -17,7 +17,7 @@ int main()
     Global::game = new CMyGame();
     Global::game->Run();
 
-    auto plyer = Global::player;
+    auto player = Global::player;
 
     // plyer->SetContextThink("123",[&] {
     //
@@ -26,13 +26,16 @@ int main()
     //     return 3;
     // },0);
 
-    plyer->SetContextThink("123",[&] {
+    player->SetContextThink("123",[&] {
         // std::cout << "Init Graphics Success" << std::endl;
-        auto creep= CreateUnitByName("creep", plyer->GetPos()+RandomVector(400), nullptr, 3).lock();
+        auto creep= CreateUnitByName("creep", player->GetPos()+RandomVector(400), nullptr, 3).lock();
         if (creep) {
-            creep->SetAttackTarget(plyer);
+            creep->SetAttackTarget(player);
             // creep->OnDeath();
         }
+        // std::cout << "属性表" << std::endl;
+        player->mAttributeSystem.Print();
+
         return 1;
     },0);
     Global::soundManager->PlayLoop("ReincarnatedEchoes");

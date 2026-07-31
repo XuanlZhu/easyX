@@ -9,7 +9,8 @@
 #include <nlohmann/json_fwd.hpp>
 
 #include "../func/CBuffSystem.h"
-
+#include "../func/GameDefine.h"
+#include "../func/CAttributeSystem.h"
 
 class CAbility;
 
@@ -23,9 +24,13 @@ public:
     void CastAbilityOnTarget(CUnit* _target,CAbility* _ability);
     CAbility* AddAbility(std::string _name);
     int GetTeam(){return mTeam;};
-    void OnDeath();//销毁
+    void OnDeath();//当死亡
+    void OnDestroy();//当销毁
     std::weak_ptr<CBuff> AddNewModifier(CUnit* _caster,CAbility* _ability,std::string _name, nlohmann::json _tab);
     std::shared_ptr<CAbility> GetSharedPtrAbility(CAbility* _ability);
+    bool IsStunned() {
+        return mBuffSystem.mStateTable[MODIFIER_STATE_STUNNED];
+    };
 
     float mHp = 100;//生命值
     float mAttackRange=35;//攻击距离
@@ -36,9 +41,9 @@ public:
     bool mIsDeath = false;//是否死亡
     float mLastAttackTime = 0;//上次攻击时间
     bool mCanRespawn = false;//无法重生，死亡后移除
-    bool isStunned = false;
 
     CBuffSystem mBuffSystem = CBuffSystem(this);//buff系统
+    CAttributeSystem mAttributeSystem = CAttributeSystem(this);//属性系统
     std::vector<std::shared_ptr<CAbility>> mAbilitys;//技能表
     std::weak_ptr<CUnit> mAttackTarget;//攻击对象
 };

@@ -17,6 +17,7 @@ CBuff::~CBuff() {
     }
 }
 
+
 void CBuff::Update(float _deltaTime) {
     mElapsedTime += _deltaTime;
     if (mElapsedTime >= mDuration && mDuration!=-1) {
@@ -36,11 +37,10 @@ void CBuff::Destroy() {
 void CBuff::OnCreated() {
     // std::cout << "buff创建" << std::endl;
     mEffect = CreateEffect("CEffect_stunned",CVector2(),mOwner.lock().get());
-    mOwner.lock()->isStunned = true;
 }
 
 void CBuff::OnDestroy() {
     // std::cout << "buff销毁" << std::endl;
     // 析构时，lock是没用的
-    mOwner.lock()->isStunned = false;
 }
+

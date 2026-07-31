@@ -72,6 +72,9 @@ add_executable(easyX
         survivor/func/CBuffManager.h
         survivor/effects/CEffect_stunned.cpp
         survivor/effects/CEffect_stunned.h
+        survivor/func/GameDefine.h
+        survivor/func/CAttributeSystem.cpp
+        survivor/func/CAttributeSystem.h
 )
 
 # EasyX库路径

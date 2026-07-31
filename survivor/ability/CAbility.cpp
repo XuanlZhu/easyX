@@ -26,14 +26,17 @@ void CAbility::OnSpellStart() {
     auto units = FindUnitsInRadius(3, mCaster->GetPos(),150,0);
     for (auto& x: units) {
         auto unit = x.lock();
-        ApplyDamage(DamageContext{mCaster,unit.get(),50});
-        std::cout << "开始附加buff" << std::endl;
-        unit->AddNewModifier(mCaster,this,"buff",json{
-            {"duration", 1}
-        });
+        ApplyDamage(DamageContext{mCaster,unit.get(),56});
+        // std::cout << "开始附加buff" << std::endl;
+        // unit->AddNewModifier(mCaster,this,"buff",json{
+        //     {"duration", 1}
+        // });
 
-        std::cout << "buff附加完成" << std::endl;
+        // std::cout << "buff附加完成" << std::endl;
     }
+    // mCaster->AddNewModifier(mCaster,this,"buff",json{
+    //     {"duration", 5}
+    // });
 }
 
 bool CAbility::IsCooldownReady() {

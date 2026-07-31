@@ -42,7 +42,7 @@ void CUnit::SetAttackTarget(std::weak_ptr<CUnit> _unit) {
 
 void CUnit::Update(float _deltaTime) {
     if (IsDeath()) {OnDeath();return;};
-    if (isStunned) {return;};
+    if (IsStunned()) {return;};
 
     auto target = mAttackTarget.lock();
     if(target)
@@ -85,6 +85,11 @@ void CUnit::OnDeath() {
         this->isdraw = false;//标记精灵表删除
     }
     this->mIsDeath = true;//标记死亡
+
+}
+
+void CUnit::OnDestroy() {
+    mBuffSystem.OnDestroy();
 }
 
 std::weak_ptr<CBuff> CUnit::AddNewModifier(CUnit* _caster, CAbility* _ability, std::string _name, nlohmann::json _tab) {

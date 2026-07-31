@@ -35,9 +35,14 @@ void CAbility::OnSpellStart() {
         // std::cout << "buff附加完成" << std::endl;
     }
     // ApplyDamage(DamageContext{mCaster,mCaster,100});
-    mCaster->AddNewModifier(mCaster,this,"buff",json{
+    static int a=0;
+    if (!a) {
+        mCaster->AddNewModifier(mCaster,this,"CBuff_test",json{
             {"duration", 5}
-    });
+        });
+        a++;
+    }
+
     // std::cout << "技能释放完毕" << std::endl;
 }
 

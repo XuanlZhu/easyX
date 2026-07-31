@@ -8,7 +8,7 @@
 
 #include "CBuffManager.h"
 #include "Global.h"
-#include "../func/CBuff.h"
+#include "../buffs/CBuff.h"
 
 CBuffSystem::CBuffSystem(CUnit* _unit) {
     mOwner = _unit;
@@ -28,7 +28,6 @@ bool CBuffSystem::HasState(int _state) {
 
 //记录buff
 void CBuffSystem::AddBuff(CBuff* _buff) {
-    _buff->mBuffSystem = this;
     //状态计数
     auto states = _buff->CheckState();
     for(auto& [state, enable] : states)

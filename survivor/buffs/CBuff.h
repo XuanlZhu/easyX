@@ -6,8 +6,9 @@
 #include <memory>
 #include <unordered_map>
 
-#include "CBuffSystem.h"
+#include "../func/CBuffSystem.h"
 
+class CAttributeSystem;
 class CEffect;
 class CAbility;
 class CUnit;
@@ -24,7 +25,7 @@ X(agility) \
 X(intellect)
 
 #define X(name) \
-virtual float GetAttribute_##name() { return 10; } \
+virtual float GetAttribute_##name() { return 0; } \
 virtual float GetAttributePercent_##name() { return 0; }
 
 class CBuff {
@@ -43,7 +44,10 @@ public:
     };//状态注册
     virtual std::vector<std::string> AffectingAttributes() {
         return std::vector<std::string>{
-
+            "attack_damage",
+            "strength",
+            "agility",
+            "intellect",
         };
     };//声明
     ATTRIBUTE_LIST//创建getter
@@ -60,14 +64,14 @@ public:
     float GetAttributePercentFunc(std::string key)
     {
         #define X(name) \
-        if(key == #name) return GetAttribute_##name();
+        if(key == #name) return GetAttributePercent_##name();
 
         ATTRIBUTE_LIST
         #undef X
         return 0;
     }
     #undef ATTRIBUTE_LIST
-    
+
     float mElapsedTime = 0;//逝去时间
     float mDuration = -1;//持续时间
     bool mDeath = false;
@@ -77,7 +81,7 @@ public:
     std::weak_ptr<CAbility> mAbility;
     std::weak_ptr<CEffect> mEffect;
     CBuffSystem* mBuffSystem;//buff系统
-
+    CAttributeSystem* mAttributeSystem;//属性系统
 
 
 

@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "Global.h"
+#include "../func/Global.h"
 #include "../unit/CUnit.h"
 #include "Graphics/CEffect.h"
 
@@ -33,7 +33,7 @@ void CBuff::Destroy() {
     // std::cout << "buff开始销毁" << std::endl;
     OnDestroy();
     mBuffSystem->DestroyBuff(this);//buff系统移除
-    //聚合器移除
+    mAttributeSystem->UnregisterModifier(this);//属性系统移除
 
     mDeath = true;
     // std::cout << "buff销毁完成" << std::endl;

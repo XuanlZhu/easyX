@@ -31,9 +31,7 @@ int main()
         auto creep= CreateUnitByName("creep", player->GetPos()+RandomVector(400), nullptr, 3).lock();
         if (creep) {
             creep->SetAttackTarget(player);
-            // creep->OnDeath();
         }
-        // std::cout << "属性表" << std::endl;
         player->mAttributeSystem.Print();
 
         return 1;

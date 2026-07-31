@@ -5,7 +5,7 @@
 #pragma once
 #include <iostream>
 
-#include "CBuff.h"
+#include "../buffs/CBuff.h"
 
 
 class CUnit;
@@ -31,7 +31,7 @@ public:
     void Print() {
         std::cout << "属性表" << std::endl;
         for (auto x : cache) {
-            std::cout << x.first << " : " << x.second.final << std::endl;
+            std::cout << x.first << " : " << Get(x.first) << std::endl;
         }
     };
 

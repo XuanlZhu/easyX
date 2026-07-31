@@ -4,6 +4,8 @@
 
 #include "CEffect_stunned.h"
 
+#include <iostream>
+
 #include "Graphics/CCamera.h"
 #include "Graphics/CSprite.h"
 // #include "../func/Global.h"
@@ -20,6 +22,7 @@ void CEffect_stunned::Update(float _deltaTime) {
     mFrameTime += _deltaTime;
 
     try{mPos = mAttacher->GetPos();}catch(const char* msg){
+        std::cout << "CEffect_stunned捕捉到异常" << std::endl;
         Destroy();//附着者失效就销毁
     }
 

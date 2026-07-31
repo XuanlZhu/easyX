@@ -45,7 +45,8 @@ std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster
     }
     mBuffTable.push_back(buff);
     _target->mBuffSystem.AddBuff(buff.get());//添加buff到单位
-
+    buff->OnCreated();//触发OnCreated
+    // std::cout << "添加buff到单位" << std::endl;
     return buff;
 }
 

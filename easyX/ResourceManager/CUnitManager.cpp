@@ -27,6 +27,7 @@ void CUnitManager::ClearList()
                     _unit->OnDestroy();
                     return true;
                 }
+                return false;
             }
         ),
         mUnits.end()

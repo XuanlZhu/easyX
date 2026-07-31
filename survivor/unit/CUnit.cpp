@@ -93,6 +93,7 @@ void CUnit::OnDestroy() {
 }
 
 std::weak_ptr<CBuff> CUnit::AddNewModifier(CUnit* _caster, CAbility* _ability, std::string _name, nlohmann::json _tab) {
+    if (_caster->IsDeath()) {return {};}
     return Global::buffManager->AddNewModifier(this,_caster,_ability,_name,_tab);
 }
 

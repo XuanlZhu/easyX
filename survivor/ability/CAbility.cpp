@@ -34,9 +34,11 @@ void CAbility::OnSpellStart() {
 
         // std::cout << "buff附加完成" << std::endl;
     }
-    // mCaster->AddNewModifier(mCaster,this,"buff",json{
-    //     {"duration", 5}
-    // });
+    ApplyDamage(DamageContext{mCaster,mCaster,100});
+    mCaster->AddNewModifier(mCaster,this,"buff",json{
+            {"duration", 0.3}
+        });
+    std::cout << "技能释放完毕" << std::endl;
 }
 
 bool CAbility::IsCooldownReady() {

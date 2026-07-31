@@ -53,7 +53,7 @@ CVector2 RandomVector(int length);
 std::weak_ptr<CEffect> CreateEffect(std::string _className,CVector2 _pos,CSprite* _attacher);//创建特效
 void SendOverheadEventMessage(CSprite* _owner,std::string _value);//头顶文字
 float CalcDistanceBetweenEntityOBB(CSprite* _s1,CSprite* _s2);//计算两个精灵的距离
-void ApplyDamage(DamageContext _context);
+void ApplyDamage(DamageContext _context);//造成伤害
 void EmitSoundOn(std::string _name);
 std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team,CVector2 _pos,float _radius,int _order);
 

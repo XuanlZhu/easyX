@@ -24,7 +24,7 @@ X(agility) \
 X(intellect)
 
 #define X(name) \
-virtual float GetAttribute_##name() { return 0; } \
+virtual float GetAttribute_##name() { return 10; } \
 virtual float GetAttributePercent_##name() { return 0; }
 
 class CBuff {
@@ -67,7 +67,7 @@ public:
         return 0;
     }
     #undef ATTRIBUTE_LIST
-
+    
     float mElapsedTime = 0;//逝去时间
     float mDuration = -1;//持续时间
     bool mDeath = false;

@@ -8,15 +8,15 @@
 #pragma comment(lib, "MSIMG32.LIB") // 链接库
 
 // 透明贴图函数
-void putimage_alpha(int x, int y, IMAGE& img) {
-    int w = img.getwidth();
-    int h = img.getheight();
+void putimage_alpha(float x, float y, IMAGE& img) {
+    float w = img.getwidth();
+    float h = img.getheight();
     AlphaBlend(GetImageHDC(NULL), x, y, w, h, GetImageHDC(&img), 0, 0, w, h, { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA });
 }
 //指定长宽
-void putimage_alpha(int x,int y,int dstW,int dstH,IMAGE& img) {
-    int srcW = img.getwidth();
-    int srcH = img.getheight();
+void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img) {
+    float srcW = img.getwidth();
+    float srcH = img.getheight();
     AlphaBlend(GetImageHDC(NULL), x, y, dstW, dstH, GetImageHDC(&img), 0, 0, srcW, srcH, { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA });
 }
 
@@ -39,7 +39,6 @@ void CSprite::Draw(CCamera& _camera)
     // putimage_alpha(screenPos.x,screenPos.y,*mImage);
     if (mImage) {
 
-
         putimage_alpha(screenPos.x-mLength/2,screenPos.y-mLength/2,mLength,mLength,*mImage);
         // putimage_alpha(screenPos.x,screenPos.y,*mImage);
     }
@@ -60,6 +59,9 @@ CVector2 CSprite::GetPos(){
 void CSprite::Update(float _deltaTime) {
 }
 
+void CSprite::Destroy() {
+    isdraw = false;
+}
 
 
 // bool CSprite::LoadImage(const wchar_t* _path){

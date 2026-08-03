@@ -36,6 +36,7 @@ int main()
 
         return 1;
     },0);
+    // CreateEffect("CEffect_levelup",player->GetPos(),nullptr);
     Global::soundManager->PlayLoop("ReincarnatedEchoes");
     
     // CVector2(5000,5000)+RandomVector(600);

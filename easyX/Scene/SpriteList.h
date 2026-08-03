@@ -14,8 +14,9 @@ class CCamera;
 class SpriteList {
 public:
     void Draw(CCamera& _camera);//绘制
-    void Append(CSprite* _sprite);//添加精灵
+    void Append(std::shared_ptr<CSprite> _sprite);//添加精灵
     void Update(float _deltaTime);//更新
     void ClearList();//清理表
-    vector<CSprite*> mSprites;
+    // vector<CSprite*> mSprites;
+    std::vector<std::shared_ptr<CSprite>> mSprites;
 };

@@ -30,7 +30,7 @@ class Global {
 public:
     inline static CGame* game = nullptr;//游戏
     inline static CScene* scene = nullptr;//场景
-    inline static std::shared_ptr<CUnit> player = nullptr;//玩家
+    inline static std::shared_ptr<CPlayer> player = nullptr;//玩家
     inline static json unitJson = {};//unitJson
     inline static CImageManager* imgManager = nullptr;//图片管理器
     inline static CThinkerManager* thinkerManager = nullptr;//thinker管理器
@@ -56,4 +56,5 @@ float CalcDistanceBetweenEntityOBB(CSprite* _s1,CSprite* _s2);//计算两个精�
 void ApplyDamage(DamageContext _context);//造成伤害
 void EmitSoundOn(std::string _name);
 std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team,CVector2 _pos,float _radius,int _order);
+std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos);//创建精灵，并下发到精灵表
 

@@ -14,9 +14,10 @@
 
 #include "Core/CVector2.h"
 #include "ResourceManager/CEffectManager.h"
-#include "../../survivor/effects/CEffectNumber.h"
+#include "../survivor/effects/CEffectNumber.h"
 #include "ResourceManager/CSoundManager.h"
 #include "ResourceManager/CUnitManager.h"
+#include "../sprite/CXpGem.h"
 
 namespace fs = std::filesystem;
 
@@ -52,11 +53,12 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     }else {
         unit = std::make_shared<CUnit>(_unitName);
     }
+    unit->jsonKV= table[_unitName];//设置json信息
 
     unit->mTeam = _team;//队伍1：好人，队伍2：敌对，队伍3：中立
     unit->SetPosition(_location);//设置位置
     //要用单位管理器管理unit
-    Global::spriteList->Append(unit.get());//添加精灵表
+    Global::spriteList->Append(unit);//添加精灵表
     Global::unitManager->Append(unit);//添加到单位管理器
 
     return unit;
@@ -138,5 +140,15 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, fl
     }
     //排序还没实现
     return result;
+}
+//创建精灵
+std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos) {
+    std::shared_ptr<CSprite> sprite;//创建精灵类，下发到当前精灵表
+    if (true) {
+        sprite = std::make_shared<CXpGem>();
+    }
+    sprite->SetPosition(_pos);
+    Global::spriteList->Append(sprite);
+    return sprite;
 }
 

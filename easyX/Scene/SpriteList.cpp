@@ -4,10 +4,15 @@
 
 #include "SpriteList.h"
 
+#include <iostream>
+#include "../../survivor/func/Global.h"
+#include "../../survivor/unit/CPlayer.h"
 
 
 void SpriteList::Update(float _deltaTime) {
-    for(auto sprite : mSprites)
+
+    auto sprites = mSprites;
+    for(auto sprite : sprites)
     {
         if(sprite)
         {
@@ -20,7 +25,7 @@ void SpriteList::Update(float _deltaTime) {
 void SpriteList::ClearList() {
     mSprites.erase(
         std::remove_if(mSprites.begin(),mSprites.end(),
-            [](CSprite* _sprite)
+            [](auto _sprite)
             {
                 return !_sprite->isdraw;
             }
@@ -31,15 +36,16 @@ void SpriteList::ClearList() {
 
 void SpriteList::Draw(CCamera& _camera)
 {
+    //裁切
     for(auto sprite : mSprites)
     {
-        if(sprite)
+        if((Global::player->GetPos()-sprite->GetPos()).Length()<=500)
         {
             sprite->Draw(_camera);
         }
     }
 }
 
-void SpriteList::Append(CSprite* _sprite) {
+void SpriteList::Append(std::shared_ptr<CSprite> _sprite) {
     mSprites.push_back(_sprite);
 }

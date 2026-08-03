@@ -7,7 +7,7 @@
 #include "Graphics/CCamera.h"
 // #include "../func/Global.h"
 // #include "ResourceManager/CAnimaManager.h"
-extern void putimage_alpha(int x,int y,int dstW,int dstH,IMAGE& img);
+extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
 
 CEffect_circle::CEffect_circle(){
     mLifeTime = 0.8f;

@@ -106,7 +106,7 @@ bool CTileMap::LoadTiles()
 void CTileMap::Draw(CCamera& _camera)
 {
     // 获取相机世界坐标范围
-    CVector2 cameraPos = _camera.GetPosition();
+    CVector2 cameraPos = _camera.GetPos();
     int startX = cameraPos.x / mTileWidth;
     int startY = cameraPos.y / mTileHeight;
 

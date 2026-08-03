@@ -24,6 +24,7 @@ public:
     void SetPosition(CVector2 _pos);// 设置位置
     CVector2 GetPos();// 获取位置
     virtual void Update(float _deltaTime);
+    virtual void Destroy();//销毁,子类要重写
 
     bool isdraw = true;//精灵表删除标记
     float mSpeed = 5;//速度

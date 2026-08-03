@@ -137,8 +137,11 @@ void CGame::Update(float _deltaTime)
     Global::thinkerManager->Update(_deltaTime);//定时器
     Global::effectManager->Update(_deltaTime);//特效
     Global::buffManager->Update(_deltaTime);//buff管理器//可能情况：buff还在，owner不在了
+    // std::cout << "spriteList更新开始" << std::endl;
     Global::spriteList->Update(_deltaTime);//精灵表使用裸指针,精灵表的清除要放在前面
+    // std::cout << "spriteList更新结束" << std::endl;
     Global::unitManager->Update(_deltaTime);//单位管理器//只做清理
+    // std::cout << "更新结束" << std::endl;
 
 }
 //绘制函数

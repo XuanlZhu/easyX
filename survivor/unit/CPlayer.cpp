@@ -5,9 +5,13 @@
 #include "CPlayer.h"
 #include <cstdio>
 #include <iostream>
+#include "../func/Global.h"
+#include <memory>
 
 #include "../ability/CAbility.h"
+#include "../sprite/CXpGem.h"
 
+vector<int> xp_table={};
 CPlayer::CPlayer(std::string _name) : CUnit(_name){
     mCanRespawn = true;//可以重生
     this->AddAbility("1");
@@ -21,6 +25,12 @@ CPlayer::CPlayer(std::string _name) : CUnit(_name){
         }
         return 0.5;
     },0);
+
+    int xp = 10;
+    for (int i = 0; i < 100; i++) {
+        xp_table.push_back(xp);
+        xp += 10;
+    }
 }
 
 void CPlayer::Update(float _deltaTime) {
@@ -28,8 +38,45 @@ void CPlayer::Update(float _deltaTime) {
     mPos.x += mChangeX * _deltaTime;
     mPos.y += mChangeY * _deltaTime;
 
+    //搜索宝石
+    std::vector<std::shared_ptr<CXpGem>> result;
+    for(auto& sprite : Global::spriteList->mSprites)
+    {
+        auto gem = std::dynamic_pointer_cast<CXpGem>(sprite);
+        if(gem){result.push_back(gem);}//过滤宝石
+    }
+    for(auto& gem : result)
+    {
+        if(gem->isflying)continue;
+        // 距离判断
+        float distance = (gem->GetPos() - mPos).Length();
 
-    // outtextxy(100, 100, L"Hello EasyX");
-    // std::cout << _deltaTime << std::endl;
-    // std::cout << mChangeX << std::endl;
+        if(distance <= 30)
+        {
+            gem->Pickup();
+        }
+    }
+
+}
+//通过经验判断等级
+int GetLevelByXP(int _xp)
+{
+    int level = 1;int totalXP = 0;
+
+    for(int i = 0; i < xp_table.size(); i++)
+    {
+        totalXP += xp_table[i];
+        if(_xp >= totalXP){level++;}else{break;}
+    }
+    return level;
+}
+
+void CPlayer::AddExperience(int _v) {
+    mXP +=_v;
+    int newLevel = GetLevelByXP(mXP);
+    if (newLevel>mLevel) {
+        mLevel = newLevel;
+        EmitSoundOn("level_up");
+        CreateEffect("CEffect_levelup2",this->GetPos(),this);
+    }
 }

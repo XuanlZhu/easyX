@@ -13,4 +13,8 @@ public:
     // using CUnit::CUnit;
     CPlayer(std::string _name);
     void Update(float _deltaTime) override;
+    void AddExperience(int _v);
+
+    int mXP=0;
+    int mLevel=1;
 };

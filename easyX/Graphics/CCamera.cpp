@@ -22,7 +22,7 @@ CVector2 CCamera::WorldToScreen(CVector2 _worldPos)
     return CVector2(_worldPos.x - mPosition.x,_worldPos.y - mPosition.y);
 }
 
-CVector2 CCamera::GetPosition()
+CVector2 CCamera::GetPos()
 {
     return mPosition;
 }

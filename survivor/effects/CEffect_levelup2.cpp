@@ -1,28 +1,24 @@
 //
-// Created by admin on 2026/7/30.
+// Created by admin on 2026/8/3.
 //
 
-#include "CEffect_stunned.h"
+#include "CEffect_levelup2.h"
 
-#include <iostream>
-
-#include "Graphics/CCamera.h"
 #include "Graphics/CSprite.h"
-// #include "../func/Global.h"
-// #include "ResourceManager/CAnimaManager.h"
+
 extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
 
-CEffect_stunned::CEffect_stunned(CSprite* _sprite){
-    mLifeTime = 9999;
+CEffect_levelup2::CEffect_levelup2(CSprite* _sprite){
+    // mLifeTime = 0.65f;
+    mLifeTime = 1.2f;
     mAttacher = _sprite;
 }
 
-void CEffect_stunned::Update(float _deltaTime) {
+void CEffect_levelup2::Update(float _deltaTime) {
     CEffect::Update(_deltaTime);
     mFrameTime += _deltaTime;
 
     try{mPos = mAttacher->GetPos();}catch(const char* msg){
-        std::cout << "CEffect_stunned捕捉到异常" << std::endl;
         Destroy();//附着者失效就销毁
     }
 
@@ -36,13 +32,17 @@ void CEffect_stunned::Update(float _deltaTime) {
             mFrame = 0;
         }
     }
+    //绑定
+    // try{mPos = mAttacher->GetPos();}catch(const char* msg){
+    //     Destroy();//附着者失效就销毁
+    // }
 }
 
-void CEffect_stunned::Draw(CCamera& _camera) {
+void CEffect_levelup2::Draw(CCamera& _camera) {
     if(IsDead())return;
     CVector2 screenPos = _camera.WorldToScreen(mPos);
 
-    float length = 65;
+    float length = 170;
 
-    putimage_alpha(screenPos.x-length/2,screenPos.y-length/2,length,length,mAnimation[mFrame]);
+    putimage_alpha(screenPos.x-length/2,screenPos.y-length/2+30,length,length/2,mAnimation[mFrame]);
 }

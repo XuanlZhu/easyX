@@ -32,6 +32,7 @@ public:
         return mBuffSystem.mStateTable[MODIFIER_STATE_STUNNED];
     };
 
+    json jsonKV={};
     float mHp = 100;//生命值
     float mAttackRange=35;//攻击距离
     float mAttackInterval = 1;//攻击间隔

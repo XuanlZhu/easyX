@@ -77,6 +77,14 @@ add_executable(easyX
         survivor/func/CAttributeSystem.h
         survivor/buffs/CBuff_test.cpp
         survivor/buffs/CBuff_test.h
+        easyX/ResourceManager/CSpriteManager.cpp
+        easyX/ResourceManager/CSpriteManager.h
+        survivor/sprite/CXpGem.cpp
+        survivor/sprite/CXpGem.h
+        survivor/effects/CEffect_levelup.cpp
+        survivor/effects/CEffect_levelup.h
+        survivor/effects/CEffect_levelup2.cpp
+        survivor/effects/CEffect_levelup2.h
 )
 
 # EasyX库路径

@@ -12,6 +12,8 @@
 #include "../func/CBuffManager.h"
 #include "ResourceManager/CImageManager.h"
 #include "ResourceManager/CSoundManager.h"
+#include "../sprite/CXpGem.h"
+
 using json = nlohmann::json;
 
 // CUnit::CUnit() {
@@ -41,7 +43,7 @@ void CUnit::SetAttackTarget(std::weak_ptr<CUnit> _unit) {
 }
 
 void CUnit::Update(float _deltaTime) {
-    if (IsDeath()) {OnDeath();return;};
+    if (IsDeath()) {OnDeath();return;};//当前帧需清除
     if (IsStunned()) {return;};
 
     auto target = mAttackTarget.lock();
@@ -67,6 +69,15 @@ bool CUnit::IsDeath() {
     }
     return mIsDeath;
 }
+void CUnit::OnDeath() {//触发时机：是Update时
+    if (!mCanRespawn) {//无法重生
+        this->isdraw = false;//标记精灵表删除
+    }
+    this->mIsDeath = true;//标记死亡
+    //创建宝石
+    auto it = CreateCSprite("CXpGem",mPos).lock();
+    std::dynamic_pointer_cast<CXpGem>(it)->BountyXP = jsonKV["BountyXP"];//设置经验
+}
 
 void CUnit::CastAbilityOnTarget(CUnit* _target, CAbility* _ability) {
     _ability->mCastTarget = _target;
@@ -80,16 +91,9 @@ CAbility* CUnit::AddAbility(std::string _name) {
     return ability.get();
 }
 
-void CUnit::OnDeath() {
-    if (!mCanRespawn) {//无法重生
-        this->isdraw = false;//标记精灵表删除
-    }
-    this->mIsDeath = true;//标记死亡
-
-}
 
 void CUnit::OnDestroy() {
-    mBuffSystem.OnDestroy();
+    mBuffSystem.OnDestroy();//触发Destroy链
 }
 
 std::weak_ptr<CBuff> CUnit::AddNewModifier(CUnit* _caster, CAbility* _ability, std::string _name, nlohmann::json _tab) {

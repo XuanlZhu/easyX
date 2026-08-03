@@ -15,7 +15,7 @@ public:
     //世界坐标转屏幕坐标
     CVector2 WorldToScreen(CVector2 _worldPos);
     //获取位置
-    CVector2 GetPosition();
+    CVector2 GetPos();
 private:
     //相机世界坐标
     CVector2 mPosition;

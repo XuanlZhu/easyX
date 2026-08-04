@@ -9,6 +9,7 @@
 #include <random>
 #include <cmath>
 #include <filesystem>
+#include <memory>
 // #include "./Graphics/CSprite.h"
 
 
@@ -18,6 +19,8 @@
 #include "ResourceManager/CSoundManager.h"
 #include "ResourceManager/CUnitManager.h"
 #include "../sprite/CXpGem.h"
+#include "../sprite/CProjectile.h"
+
 
 namespace fs = std::filesystem;
 
@@ -144,11 +147,37 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, fl
 //创建精灵
 std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos) {
     std::shared_ptr<CSprite> sprite;//创建精灵类，下发到当前精灵表
-    if (true) {
+    if (_sprite=="CXpGem") {
         sprite = std::make_shared<CXpGem>();
+    }else if (_sprite=="CProjectile") {
+        sprite = std::make_shared<CProjectile>();
     }
+
     sprite->SetPosition(_pos);
     Global::spriteList->Append(sprite);
     return sprite;
 }
+std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _context) {
+    std::shared_ptr<CProjectile> projectile;
+    if (_context.Source) {
+        //在Source创建
+        auto it = CreateCSprite("CProjectile",_context.Source->GetPos()+_context.vSpawnOrigin).lock();
+        projectile = std::dynamic_pointer_cast<CProjectile>(it);
+    }else {
+        CreateCSprite("CProjectile",_context.vSpawnOrigin);
+    }
+#pragma region//信息定义
+    projectile->Source = Global::unitManager->GetSharedPtr(_context.Source);
+    projectile->Ability = _context.Source->GetSharedPtrAbility(_context.ability);
 
+    projectile->vSpawnOrigin = _context.vSpawnOrigin;
+    projectile->fStartRadius = _context.fStartRadius;
+    projectile->fEndRadius = _context.fEndRadius;
+    projectile->fDistance = _context.fDistance;
+    projectile->vVelocity = _context.vVelocity;
+    projectile->iUnitTargetTeam = _context.iUnitTargetTeam;
+    projectile->EffectName = _context.EffectName;
+    projectile->ExtraData = _context.ExtraData;
+#pragma endregion
+    return projectile;
+}

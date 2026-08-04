@@ -28,6 +28,9 @@ public:
     float RecalculateKey(std::string _key);
     void RegisterModifier(CBuff* _buff);//注册buff
     void UnregisterModifier(CBuff* _buff);//注销buff
+    void MarkDirty(std::string _key){dirty[_key] = true;};//标记脏
+    void ModifyBase(std::string _key,float _value) {base[_key] += _value;dirty[_key] = true;};//修改基础值
+    float GetBase(std::string _key){return base[_key];};//获取基础值
     void Print() {
         std::cout << "属性表" << std::endl;
         for (auto x : cache) {

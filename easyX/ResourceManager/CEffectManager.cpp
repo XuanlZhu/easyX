@@ -12,6 +12,8 @@
 #include "../../survivor/effects/CEffect_stunned.h"
 #include "../../survivor/effects/CEffect_levelup.h"
 #include "../../survivor/effects/CEffect_levelup2.h"
+#include "../../survivor/effects/CEffect_projectile.h"
+
 
 void CEffectManager::Update(float _deltaTime) {
     for(auto& effect : mEffects)
@@ -56,7 +58,10 @@ std::weak_ptr<CEffect> CEffectManager::CreateEffect(std::string _className, CVec
         effect = std::make_shared<CEffect_levelup>(_attacher);
     }else if (_className == "CEffect_levelup2") {
         effect = std::make_shared<CEffect_levelup2>(_attacher);
+    }else if (_className == "CEffect_projectile") {
+        effect = std::make_shared<CEffect_projectile>(_attacher);
     }
+
     else {
         effect = std::make_shared<CEffect>();
     }

@@ -85,6 +85,14 @@ add_executable(easyX
         survivor/effects/CEffect_levelup.h
         survivor/effects/CEffect_levelup2.cpp
         survivor/effects/CEffect_levelup2.h
+        survivor/ability/CAblity_stamp.cpp
+        survivor/ability/CAblity_stamp.h
+        survivor/ability/CAbility_flyingKnife.cpp
+        survivor/ability/CAbility_flyingKnife.h
+        survivor/sprite/CProjectile.cpp
+        survivor/sprite/CProjectile.h
+        survivor/effects/CEffect_projectile.cpp
+        survivor/effects/CEffect_projectile.h
 )
 
 # EasyX库路径

@@ -6,8 +6,12 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <memory>
+
+#include "Core/CVector2.h"
 // #include "../unit/CUnit.h"
 
+class CProjectile;
+class CAbility;
 class CBuffManager;
 class CUnitManager;
 class SpriteList;
@@ -42,7 +46,7 @@ public:
     inline static CBuffManager* buffManager = nullptr;//buff管理器
 };
 struct DamageContext { CUnit* _attacker; CUnit* _victim; float _damage; };//伤害结构体
-
+struct LinearProjectileContext { CAbility* ability; CVector2 vSpawnOrigin; float fStartRadius;float fEndRadius;float fDistance;CVector2 vVelocity;CUnit* Source;int iUnitTargetTeam;std::string EffectName;json ExtraData; };//线性投射物结构体
 
 json LoadJson(std::string _path);
 std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName,CVector2 _location,CUnit* _owner,int _team);
@@ -57,4 +61,4 @@ void ApplyDamage(DamageContext _context);//造成伤害
 void EmitSoundOn(std::string _name);
 std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team,CVector2 _pos,float _radius,int _order);
 std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos);//创建精灵，并下发到精灵表
-
+std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _context);

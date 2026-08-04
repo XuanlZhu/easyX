@@ -9,7 +9,7 @@ CAnimaManager::CAnimaManager() {
     Load("26",64,64);
     Load("529",64,64);
     Load("713",64,64);
-
+    Load("579",64,64);
 }
 void CAnimaManager::Load(std::string _name,int frameWidth,int frameHeight)
 {

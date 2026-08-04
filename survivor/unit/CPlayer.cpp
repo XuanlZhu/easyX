@@ -14,7 +14,8 @@
 vector<int> xp_table={};
 CPlayer::CPlayer(std::string _name) : CUnit(_name){
     mCanRespawn = true;//可以重生
-    this->AddAbility("1");
+    this->AddAbility("CAbility_stamp");
+    this->AddAbility("CAbility_flyingKnife");
     this->SetContextThink("auto_cast",[&] {
         // std::cout << "遍历技能" << std::endl;
         for(auto& ability : mAbilitys)
@@ -75,8 +76,20 @@ void CPlayer::AddExperience(int _v) {
     mXP +=_v;
     int newLevel = GetLevelByXP(mXP);
     if (newLevel>mLevel) {
+        for(int i = 0; i < newLevel-mLevel; i++) {
+            OnLevelUp();
+        }
         mLevel = newLevel;
         EmitSoundOn("level_up");
         CreateEffect("CEffect_levelup2",this->GetPos(),this);
     }
 }
+//当升级
+void CPlayer::OnLevelUp() {
+    //属性提升，直接修改base
+    // mAttributeSystem.base["attack_damage"];
+    mAttributeSystem.ModifyBase("strength",2.6);
+    mAttributeSystem.ModifyBase("agility",2.6);
+    mAttributeSystem.ModifyBase("intellect",2.6);
+}
+

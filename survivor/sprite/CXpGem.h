@@ -13,6 +13,6 @@ public:
     void Pickup();
     void Update(float _deltaTime) override;
     bool isflying = false;
-    float mSpeed=30;
+    float mSpeed=10;
     int BountyXP=0;
 };

@@ -28,7 +28,7 @@ void CXpGem::Update(float _deltaTime) {
             EmitSoundOn("pickup_gem");
             Destroy();
         }
-        mSpeed +=20;
+        mSpeed +=1;
         auto dir = (Global::player->GetPos()-mPos).Normalize()*_deltaTime*mSpeed;
         SetPosition(mPos+dir);
     }

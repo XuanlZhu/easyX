@@ -13,6 +13,8 @@
 #include "ResourceManager/CImageManager.h"
 #include "ResourceManager/CSoundManager.h"
 #include "../sprite/CXpGem.h"
+#include "../ability/CAblity_stamp.h"
+#include "../ability/CAbility_flyingKnife.h"
 
 using json = nlohmann::json;
 
@@ -85,7 +87,15 @@ void CUnit::CastAbilityOnTarget(CUnit* _target, CAbility* _ability) {
 }
 
 CAbility* CUnit::AddAbility(std::string _name) {
-    std::shared_ptr<CAbility> ability = std::make_shared<CAbility>();
+    std::shared_ptr<CAbility> ability;
+    if (_name=="CAblity_stamp") {
+        ability = std::make_shared<CAblity_stamp>();
+    }else if (_name=="CAbility_flyingKnife") {
+        ability = std::make_shared<CAbility_flyingKnife>();
+    }else {
+        ability = std::make_shared<CAbility>();
+    }
+
     ability->mCaster = this;
     mAbilitys.push_back(ability);//添加技能
     return ability.get();

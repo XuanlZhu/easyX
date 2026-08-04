@@ -13,13 +13,12 @@ CProjectile::CProjectile() {
     // mLength = fStartRadius/2;//长度
     fExpireTime = fDistance/vVelocity.Length();//计算时间
 
-    mEffect = CreateEffect("CEffect_projectile",CVector2(),this);//创建特效
-    // mEffect.lock()->SetParticleControl(0,vVelocity);
 }
 
 void CProjectile::Update(float _deltaTime) {
     if (!isInit) {
         isInit = true;
+        mEffect = CreateEffect("CEffect_projectile",CVector2(),this);//创建特效
         mEffect.lock()->SetParticleControl(0,vVelocity);
     }
 

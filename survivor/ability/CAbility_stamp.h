@@ -6,7 +6,7 @@
 #include "CAbility.h"
 
 
-class CAblity_stamp :public CAbility
+class CAbility_stamp :public CAbility
 {
 public:
     void OnSpellStart() override;//当施法开始

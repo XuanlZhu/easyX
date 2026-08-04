@@ -2,7 +2,7 @@
 // Created by admin on 2026/8/3.
 //
 
-#include "CAblity_stamp.h"
+#include "CAbility_stamp.h"
 
 #include "CAbility.h"
 
@@ -18,14 +18,14 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-void CAblity_stamp::OnSpellStart() {
+void CAbility_stamp::OnSpellStart() {
     mLastCastTime = GetNowTime();//记录施法时间
 
     EmitSoundOn("hoof_stomp");
     auto effect = CreateEffect("CEffect_circle",mCaster->GetPos(),nullptr).lock();
-    effect->SetParticleControl(0,CVector2(150,0));
+    effect->SetParticleControl(0,CVector2(100,0));
 
-    auto units = FindUnitsInRadius(3, mCaster->GetPos(),150,0);
+    auto units = FindUnitsInRadius(3, mCaster->GetPos(),100,0);
     for (auto& x: units) {
         auto unit = x.lock();
         ApplyDamage(DamageContext{mCaster,unit.get(),100});

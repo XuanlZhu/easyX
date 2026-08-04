@@ -20,5 +20,6 @@ public:
     CVector2 operator*(float _value) const;
     float Length() const;//长度
     CVector2 Normalize() const;//归1化
+    float Dot(CVector2 _other){return x * _other.x + y * _other.y;};
     float ToAngle(){return std::atan2(y, x) * 180.0f / 3.1415926f;};//转角度
 };

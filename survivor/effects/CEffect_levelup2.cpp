@@ -5,21 +5,23 @@
 #include "CEffect_levelup2.h"
 
 #include "Graphics/CSprite.h"
+#include "Scene/SpriteList.h"
 
 extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
 
 CEffect_levelup2::CEffect_levelup2(CSprite* _sprite){
     // mLifeTime = 0.65f;
     mLifeTime = 1.2f;
-    mAttacher = _sprite;
+    mAttacher = Global::spriteList->GetSharedPtr(_sprite);;
 }
 
 void CEffect_levelup2::Update(float _deltaTime) {
     CEffect::Update(_deltaTime);
     mFrameTime += _deltaTime;
 
-    try{mPos = mAttacher->GetPos();}catch(const char* msg){
-        Destroy();//附着者失效就销毁
+    auto unit = mAttacher.lock();
+    if (unit) {
+        mPos = unit->GetPos();
     }
 
     if(mFrameTime >= 0.04)

@@ -30,7 +30,7 @@ int main()
         // std::cout << "Init Graphics Success" << std::endl;
         auto creep= CreateUnitByName("creep", player->GetPos()+RandomVector(400), nullptr, 3).lock();
         if (creep) {
-            creep->SetAttackTarget(player);
+            // creep->SetAttackTarget(player);
         }
         player->mAttributeSystem.Print();
 

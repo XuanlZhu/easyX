@@ -20,7 +20,7 @@ public:
     //是否死亡
     bool IsDead();
     void Destroy(){mIsDead=true;};
-    CSprite* mAttacher;//附着者
+    std::weak_ptr<CSprite> mAttacher;//附着者
     CVector2 mPos;//位置
     float mLifeTime = 1;//生命时间
     virtual void SetParticleControl(int _controlPoint,CVector2 _pos);

@@ -34,6 +34,17 @@ void SpriteList::ClearList() {
     );
 }
 
+std::shared_ptr<CSprite> SpriteList::GetSharedPtr(CSprite* _unit) {
+    for (auto& unit : mSprites)
+    {
+        if (unit.get() == _unit)
+        {
+            return unit;
+        }
+    }
+    return nullptr;
+}
+
 void SpriteList::Draw(CCamera& _camera)
 {
     //裁切

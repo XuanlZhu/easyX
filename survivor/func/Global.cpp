@@ -136,7 +136,7 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, fl
         // 距离判断
         float distance = (unit->GetPos() - _pos).Length();
 
-        if(distance <= _radius)
+        if(distance <= _radius+unit->mLength/2)
         {
             result.push_back(unit);
         }
@@ -144,15 +144,49 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, fl
     //排序还没实现
     return result;
 }
+std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team, CVector2 startPos, CVector2 endPos, float width) {
+    std::vector<std::weak_ptr<CUnit>> result;
+    CVector2 line = endPos - startPos;
+    float lineLength = line.Length();
+    if(lineLength == 0)return result;
+    //单位方向
+    CVector2 dir = line.Normalize();
+
+    for(auto& unit : Global::unitManager->mUnits)
+    {
+        //阵营过滤
+        if(unit->GetTeam() != _team)continue;
+
+        CVector2 toUnit = unit->GetPos() - startPos;
+        //投影长度
+        float projection = toUnit.Dot(dir);
+
+        //在线段前后
+        if(projection < 0 || projection > lineLength)continue;
+        //计算垂直距离
+        CVector2 closest = startPos + dir * projection;
+
+        float distance = (unit->GetPos() - closest).Length();
+
+        //考虑单位大小
+        if(distance <= width/2+ unit->mLength/2)
+        {
+            result.push_back(unit);
+        }
+    }
+    return result;
+}
+
+
 //创建精灵
 std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos) {
-    std::shared_ptr<CSprite> sprite;//创建精灵类，下发到当前精灵表
+    std::shared_ptr<CSprite> sprite;;//创建精灵类，下发到当前精灵表
+    // Global::spriteList->Append(sprite);
     if (_sprite=="CXpGem") {
         sprite = std::make_shared<CXpGem>();
     }else if (_sprite=="CProjectile") {
         sprite = std::make_shared<CProjectile>();
     }
-
     sprite->SetPosition(_pos);
     Global::spriteList->Append(sprite);
     return sprite;
@@ -164,7 +198,7 @@ std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _conte
         auto it = CreateCSprite("CProjectile",_context.Source->GetPos()+_context.vSpawnOrigin).lock();
         projectile = std::dynamic_pointer_cast<CProjectile>(it);
     }else {
-        CreateCSprite("CProjectile",_context.vSpawnOrigin);
+        CreateCSprite("CProjectile",_context.vSpawnOrigin);//无来源
     }
 #pragma region//信息定义
     projectile->Source = Global::unitManager->GetSharedPtr(_context.Source);

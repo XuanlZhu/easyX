@@ -60,5 +60,6 @@ float CalcDistanceBetweenEntityOBB(CSprite* _s1,CSprite* _s2);//计算两个精�
 void ApplyDamage(DamageContext _context);//造成伤害
 void EmitSoundOn(std::string _name);
 std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team,CVector2 _pos,float _radius,int _order);
+std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team,CVector2 startPos,CVector2 endPos,float width);
 std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos);//创建精灵，并下发到精灵表
 std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _context);

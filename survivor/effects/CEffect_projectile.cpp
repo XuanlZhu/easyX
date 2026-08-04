@@ -8,6 +8,7 @@
 
 #include "Graphics/CCamera.h"
 #include "Graphics/CSprite.h"
+#include "Scene/SpriteList.h"
 // #include "../func/Global.h"
 // #include "ResourceManager/CAnimaManager.h"
 extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
@@ -94,7 +95,9 @@ void RotateImageAlpha(IMAGE* dst, IMAGE* src, float angle)
 
 CEffect_projectile::CEffect_projectile(CSprite* _sprite){
     mLifeTime = 9999;
-    mAttacher = _sprite;
+    mAttacher = Global::spriteList->GetSharedPtr(_sprite);
+    // std::cout << "_sprite的名字" << typeid(*_sprite).name() << std::endl;
+    // std::cout << "mAttacher的名字" << typeid(*mAttacher.lock().get()).name() << std::endl;
 }
 
 void CEffect_projectile::SetParticleControl(int _controlPoint, CVector2 _pos) {
@@ -112,9 +115,11 @@ void CEffect_projectile::Update(float _deltaTime) {
     CEffect::Update(_deltaTime);
     mFrameTime += _deltaTime;
 
-    try{mPos = mAttacher->GetPos();}catch(const char* msg){
-        std::cout << "CEffect_stunned捕捉到异常" << std::endl;
-        Destroy();//附着者失效就销毁
+    auto unit = mAttacher.lock();
+    if (unit) {
+        mPos = unit->GetPos();
+    }else {
+        Destroy();
     }
 
     if(mFrameTime >= 0.04)
@@ -135,6 +140,6 @@ void CEffect_projectile::Draw(CCamera& _camera) {
 
     float length = 100;
     // putimage(screenPos.x,screenPos.y,&mAnimation2[mFrame]);
-    putimage_alpha(screenPos.x-length/2-30,screenPos.y-length/2,length,length,mAnimation2[mFrame]);
+    putimage_alpha(screenPos.x-length/2,screenPos.y-length/2,length,length,mAnimation2[mFrame]);
 }
 

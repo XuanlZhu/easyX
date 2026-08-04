@@ -14,8 +14,9 @@
 vector<int> xp_table={};
 CPlayer::CPlayer(std::string _name) : CUnit(_name){
     mCanRespawn = true;//可以重生
-    this->AddAbility("CAbility_stamp");
-    this->AddAbility("CAbility_flyingKnife");
+    this->AddAbility("CAbility_whip");
+    // this->AddAbility("CAbility_stamp");
+    // this->AddAbility("CAbility_flyingKnife");
     this->SetContextThink("auto_cast",[&] {
         // std::cout << "遍历技能" << std::endl;
         for(auto& ability : mAbilitys)

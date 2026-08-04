@@ -13,8 +13,10 @@
 #include "ResourceManager/CImageManager.h"
 #include "ResourceManager/CSoundManager.h"
 #include "../sprite/CXpGem.h"
-#include "../ability/CAblity_stamp.h"
+#include "../ability/CAbility_stamp.h"
 #include "../ability/CAbility_flyingKnife.h"
+#include "../ability/CAbility_whip.h"
+
 
 using json = nlohmann::json;
 
@@ -88,10 +90,13 @@ void CUnit::CastAbilityOnTarget(CUnit* _target, CAbility* _ability) {
 
 CAbility* CUnit::AddAbility(std::string _name) {
     std::shared_ptr<CAbility> ability;
-    if (_name=="CAblity_stamp") {
-        ability = std::make_shared<CAblity_stamp>();
+    if (_name=="CAbility_stamp") {
+        ability = std::make_shared<CAbility_stamp>();
     }else if (_name=="CAbility_flyingKnife") {
         ability = std::make_shared<CAbility_flyingKnife>();
+    }else if (_name=="CAbility_whip") {
+        ability = std::make_shared<CAbility_whip>();
+
     }else {
         ability = std::make_shared<CAbility>();
     }

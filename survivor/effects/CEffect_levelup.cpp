@@ -6,21 +6,23 @@
 
 #include "Graphics/CCamera.h"
 #include "Graphics/CSprite.h"
+#include "Scene/SpriteList.h"
 // #include "../func/Global.h"
 // #include "ResourceManager/CAnimaManager.h"
 extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
 
 CEffect_levelup::CEffect_levelup(CSprite* _sprite){
     mLifeTime = 1.2f;
-    mAttacher = _sprite;
+    mAttacher = Global::spriteList->GetSharedPtr(_sprite);;
 }
 
 void CEffect_levelup::Update(float _deltaTime) {
     CEffect::Update(_deltaTime);
     mFrameTime += _deltaTime;
 
-    try{mPos = mAttacher->GetPos();}catch(const char* msg){
-        Destroy();//附着者失效就销毁
+    auto unit = mAttacher.lock();
+    if (unit) {
+        mPos = unit->GetPos();
     }
 
     if(mFrameTime >= 0.08)

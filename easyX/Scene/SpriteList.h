@@ -17,6 +17,7 @@ public:
     void Append(std::shared_ptr<CSprite> _sprite);//添加精灵
     void Update(float _deltaTime);//更新
     void ClearList();//清理表
+    std::shared_ptr<CSprite> GetSharedPtr(CSprite* _unit);
     // vector<CSprite*> mSprites;
     std::vector<std::shared_ptr<CSprite>> mSprites;
 };

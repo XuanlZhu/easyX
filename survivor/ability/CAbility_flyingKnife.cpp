@@ -16,14 +16,12 @@ using json = nlohmann::json;
 
 void CAbility_flyingKnife::OnSpellStart() {
     mLastCastTime = GetNowTime();//记录施法时间
-    EmitSoundOn("hoof_stomp");
-    // CreateCSprite("CProjectile",mCaster->GetPos());
 
     auto tab =LinearProjectileContext{
         this,
         CVector2(),
         10,
-        100,
+        10,
         300,
         CVector2(150,150),
         mCaster,
@@ -37,10 +35,13 @@ void CAbility_flyingKnife::OnSpellStart() {
         auto unit = x.lock();
         tab.vVelocity = (unit->GetPos()-mCaster->GetPos()).Normalize()*150;
         CreateLinearProjectile(tab);
+        EmitSoundOn("ice_proj");
     }
 }
 
-bool CAbility_flyingKnife::OnProjectileHit(CUnit *_unit, CVector2 _pos, nlohmann::json _data) {
-
+bool CAbility_flyingKnife::OnProjectileHit(CUnit* _unit, CVector2 _pos, nlohmann::json _data) {
+    ApplyDamage(DamageContext{mCaster,_unit,50});
+    EmitSoundOn("ice_impact");
+    // unit->AddNewModifier(mCaster,this,"buff",json{{"duration", 1}});
     return true;
 }

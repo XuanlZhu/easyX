@@ -8,22 +8,23 @@
 
 #include "Graphics/CCamera.h"
 #include "Graphics/CSprite.h"
+#include "Scene/SpriteList.h"
 // #include "../func/Global.h"
 // #include "ResourceManager/CAnimaManager.h"
 extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
 
 CEffect_stunned::CEffect_stunned(CSprite* _sprite){
     mLifeTime = 9999;
-    mAttacher = _sprite;
+    mAttacher = Global::spriteList->GetSharedPtr(_sprite);;
 }
 
 void CEffect_stunned::Update(float _deltaTime) {
     CEffect::Update(_deltaTime);
     mFrameTime += _deltaTime;
 
-    try{mPos = mAttacher->GetPos();}catch(const char* msg){
-        std::cout << "CEffect_stunned捕捉到异常" << std::endl;
-        Destroy();//附着者失效就销毁
+    auto unit = mAttacher.lock();
+    if (unit) {
+        mPos = unit->GetPos();
     }
 
     if(mFrameTime >= 0.04)

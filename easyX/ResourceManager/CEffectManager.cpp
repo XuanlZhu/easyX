@@ -13,6 +13,7 @@
 #include "../../survivor/effects/CEffect_levelup.h"
 #include "../../survivor/effects/CEffect_levelup2.h"
 #include "../../survivor/effects/CEffect_projectile.h"
+#include "../../survivor/effects/CEffect_whip.h"
 
 
 void CEffectManager::Update(float _deltaTime) {
@@ -60,7 +61,11 @@ std::weak_ptr<CEffect> CEffectManager::CreateEffect(std::string _className, CVec
         effect = std::make_shared<CEffect_levelup2>(_attacher);
     }else if (_className == "CEffect_projectile") {
         effect = std::make_shared<CEffect_projectile>(_attacher);
+    }else if (_className == "CEffect_whip") {
+        effect = std::make_shared<CEffect_whip>();
     }
+
+
 
     else {
         effect = std::make_shared<CEffect>();

@@ -6,6 +6,7 @@
 #include "../func/Global.h"
 #include "ResourceManager/CImageManager.h"
 #include "../unit/CUnit.h"
+#include "Graphics/CEffect.h"
 
 CProjectile::CProjectile() {
     // mImage = Global::imgManager->GetImage("PNG/gem1.png");
@@ -13,9 +14,15 @@ CProjectile::CProjectile() {
     fExpireTime = fDistance/vVelocity.Length();//计算时间
 
     mEffect = CreateEffect("CEffect_projectile",CVector2(),this);//创建特效
+    // mEffect.lock()->SetParticleControl(0,vVelocity);
 }
 
 void CProjectile::Update(float _deltaTime) {
+    if (!isInit) {
+        isInit = true;
+        mEffect.lock()->SetParticleControl(0,vVelocity);
+    }
+
     fAge += _deltaTime;
     if (fAge>=fExpireTime) {Destroy();return;}
 

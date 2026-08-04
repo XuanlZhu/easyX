@@ -29,6 +29,7 @@ public:
     int iUnitTargetTeam=3;//目标类型
     std::string EffectName="CEffect_stunned";//特效名
     nlohmann::json ExtraData={};//额外
+    bool isInit = false;
 
     std::weak_ptr<CUnit> Source;//释放者
     std::weak_ptr<CAbility> Ability;//技能

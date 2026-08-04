@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include <cmath>
 
 class CVector2
 {
@@ -19,4 +20,5 @@ public:
     CVector2 operator*(float _value) const;
     float Length() const;//长度
     CVector2 Normalize() const;//归1化
+    float ToAngle(){return std::atan2(y, x) * 180.0f / 3.1415926f;};//转角度
 };

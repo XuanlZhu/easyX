@@ -38,7 +38,6 @@ void CSprite::Draw(CCamera& _camera)
     // putimage(screenPos.x,screenPos.y,mImage);
     // putimage_alpha(screenPos.x,screenPos.y,*mImage);
     if (mImage) {
-
         putimage_alpha(screenPos.x-mLength/2,screenPos.y-mLength/2,mLength,mLength,*mImage);
         // putimage_alpha(screenPos.x,screenPos.y,*mImage);
     }

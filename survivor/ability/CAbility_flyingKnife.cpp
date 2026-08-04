@@ -18,18 +18,26 @@ void CAbility_flyingKnife::OnSpellStart() {
     mLastCastTime = GetNowTime();//记录施法时间
     EmitSoundOn("hoof_stomp");
     // CreateCSprite("CProjectile",mCaster->GetPos());
-    CreateLinearProjectile(LinearProjectileContext{
+
+    auto tab =LinearProjectileContext{
         this,
         CVector2(),
         10,
         100,
         300,
-        CVector2(100,100),
+        CVector2(150,150),
         mCaster,
         3,
         "CEffect_projectile",
         {}
-    });
+    };
+
+    auto units = FindUnitsInRadius(3, mCaster->GetPos(),300,0);
+    for (auto& x: units) {
+        auto unit = x.lock();
+        tab.vVelocity = (unit->GetPos()-mCaster->GetPos()).Normalize()*150;
+        CreateLinearProjectile(tab);
+    }
 }
 
 bool CAbility_flyingKnife::OnProjectileHit(CUnit *_unit, CVector2 _pos, nlohmann::json _data) {

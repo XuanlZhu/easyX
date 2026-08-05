@@ -87,8 +87,8 @@ add_executable(easyX
         survivor/effects/CEffect_levelup2.h
         survivor/ability/CAbility_stamp.cpp
         survivor/ability/CAbility_stamp.h
-        survivor/ability/CAbility_flyingKnife.cpp
-        survivor/ability/CAbility_flyingKnife.h
+        survivor/ability/CAbility_ice.cpp
+        survivor/ability/CAbility_ice.h
         survivor/sprite/CProjectile.cpp
         survivor/sprite/CProjectile.h
         survivor/effects/CEffect_projectile.cpp
@@ -97,6 +97,12 @@ add_executable(easyX
         survivor/effects/CEffect_whip.h
         survivor/ability/CAbility_whip.cpp
         survivor/ability/CAbility_whip.h
+        survivor/effects/CEffect_gem.cpp
+        survivor/effects/CEffect_gem.h
+        survivor/ability/CAbility_Knife.cpp
+        survivor/ability/CAbility_Knife.h
+        survivor/effects/CEffect_knife.cpp
+        survivor/effects/CEffect_knife.h
 )
 
 # EasyX库路径

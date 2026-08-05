@@ -1,27 +1,30 @@
 //
-// Created by admin on 2026/8/3.
+// Created by admin on 2026/8/5.
 //
 
-#include "CEffect_levelup2.h"
+#include "CEffect_gem.h"
 
+#include <iostream>
+
+#include "Graphics/CCamera.h"
 #include "Graphics/CSprite.h"
 #include "Scene/SpriteList.h"
-
+// #include "../func/Global.h"
+// #include "ResourceManager/CAnimaManager.h"
 extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
 
-CEffect_levelup2::CEffect_levelup2(CSprite* _sprite){
-    // mLifeTime = 0.65f;
-    mLifeTime = 1.2f;
+CEffect_gem::CEffect_gem(CSprite* _sprite){
+    mLifeTime = 9999;
     mAttacher = Global::spriteList->GetSharedPtr(_sprite);;
 }
 
-void CEffect_levelup2::Update(float _deltaTime) {
+void CEffect_gem::Update(float _deltaTime) {
     CEffect::Update(_deltaTime);
     mFrameTime += _deltaTime;
 
     auto unit = mAttacher.lock();
     if (unit) {
-        mPos = unit->GetPos();
+        mPos = unit->GetPos() + mControlPoint0;
     }else{Destroy();}
 
     if(mFrameTime >= 0.04)
@@ -34,17 +37,13 @@ void CEffect_levelup2::Update(float _deltaTime) {
             mFrame = 0;
         }
     }
-    //绑定
-    // try{mPos = mAttacher->GetPos();}catch(const char* msg){
-    //     Destroy();//附着者失效就销毁
-    // }
 }
 
-void CEffect_levelup2::Draw(CCamera& _camera) {
+void CEffect_gem::Draw(CCamera& _camera) {
     if(IsDead())return;
     CVector2 screenPos = _camera.WorldToScreen(mPos);
 
-    float length = 170;
+    float length = 20;
 
-    putimage_alpha(screenPos.x-length/2,screenPos.y-length/2+30,length,length/2,mAnimation[mFrame]);
+    putimage_alpha(screenPos.x-length/2,screenPos.y-length/2,length,length,mAnimation[mFrame]);
 }

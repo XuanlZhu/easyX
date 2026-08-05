@@ -23,7 +23,7 @@ void CEffect_levelup::Update(float _deltaTime) {
     auto unit = mAttacher.lock();
     if (unit) {
         mPos = unit->GetPos();
-    }
+    }else{Destroy();}
 
     if(mFrameTime >= 0.08)
     {

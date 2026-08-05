@@ -17,19 +17,41 @@ using json = nlohmann::json;
 void CAbility_whip::OnSpellStart() {
     mLastCastTime = GetNowTime();//记录施法时间
 
-    auto it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(100,-30),nullptr).lock();//创建特效
+    EmitSoundOn("riki_backstab");
+    auto it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(100,-40),nullptr).lock();//创建特效
     it->SetParticleControl(0,CVector2(0,0));
-    // it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(100,30),nullptr).lock();//创建特效
-    // it->SetParticleControl(0,CVector2(180,0));
-    // it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(-100,-30),nullptr).lock();//创建特效
-    // it->SetParticleControl(0,CVector2(0,0));
-    // it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(-100,30),nullptr).lock();//创建特效
-    // it->SetParticleControl(0,CVector2(180,0));
-
-    auto units = FindUnitsInLine(3, mCaster->GetPos()+CVector2(0,0),mCaster->GetPos()+CVector2(200,0),30);
+    auto units = FindUnitsInLine(3, mCaster->GetPos()+CVector2(0,-40),mCaster->GetPos()+CVector2(200,-40),25);
     for (auto& x: units) {
         auto unit = x.lock();
         ApplyDamage(DamageContext{mCaster,unit.get(),1});
-        EmitSoundOn("ice_impact");
     }
+
+    EmitSoundOn("riki_backstab");
+    it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(100,40),nullptr).lock();//创建特效
+    it->SetParticleControl(0,CVector2(180,0));
+    units = FindUnitsInLine(3, mCaster->GetPos()+CVector2(0,40),mCaster->GetPos()+CVector2(200,40),25);
+    for (auto& x: units) {
+        auto unit = x.lock();
+        ApplyDamage(DamageContext{mCaster,unit.get(),1});
+    }
+
+    EmitSoundOn("riki_backstab");
+    it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(-100,-40),nullptr).lock();//创建特效
+    it->SetParticleControl(0,CVector2(0,0));
+    units = FindUnitsInLine(3, mCaster->GetPos()+CVector2(0,-40),mCaster->GetPos()+CVector2(-200,-40),25);
+    for (auto& x: units) {
+        auto unit = x.lock();
+        ApplyDamage(DamageContext{mCaster,unit.get(),1});
+    }
+
+    EmitSoundOn("riki_backstab");
+    it = CreateEffect("CEffect_whip",mCaster->GetPos()+CVector2(-100,40),nullptr).lock();//创建特效
+    it->SetParticleControl(0,CVector2(180,0));
+    it->SetParticleControl(0,CVector2(0,0));
+    units = FindUnitsInLine(3, mCaster->GetPos()+CVector2(0,40),mCaster->GetPos()+CVector2(-200,40),25);
+    for (auto& x: units) {
+        auto unit = x.lock();
+        ApplyDamage(DamageContext{mCaster,unit.get(),1});
+    }
+
 }

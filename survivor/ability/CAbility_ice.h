@@ -6,7 +6,7 @@
 #include "CAbility.h"
 
 
-class CAbility_flyingKnife :public CAbility
+class CAbility_ice :public CAbility
 {
 public:
     void OnSpellStart() override;//当施法开始

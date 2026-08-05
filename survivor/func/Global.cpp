@@ -169,7 +169,7 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team, CVector2 startPos, 
         float distance = (unit->GetPos() - closest).Length();
 
         //考虑单位大小
-        if(distance <= width/2+ unit->mLength/2)
+        if(distance <= width + unit->mLength/2)
         {
             result.push_back(unit);
         }

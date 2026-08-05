@@ -31,6 +31,7 @@ public:
     float mChangeX=0;//偏移
     float mChangeY=0;
     float mLength=50;//长度
+    CVector2 mLookat = CVector2(1,0);
 protected:
     IMAGE* mImage = nullptr;//图片
     CVector2 mPos;//位置

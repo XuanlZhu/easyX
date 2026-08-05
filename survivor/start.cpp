@@ -10,6 +10,7 @@
 #include "unit/CPlayer.h"
 #define MINIAUDIO_IMPLEMENTATION
 #include "../miniaudio/miniaudio.h"
+#include "Graphics/CEffect.h"
 
 int main()
 {
@@ -37,6 +38,19 @@ int main()
         return 1;
     },0);
     // CreateEffect("CEffect_levelup",player->GetPos(),nullptr);
+
+    // auto it = CreateEffect("CEffect_gem",player->GetPos(),player.get()).lock();//创建特效
+    // it->SetParticleControl(0,CVector2(0,0));
+    // it = CreateEffect("CEffect_gem",player->GetPos(),player.get()).lock();//创建特效
+    // it->SetParticleControl(0,CVector2(200,0));
+    // it = CreateEffect("CEffect_gem",player->GetPos(),player.get()).lock();//创建特效
+    // it->SetParticleControl(0,CVector2(0,-50));
+    // it = CreateEffect("CEffect_gem",player->GetPos(),player.get()).lock();//创建特效
+    // it->SetParticleControl(0,CVector2(200,-50));
+
+
+
+
     Global::soundManager->PlayLoop("ReincarnatedEchoes");
     
     // CVector2(5000,5000)+RandomVector(600);

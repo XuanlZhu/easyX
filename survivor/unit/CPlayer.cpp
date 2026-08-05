@@ -14,7 +14,7 @@
 vector<int> xp_table={};
 CPlayer::CPlayer(std::string _name) : CUnit(_name){
     mCanRespawn = true;//可以重生
-    this->AddAbility("CAbility_whip");
+    this->AddAbility("CAbility_Knife");
     // this->AddAbility("CAbility_stamp");
     // this->AddAbility("CAbility_flyingKnife");
     this->SetContextThink("auto_cast",[&] {
@@ -39,6 +39,9 @@ void CPlayer::Update(float _deltaTime) {
     if (IsDeath())return;
     mPos.x += mChangeX * _deltaTime;
     mPos.y += mChangeY * _deltaTime;
+
+    if (mChangeX ==0 && mChangeY ==0) {
+    }else{mLookat = CVector2(mChangeX,mChangeY).Normalize();}
 
     //搜索宝石
     std::vector<std::shared_ptr<CXpGem>> result;

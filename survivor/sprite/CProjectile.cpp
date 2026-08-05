@@ -8,18 +8,18 @@
 #include "../unit/CUnit.h"
 #include "Graphics/CEffect.h"
 
+
 CProjectile::CProjectile() {
     // mImage = Global::imgManager->GetImage("PNG/gem1.png");
     // mLength = fStartRadius/2;//长度
-    fExpireTime = fDistance/vVelocity.Length();//计算时间
-
 }
 
 void CProjectile::Update(float _deltaTime) {
     if (!isInit) {
         isInit = true;
-        mEffect = CreateEffect("CEffect_projectile",CVector2(),this);//创建特效
+        mEffect = CreateEffect(EffectName,CVector2(),this);//创建特效
         mEffect.lock()->SetParticleControl(0,vVelocity);
+        fExpireTime = fDistance/vVelocity.Length();//计算时间
     }
 
     fAge += _deltaTime;

@@ -1,8 +1,8 @@
 //
-// Created by admin on 2026/8/3.
+// Created by admin on 2026/8/5.
 //
 
-#include "CAbility_flyingKnife.h"
+#include "CAbility_Knife.h"
 
 #include "../func/CBuffManager.h"
 #include "../func/Global.h"
@@ -14,7 +14,11 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-void CAbility_flyingKnife::OnSpellStart() {
+CAbility_Knife::CAbility_Knife() {
+    mCoolDown = 1;
+}
+
+void CAbility_Knife::OnSpellStart() {
     mLastCastTime = GetNowTime();//记录施法时间
 
     auto tab =LinearProjectileContext{
@@ -22,26 +26,26 @@ void CAbility_flyingKnife::OnSpellStart() {
         CVector2(),
         10,
         10,
-        300,
+        250,
         CVector2(150,150),
         mCaster,
         3,
-        "CEffect_projectile",
+        "CEffect_knife",
         {}
     };
 
-    auto units = FindUnitsInRadius(3, mCaster->GetPos(),300,0);
-    for (auto& x: units) {
-        auto unit = x.lock();
-        tab.vVelocity = (unit->GetPos()-mCaster->GetPos()).Normalize()*150;
+    tab.vVelocity = mCaster->mLookat.Normalize()*350;
+    for (int i = 0; i < 4; i++) {
+        tab.vSpawnOrigin = RandomVector(20);
         CreateLinearProjectile(tab);
-        EmitSoundOn("ice_proj");
     }
+
+    EmitSoundOn("stifling_dagger_cast");
 }
 
-bool CAbility_flyingKnife::OnProjectileHit(CUnit* _unit, CVector2 _pos, nlohmann::json _data) {
+bool CAbility_Knife::OnProjectileHit(CUnit* _unit, CVector2 _pos, nlohmann::json _data) {
     ApplyDamage(DamageContext{mCaster,_unit,50});
-    EmitSoundOn("ice_impact");
+    EmitSoundOn("attack_long01");
     // unit->AddNewModifier(mCaster,this,"buff",json{{"duration", 1}});
     return true;
 }

@@ -22,12 +22,12 @@ void CEffect_knife::SetParticleControl(int _controlPoint, CVector2 _pos) {
 
     RotateImageAlpha(&mImage2, mImage, _pos.ToAngle()-130);
 
-    for (auto& img : mAnimation)
-    {
-        IMAGE rotated;
-        RotateImageAlpha(&rotated, &img, _pos.ToAngle());
-        mAnimation2.push_back(rotated);
-    }
+    // for (auto& img : mAnimation)
+    // {
+    //     IMAGE rotated;
+    //     RotateImageAlpha(&rotated, &img, _pos.ToAngle());
+    //     mAnimation2.push_back(rotated);
+    // }
 }
 
 void CEffect_knife::Update(float _deltaTime) {

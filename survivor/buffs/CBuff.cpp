@@ -21,8 +21,15 @@ CBuff::~CBuff() {
 
 void CBuff::Update(float _deltaTime) {
     // std::cout << "CBuff更新" << std::endl;
-    if (mDeath) return;
+    if (mDestroying) return;//当自己死亡
 
+    //思考
+    think_time += _deltaTime;
+    if (think_interval != -1 && think_time >= think_interval) {
+        think_time = 0;
+        OnIntervalThink();
+    }
+    //计时
     mElapsedTime += _deltaTime;
     if (mElapsedTime >= mDuration && mDuration!=-1) {
         this->Destroy();
@@ -35,12 +42,14 @@ void CBuff::Destroy() {
     mBuffSystem->DestroyBuff(this);//buff系统移除
     mAttributeSystem->UnregisterModifier(this);//属性系统移除
 
-    mDeath = true;
+    mDestroying = true;
     // std::cout << "buff销毁完成" << std::endl;
 }
 void CBuff::OnCreated() {
     // std::cout << "buff创建" << std::endl;
-    mEffect = CreateEffect("CEffect_stunned",CVector2(),mOwner.lock().get());
+    if (effect_name!="") {
+        mEffect = CreateEffect(effect_name,CVector2(),mOwner.lock().get());
+    }
     // std::cout << "buff创建完成" << std::endl;
 }
 

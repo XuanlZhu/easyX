@@ -52,3 +52,14 @@ CVector2 CVector2::Normalize() const {
     }
     return CVector2(x / len,y / len);
 }
+
+CVector2 CVector2::Rotate(float _angle)
+{
+    // 角度转弧度
+    float rad = _angle * 3.1415926535f / 180.0f;
+
+    float cosA = cos(rad);
+    float sinA = sin(rad);
+
+    return CVector2(x * cosA - y * sinA,x * sinA + y * cosA);
+}

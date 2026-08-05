@@ -17,6 +17,8 @@
 #include "../ability/CAbility_ice.h"
 #include "../ability/CAbility_whip.h"
 #include "../ability/CAbility_Knife.h"
+#include "../ability/CAbility_axe.h"
+#include "../ability/CAbility_cross.h"
 
 
 
@@ -81,8 +83,11 @@ void CUnit::OnDeath() {//触发时机：是Update时
     }
     this->mIsDeath = true;//标记死亡
     //创建宝石
-    auto it = CreateCSprite("CXpGem",mPos).lock();
-    std::dynamic_pointer_cast<CXpGem>(it)->BountyXP = jsonKV["BountyXP"];//设置经验
+    std::cout << GetName() << std::endl;
+    if (GetName()!="CUnit_thinker") {
+        auto it = CreateCSprite("CXpGem",mPos).lock();
+        std::dynamic_pointer_cast<CXpGem>(it)->BountyXP = jsonKV.value("BountyXP", 0);//设置经验
+    }
 }
 
 void CUnit::CastAbilityOnTarget(CUnit* _target, CAbility* _ability) {
@@ -100,6 +105,10 @@ CAbility* CUnit::AddAbility(std::string _name) {
         ability = std::make_shared<CAbility_whip>();
     }else if (_name=="CAbility_Knife") {
         ability = std::make_shared<CAbility_Knife>();
+    }else if (_name=="CAbility_axe") {
+        ability = std::make_shared<CAbility_axe>();
+    }else if (_name=="CAbility_cross") {
+        ability = std::make_shared<CAbility_cross>();
 
 
     }else {

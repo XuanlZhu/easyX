@@ -15,7 +15,7 @@ extern void putimage_alpha(float x,float y,float dstW,float dstH,IMAGE& img);
 
 CEffect_stunned::CEffect_stunned(CSprite* _sprite){
     mLifeTime = 9999;
-    mAttacher = Global::spriteList->GetSharedPtr(_sprite);;
+    mAttacher = Global::spriteList->GetSharedPtr(_sprite);
 }
 
 void CEffect_stunned::Update(float _deltaTime) {

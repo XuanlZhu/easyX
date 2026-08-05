@@ -31,11 +31,12 @@ virtual float GetAttributePercent_##name() { return 0; }
 class CBuff {
 public:
     ~CBuff();
-    void Update(float _deltaTime);//更新
-    bool IsDead(){return mDeath;};
+    virtual void Update(float _deltaTime);//更新
+    bool IsDestroy(){return mDestroying;};
     void Destroy();//销毁
     void OnCreated();//当创建
     void OnDestroy();//当销毁
+    virtual void OnIntervalThink(){};//当销毁
     // virtual std::unordered_map<int,bool> CheckState() {return std::unordered_map<int, bool>{};};//状态注册
     virtual std::unordered_map<int,bool> CheckState() {
         return std::unordered_map<int, bool>{
@@ -72,10 +73,14 @@ public:
     }
     #undef ATTRIBUTE_LIST
 
+    float think_time = 0;//思考时间
+    float think_interval = -1;//思考间隔
     float mElapsedTime = 0;//逝去时间
     float mDuration = -1;//持续时间
-    bool mDeath = false;
+    bool mDestroying = false;
     // bool isDestroying = false;
+    std::string effect_name = "";//特效名
+    //记录
     std::weak_ptr<CUnit> mOwner;
     std::weak_ptr<CUnit> mCaster;
     std::weak_ptr<CAbility> mAbility;

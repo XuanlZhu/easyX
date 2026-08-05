@@ -15,6 +15,8 @@
 #include "Global.h"
 #include "ResourceManager/CUnitManager.h"
 #include "../func/CAttributeSystem.h"
+#include "../buffs/CBuff_axe_thinker.h"
+
 
 void CBuffManager::Update(float _deltaTime) {
     for(auto& buff : mBuffTable)
@@ -28,7 +30,7 @@ void CBuffManager::ClearList() {
         std::remove_if(mBuffTable.begin(),mBuffTable.end(),
             [](std::shared_ptr<CBuff>& _buff)
             {
-                return _buff->IsDead();
+                return _buff->IsDestroy();
             }
         ),
         mBuffTable.end()
@@ -39,6 +41,8 @@ std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster
     std::shared_ptr<CBuff> buff;
     if (_name=="CBuff_test") {
         buff = std::make_shared<CBuff_test>();
+    }else if (_name=="CBuff_axe_thinker") {
+        buff = std::make_shared<CBuff_axe_thinker>();
     }else {
         buff = std::make_shared<CBuff>();
     }

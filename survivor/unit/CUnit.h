@@ -42,6 +42,7 @@ public:
     bool mIsDeath = false;//是否死亡
     float mLastAttackTime = 0;//上次攻击时间
     bool mCanRespawn = false;//无法重生，死亡后移除
+    bool mInvincible = false;//无敌
 
     CBuffSystem mBuffSystem = CBuffSystem(this);//buff系统
     CAttributeSystem mAttributeSystem = CAttributeSystem(this);//属性系统

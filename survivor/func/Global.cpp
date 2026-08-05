@@ -20,6 +20,8 @@
 #include "ResourceManager/CUnitManager.h"
 #include "../sprite/CXpGem.h"
 #include "../sprite/CProjectile.h"
+#include "../unit/CUnit_thinker.h"
+
 
 
 namespace fs = std::filesystem;
@@ -50,9 +52,12 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     auto& table= Global::unitJson;
     // std::cout<<table<<std::endl;
     std::shared_ptr<CUnit> unit;
-    if(table[_unitName].contains("class"))//如果指定类
+    // if(table[_unitName].contains("class"))//如果指定类
+    if(_unitName=="player")//如果指定类
     {
         unit = std::make_shared<CPlayer>(_unitName);
+    }else if (_unitName=="CUnit_thinker"){
+        unit = std::make_shared<CUnit_thinker>(_unitName);
     }else {
         unit = std::make_shared<CUnit>(_unitName);
     }
@@ -63,7 +68,7 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     //要用单位管理器管理unit
     Global::spriteList->Append(unit);//添加精灵表
     Global::unitManager->Append(unit);//添加到单位管理器
-
+    std::cout << "thinker添加到精灵表" << std::endl;
     return unit;
 }
 //获取当前时间 单位秒
@@ -131,8 +136,9 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, fl
 
     for(auto& unit : Global::unitManager->mUnits)
     {
-        // 阵营过滤
-        if(unit->GetTeam() != _team)continue;
+        if(unit->GetTeam() != _team)continue;//阵营过滤
+        if(unit->mInvincible)continue;//过滤无敌
+
         // 距离判断
         float distance = (unit->GetPos() - _pos).Length();
 
@@ -154,8 +160,8 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team, CVector2 startPos, 
 
     for(auto& unit : Global::unitManager->mUnits)
     {
-        //阵营过滤
-        if(unit->GetTeam() != _team)continue;
+        if(unit->GetTeam() != _team)continue;//阵营过滤
+        if(unit->mInvincible)continue;//过滤无敌
 
         CVector2 toUnit = unit->GetPos() - startPos;
         //投影长度
@@ -214,4 +220,12 @@ std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _conte
     projectile->ExtraData = _context.ExtraData;
 #pragma endregion
     return projectile;
+}
+
+std::weak_ptr<CUnit> CreateModifierThinker(CUnit* caster, CAbility* ability, std::string name, json table,CVector2 origin, int team) {
+    auto thinker = CreateUnitByName("CUnit_thinker",origin,caster,3).lock();
+    thinker->mInvincible = true;//设置无敌
+    std::dynamic_pointer_cast<CUnit_thinker>(thinker)->thinker_buff = thinker->AddNewModifier(caster, ability, name, table);
+
+    return thinker;
 }

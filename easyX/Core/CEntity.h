@@ -15,6 +15,7 @@ public:
     ~CEntity();
     void SetContextThink(std::string _name,std::function<float()> _func,float _interval=0);
     void RemoveThinker(std::string _name);
+    virtual std::string GetName();
 
     std::unordered_map<std::string,std::weak_ptr<CThinker>> thinkerTable;
 

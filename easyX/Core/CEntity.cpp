@@ -43,3 +43,9 @@ void CEntity::RemoveThinker(std::string _name)
         thinkerTable.erase(it);
     }
 }
+
+std::string CEntity::GetName() {
+    std::string name = typeid(*this).name();
+    name = name.substr(6);
+    return name;
+};

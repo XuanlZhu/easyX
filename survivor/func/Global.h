@@ -7,6 +7,7 @@
 #include <nlohmann/json.hpp>
 #include <memory>
 
+#include "../ability/CAbility.h"
 #include "Core/CVector2.h"
 // #include "../unit/CUnit.h"
 
@@ -63,3 +64,4 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team,CVector2 _pos,floa
 std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team,CVector2 startPos,CVector2 endPos,float width);
 std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos);//创建精灵，并下发到精灵表
 std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _context);
+std::weak_ptr<CUnit> CreateModifierThinker(CUnit* caster,CAbility* ability,std::string name,json table,CVector2 origin,int team);

@@ -103,6 +103,18 @@ add_executable(easyX
         survivor/ability/CAbility_Knife.h
         survivor/effects/CEffect_knife.cpp
         survivor/effects/CEffect_knife.h
+        survivor/ability/CAbility_axe.cpp
+        survivor/ability/CAbility_axe.h
+        survivor/unit/CUnit_thinker.cpp
+        survivor/unit/CUnit_thinker.h
+        survivor/effects/CEffect_axe.cpp
+        survivor/effects/CEffect_axe.h
+        survivor/buffs/CBuff_axe_thinker.cpp
+        survivor/buffs/CBuff_axe_thinker.h
+        survivor/ability/CAbility_cross.cpp
+        survivor/ability/CAbility_cross.h
+        survivor/buffs/CBuff_cross_thinker.cpp
+        survivor/buffs/CBuff_cross_thinker.h
 )
 
 # EasyX库路径

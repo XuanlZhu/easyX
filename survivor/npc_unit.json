@@ -10,5 +10,8 @@
         "img": "player2",
         "hp": 100,
 		"mSpeed":100
+    },
+    "CUnit_thinker": {
+        "hp": 100
     }
 }

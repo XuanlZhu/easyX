@@ -19,7 +19,7 @@
 #include "../ability/CAbility_Knife.h"
 #include "../ability/CAbility_axe.h"
 #include "../ability/CAbility_cross.h"
-
+#include "../ability/CAbility_KingBook.h"
 
 
 using json = nlohmann::json;
@@ -109,6 +109,9 @@ CAbility* CUnit::AddAbility(std::string _name) {
         ability = std::make_shared<CAbility_axe>();
     }else if (_name=="CAbility_cross") {
         ability = std::make_shared<CAbility_cross>();
+    }else if (_name=="CAbility_KingBook") {
+        ability = std::make_shared<CAbility_KingBook>();
+
 
 
     }else {

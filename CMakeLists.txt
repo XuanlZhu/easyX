@@ -119,6 +119,10 @@ add_executable(easyX
         survivor/effects/CEffect_cross.h
         survivor/effects/CEffect_fly_fire.cpp
         survivor/effects/CEffect_fly_fire.h
+        survivor/ability/CAbility_KingBook.cpp
+        survivor/ability/CAbility_KingBook.h
+        survivor/buffs/CBuff_KingBook.cpp
+        survivor/buffs/CBuff_KingBook.h
 )
 
 # EasyX库路径

@@ -17,6 +17,7 @@
 #include "../func/CAttributeSystem.h"
 #include "../buffs/CBuff_axe_thinker.h"
 #include "../buffs/CBuff_cross_thinker.h"
+#include "../buffs/CBuff_KingBook.h"
 
 
 
@@ -47,6 +48,8 @@ std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster
         buff = std::make_shared<CBuff_axe_thinker>();
     }else if (_name=="CBuff_cross_thinker") {
         buff = std::make_shared<CBuff_cross_thinker>();
+    }else if (_name=="CBuff_KingBook") {
+        buff = std::make_shared<CBuff_KingBook>();
 
     }else {
         buff = std::make_shared<CBuff>();

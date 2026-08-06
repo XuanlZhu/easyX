@@ -11,6 +11,8 @@ CAnimaManager::CAnimaManager() {
     Load("713",64,64);
     Load("579",64,64);
     Load("589",64,64);
+    Load("296",64,64);//光环56
+    Load("295",64,64);//光环65
 }
 void CAnimaManager::Load(std::string _name,int frameWidth,int frameHeight)
 {

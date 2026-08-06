@@ -127,6 +127,10 @@ add_executable(easyX
         survivor/ability/CAbility_damage_aura.h
         survivor/buffs/CBuff_damage_aura.cpp
         survivor/buffs/CBuff_damage_aura.h
+        survivor/effects/CEffect_damage_aura.cpp
+        survivor/effects/CEffect_damage_aura.h
+        survivor/ability/CAbility_water.cpp
+        survivor/ability/CAbility_water.h
 )
 
 # EasyX库路径

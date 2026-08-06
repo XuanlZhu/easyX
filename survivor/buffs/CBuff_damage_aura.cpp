@@ -14,17 +14,15 @@ CBuff_damage_aura::CBuff_damage_aura() {
 void CBuff_damage_aura::OnIntervalThink() {
     auto caster = mCaster.lock().get();
     auto ability = mAbility.lock().get();
-    if (caster) {std::cout << "caster正常" << std::endl;}
-    if (ability) {std::cout << "ability正常" << std::endl;}
 
-    EmitSoundOn("hoof_stomp");
-    auto effect = CreateEffect("CEffect_circle",caster->GetPos(),nullptr).lock();
-    effect->SetParticleControl(0,CVector2(100,0));
+    EmitSoundOn("butterfly");
+    auto effect = CreateEffect("CEffect_damage_aura",caster->GetPos(),caster).lock();
+    effect->SetParticleControl(0,CVector2(125,0));
 
-    // auto units = FindUnitsInRadius(3, caster->GetPos(),100,0);
-    // for (auto& x: units) {
-    //     auto unit = x.lock();
-    //     ApplyDamage(DamageContext{caster,unit.get(),100});
-    //     unit->AddNewModifier(caster,ability,"buff",json{{"duration", 1}});
-    // }
+    auto units = FindUnitsInRadius(3, caster->GetPos(),125,0);
+    for (auto& x: units) {
+        auto unit = x.lock();
+        ApplyDamage(DamageContext{caster,unit.get(),34});
+        // unit->AddNewModifier(caster,ability,"buff",json{{"duration", 1}});
+    }
 }

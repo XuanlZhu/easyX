@@ -9,7 +9,6 @@
 
 #include "../ability/CAbility.h"
 #include "Core/CVector2.h"
-// #include "../unit/CUnit.h"
 
 class CProjectile;
 class CAbility;

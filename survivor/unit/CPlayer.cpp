@@ -24,6 +24,7 @@ CPlayer::CPlayer(std::string _name) : CUnit(_name){
 
 void CPlayer::OnCreate() {
     this->AddAbility("CAbility_damage_aura");
+    // this->AddAbility("CAbility_KingBook");
     // this->AddAbility("CAbility_stamp");
     // this->AddAbility("CAbility_flyingKnife");
     this->SetContextThink("auto_cast",[&] {

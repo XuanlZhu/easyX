@@ -34,8 +34,8 @@ public:
     virtual void Update(float _deltaTime);//更新
     bool IsDestroy(){return mDestroying;};
     void Destroy();//销毁
-    void OnCreated();//当创建
-    void OnDestroy();//当销毁
+    virtual void OnCreated();//当创建
+    virtual void OnDestroy();//当销毁
     virtual void OnIntervalThink(){};//当销毁
     // virtual std::unordered_map<int,bool> CheckState() {return std::unordered_map<int, bool>{};};//状态注册
     virtual std::unordered_map<int,bool> CheckState() {

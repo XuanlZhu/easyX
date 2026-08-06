@@ -16,6 +16,8 @@
 #include "ResourceManager/CUnitManager.h"
 #include "../func/CAttributeSystem.h"
 #include "../buffs/CBuff_axe_thinker.h"
+#include "../buffs/CBuff_cross_thinker.h"
+
 
 
 void CBuffManager::Update(float _deltaTime) {
@@ -43,6 +45,9 @@ std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster
         buff = std::make_shared<CBuff_test>();
     }else if (_name=="CBuff_axe_thinker") {
         buff = std::make_shared<CBuff_axe_thinker>();
+    }else if (_name=="CBuff_cross_thinker") {
+        buff = std::make_shared<CBuff_cross_thinker>();
+
     }else {
         buff = std::make_shared<CBuff>();
     }

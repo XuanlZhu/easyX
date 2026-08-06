@@ -17,7 +17,8 @@
 #include "../../survivor/effects/CEffect_gem.h"
 #include "../../survivor/effects/CEffect_knife.h"
 #include "../../survivor/effects/CEffect_axe.h"
-
+#include "../../survivor/effects/CEffect_cross.h"
+#include "../../survivor/effects/CEffect_fly_fire.h"
 
 
 
@@ -74,11 +75,13 @@ std::weak_ptr<CEffect> CEffectManager::CreateEffect(std::string _className, CVec
         effect = std::make_shared<CEffect_knife>(_attacher);
     }else if (_className == "CEffect_axe") {
         effect = std::make_shared<CEffect_axe>(_attacher);
-    }
+    }else if (_className == "CEffect_cross") {
+        effect = std::make_shared<CEffect_cross>(_attacher);
+    }else if (_className == "CEffect_fly_fire") {
+        effect = std::make_shared<CEffect_fly_fire>(_attacher);
 
 
-
-    else {
+    }else {
         effect = std::make_shared<CEffect>();
     }
     effect->mPos = _pos;

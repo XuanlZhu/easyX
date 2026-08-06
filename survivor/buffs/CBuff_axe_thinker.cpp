@@ -43,4 +43,3 @@ void CBuff_axe_thinker::OnIntervalThink() {
     }
     last_hit = units;
 }
-

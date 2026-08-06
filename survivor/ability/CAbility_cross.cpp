@@ -16,7 +16,7 @@ void CAbility_cross::OnSpellStart() {
     mLastCastTime = GetNowTime();//记录施法时间
     EmitSoundOn("whirling_ranged_cast");
     for (int i = 0; i < 3; i++) {
-        CreateModifierThinker(mCaster,this,"CBuff_axe_thinker",json{{"duration", 3}},mCaster->GetPos(),1);
+        CreateModifierThinker(mCaster,this,"CBuff_cross_thinker",json{{"duration", 3}},mCaster->GetPos(),1);
     }
 
 }

@@ -115,6 +115,10 @@ add_executable(easyX
         survivor/ability/CAbility_cross.h
         survivor/buffs/CBuff_cross_thinker.cpp
         survivor/buffs/CBuff_cross_thinker.h
+        survivor/effects/CEffect_cross.cpp
+        survivor/effects/CEffect_cross.h
+        survivor/effects/CEffect_fly_fire.cpp
+        survivor/effects/CEffect_fly_fire.h
 )
 
 # EasyX库路径

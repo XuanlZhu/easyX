@@ -46,7 +46,9 @@ public:
     inline static CBuffManager* buffManager = nullptr;//buff管理器
 };
 struct DamageContext { CUnit* _attacker; CUnit* _victim; float _damage; };//伤害结构体
-struct LinearProjectileContext { CAbility* ability; CVector2 vSpawnOrigin; float fStartRadius;float fEndRadius;float fDistance;CVector2 vVelocity;CUnit* Source;int iUnitTargetTeam;std::string EffectName;json ExtraData; };//线性投射物结构体
+struct LinearProjectileContext { CAbility* ability; CUnit* Source;CVector2 vSpawnOrigin; float fStartRadius;float fEndRadius;float fDistance;CVector2 vVelocity;int iUnitTargetTeam;std::string EffectName;json ExtraData; };//线性投射物结构体
+struct TrackingProjectileContext { CAbility* ability;CUnit* Source;CUnit* Target; CVector2 vSpawnOrigin;float iMoveSpeed;std::string EffectName;json ExtraData; };//线性投射物结构体
+
 
 json LoadJson(std::string _path);
 std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName,CVector2 _location,CUnit* _owner,int _team);
@@ -63,4 +65,5 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team,CVector2 _pos,floa
 std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team,CVector2 startPos,CVector2 endPos,float width);
 std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos);//创建精灵，并下发到精灵表
 std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _context);
+std::weak_ptr<CProjectile> CreateTrackingProjectile(TrackingProjectileContext _context);
 std::weak_ptr<CUnit> CreateModifierThinker(CUnit* caster,CAbility* ability,std::string name,json table,CVector2 origin,int team);

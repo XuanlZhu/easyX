@@ -131,6 +131,8 @@ add_executable(easyX
         survivor/effects/CEffect_damage_aura.h
         survivor/ability/CAbility_water.cpp
         survivor/ability/CAbility_water.h
+        survivor/sprite/CProjectile_Tracking.cpp
+        survivor/sprite/CProjectile_Tracking.h
 )
 
 # EasyX库路径

@@ -14,12 +14,13 @@ CBuff_damage_aura::CBuff_damage_aura() {
 void CBuff_damage_aura::OnIntervalThink() {
     auto caster = mCaster.lock().get();
     auto ability = mAbility.lock().get();
+    auto owner = mOwner.lock().get();
 
     EmitSoundOn("butterfly");
-    auto effect = CreateEffect("CEffect_damage_aura",caster->GetPos(),caster).lock();
+    auto effect = CreateEffect("CEffect_damage_aura",owner->GetPos(),owner).lock();
     effect->SetParticleControl(0,CVector2(125,0));
 
-    auto units = FindUnitsInRadius(3, caster->GetPos(),125,0);
+    auto units = FindUnitsInRadius(3, owner->GetPos(),125,0);
     for (auto& x: units) {
         auto unit = x.lock();
         ApplyDamage(DamageContext{caster,unit.get(),34});

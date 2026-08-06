@@ -21,7 +21,7 @@
 #include "../sprite/CXpGem.h"
 #include "../sprite/CProjectile.h"
 #include "../unit/CUnit_thinker.h"
-
+#include "../sprite/CProjectile_Tracking.h"
 
 
 namespace fs = std::filesystem;
@@ -193,7 +193,10 @@ std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos) {
         sprite = std::make_shared<CXpGem>();
     }else if (_sprite=="CProjectile") {
         sprite = std::make_shared<CProjectile>();
+    }else if (_sprite=="CProjectile_Tracking") {
+        sprite = std::make_shared<CProjectile_Tracking>();
     }
+
     sprite->SetPosition(_pos);
     Global::spriteList->Append(sprite);
     return sprite;
@@ -220,6 +223,32 @@ std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _conte
     projectile->EffectName = _context.EffectName;
     projectile->ExtraData = _context.ExtraData;
 #pragma endregion
+    return projectile;
+}
+
+std::weak_ptr<CProjectile> CreateTrackingProjectile(TrackingProjectileContext _context) {
+    std::shared_ptr<CProjectile_Tracking> projectile;
+    // std::cout << "创建CProjectile_Tracking" << std::endl;
+    if (_context.Source) {
+        //在Source处创建
+        auto it = CreateCSprite("CProjectile_Tracking",_context.Source->GetPos()+_context.vSpawnOrigin).lock();
+        projectile = std::dynamic_pointer_cast<CProjectile_Tracking>(it);
+    }else {
+        auto it = CreateCSprite("CProjectile_Tracking",_context.vSpawnOrigin).lock();//无来源
+        projectile = std::dynamic_pointer_cast<CProjectile_Tracking>(it);
+    }
+    // std::cout << "定义CProjectile_Tracking" << std::endl;
+#pragma region//信息定义
+    projectile->Ability = _context.Source->GetSharedPtrAbility(_context.ability);
+    projectile->Source = Global::unitManager->GetSharedPtr(_context.Source);
+    projectile->Target = Global::unitManager->GetSharedPtr(_context.Target);
+
+    projectile->vSpawnOrigin = _context.vSpawnOrigin;
+    projectile->iMoveSpeed = _context.iMoveSpeed;
+    projectile->EffectName = _context.EffectName;
+    projectile->ExtraData = _context.ExtraData;
+#pragma endregion
+    // std::cout << "定义完成" << std::endl;
     return projectile;
 }
 

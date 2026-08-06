@@ -23,7 +23,7 @@ CPlayer::CPlayer(std::string _name) : CUnit(_name){
 }
 
 void CPlayer::OnCreate() {
-    this->AddAbility("CAbility_damage_aura");
+    // this->AddAbility("CAbility_water");
     // this->AddAbility("CAbility_KingBook");
     // this->AddAbility("CAbility_stamp");
     // this->AddAbility("CAbility_flyingKnife");
@@ -42,11 +42,31 @@ void CPlayer::OnCreate() {
 
 void CPlayer::Update(float _deltaTime) {
     if (IsDeath())return;
-    mPos.x += mChangeX * _deltaTime;
-    mPos.y += mChangeY * _deltaTime;
+    mPos.x += mChangeX * _deltaTime;mPos.y += mChangeY * _deltaTime;//运动
+    if (mChangeX ==0 && mChangeY ==0) {}else{mLookat = CVector2(mChangeX,mChangeY).Normalize();}//朝向
 
-    if (mChangeX ==0 && mChangeY ==0) {
-    }else{mLookat = CVector2(mChangeX,mChangeY).Normalize();}
+    //攻击
+    attack_cd -= _deltaTime;
+    if (attack_cd<=0) {
+        // attack_cd = 1.7;
+        auto units = FindUnitsInRadius(3, GetPos(),200,0);
+        if (units.size()>0) {
+            auto target = units[0].lock().get();
+            auto tab =TrackingProjectileContext{
+                nullptr,
+                this,
+                target,
+                CVector2(),
+                200,
+                "CEffect_gem",
+                {}
+            };
+            CreateTrackingProjectile(tab);
+            EmitSoundOn("ice_proj");
+            attack_cd = 1.7;
+        }
+
+    }
 
     //搜索宝石
     std::vector<std::shared_ptr<CXpGem>> result;
@@ -68,6 +88,8 @@ void CPlayer::Update(float _deltaTime) {
     }
 
 }
+
+
 //通过经验判断等级
 int GetLevelByXP(int _xp)
 {

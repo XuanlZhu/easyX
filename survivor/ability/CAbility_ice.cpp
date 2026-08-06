@@ -19,12 +19,12 @@ void CAbility_ice::OnSpellStart() {
 
     auto tab =LinearProjectileContext{
         this,
+        mCaster,
         CVector2(),
         10,
         10,
         300,
         CVector2(150,150),
-        mCaster,
         3,
         "CEffect_projectile",
         {}

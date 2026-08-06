@@ -21,7 +21,7 @@
 #include "../ability/CAbility_cross.h"
 #include "../ability/CAbility_KingBook.h"
 #include "../ability/CAbility_damage_aura.h"
-
+#include "../ability/CAbility_water.h"
 
 
 using json = nlohmann::json;
@@ -115,6 +115,9 @@ CAbility* CUnit::AddAbility(std::string _name) {
         ability = std::make_shared<CAbility_KingBook>();
     }else if (_name=="CAbility_damage_aura") {
         ability = std::make_shared<CAbility_damage_aura>();
+    }else if (_name=="CAbility_water") {
+        ability = std::make_shared<CAbility_water>();
+
 
 
 

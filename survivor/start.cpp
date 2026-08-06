@@ -31,11 +31,11 @@ int main()
         // std::cout << "Init Graphics Success" << std::endl;
         auto creep= CreateUnitByName("creep", player->GetPos()+RandomVector(400), nullptr, 3).lock();
         if (creep) {
-            creep->SetAttackTarget(player);
+            // creep->SetAttackTarget(player);
         }
         player->mAttributeSystem.Print();
 
-        return 0.3;
+        return 1;
     },0);
     // CreateEffect("CEffect_levelup",player->GetPos(),nullptr);
 
@@ -47,8 +47,6 @@ int main()
     // it->SetParticleControl(0,CVector2(0,-50));
     // it = CreateEffect("CEffect_gem",player->GetPos(),player.get()).lock();//创建特效
     // it->SetParticleControl(0,CVector2(200,-50));
-
-
 
 
     Global::soundManager->PlayLoop("ReincarnatedEchoes");

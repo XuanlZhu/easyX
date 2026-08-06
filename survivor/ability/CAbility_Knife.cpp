@@ -23,12 +23,12 @@ void CAbility_Knife::OnSpellStart() {
 
     auto tab =LinearProjectileContext{
         this,
+        mCaster,
         CVector2(),
         10,
         10,
         250,
         CVector2(150,150),
-        mCaster,
         3,
         "CEffect_knife",
         {}

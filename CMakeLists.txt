@@ -123,6 +123,10 @@ add_executable(easyX
         survivor/ability/CAbility_KingBook.h
         survivor/buffs/CBuff_KingBook.cpp
         survivor/buffs/CBuff_KingBook.h
+        survivor/ability/CAbility_damage_aura.cpp
+        survivor/ability/CAbility_damage_aura.h
+        survivor/buffs/CBuff_damage_aura.cpp
+        survivor/buffs/CBuff_damage_aura.h
 )
 
 # EasyX库路径

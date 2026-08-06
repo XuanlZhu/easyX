@@ -26,6 +26,8 @@ public:
     int GetTeam(){return mTeam;};
     void OnDeath();//当死亡
     void OnDestroy();//当销毁
+    virtual void OnCreate();//当创建
+
     std::weak_ptr<CBuff> AddNewModifier(CUnit* _caster,CAbility* _ability,std::string _name, nlohmann::json _tab);
     std::shared_ptr<CAbility> GetSharedPtrAbility(CAbility* _ability);
     bool IsStunned() {

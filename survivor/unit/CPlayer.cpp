@@ -14,7 +14,16 @@
 vector<int> xp_table={};
 CPlayer::CPlayer(std::string _name) : CUnit(_name){
     mCanRespawn = true;//可以重生
-    this->AddAbility("CAbility_KingBook");
+
+    int xp = 10;
+    for (int i = 0; i < 100; i++) {
+        xp_table.push_back(xp);
+        xp += 10;
+    }
+}
+
+void CPlayer::OnCreate() {
+    this->AddAbility("CAbility_damage_aura");
     // this->AddAbility("CAbility_stamp");
     // this->AddAbility("CAbility_flyingKnife");
     this->SetContextThink("auto_cast",[&] {
@@ -27,13 +36,8 @@ CPlayer::CPlayer(std::string _name) : CUnit(_name){
         }
         return 0.5;
     },0);
-
-    int xp = 10;
-    for (int i = 0; i < 100; i++) {
-        xp_table.push_back(xp);
-        xp += 10;
-    }
 }
+
 
 void CPlayer::Update(float _deltaTime) {
     if (IsDeath())return;

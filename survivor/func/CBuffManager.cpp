@@ -18,6 +18,7 @@
 #include "../buffs/CBuff_axe_thinker.h"
 #include "../buffs/CBuff_cross_thinker.h"
 #include "../buffs/CBuff_KingBook.h"
+#include "../buffs/CBuff_damage_aura.h"
 
 
 
@@ -41,6 +42,7 @@ void CBuffManager::ClearList() {
 }
 //创建，分配
 std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster, CAbility* _ability, std::string _name, json _tab) {
+    if (_name==""){return {};}//buff为空
     std::shared_ptr<CBuff> buff;
     if (_name=="CBuff_test") {
         buff = std::make_shared<CBuff_test>();
@@ -50,6 +52,10 @@ std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster
         buff = std::make_shared<CBuff_cross_thinker>();
     }else if (_name=="CBuff_KingBook") {
         buff = std::make_shared<CBuff_KingBook>();
+    }else if (_name=="CBuff_damage_aura") {
+        buff = std::make_shared<CBuff_damage_aura>();
+
+
 
     }else {
         buff = std::make_shared<CBuff>();

@@ -20,6 +20,8 @@
 #include "../ability/CAbility_axe.h"
 #include "../ability/CAbility_cross.h"
 #include "../ability/CAbility_KingBook.h"
+#include "../ability/CAbility_damage_aura.h"
+
 
 
 using json = nlohmann::json;
@@ -111,6 +113,9 @@ CAbility* CUnit::AddAbility(std::string _name) {
         ability = std::make_shared<CAbility_cross>();
     }else if (_name=="CAbility_KingBook") {
         ability = std::make_shared<CAbility_KingBook>();
+    }else if (_name=="CAbility_damage_aura") {
+        ability = std::make_shared<CAbility_damage_aura>();
+
 
 
 
@@ -120,6 +125,7 @@ CAbility* CUnit::AddAbility(std::string _name) {
 
     ability->mCaster = this;
     mAbilitys.push_back(ability);//添加技能
+    ability->OnCreated();
     return ability.get();
 }
 
@@ -128,8 +134,12 @@ void CUnit::OnDestroy() {
     mBuffSystem.OnDestroy();//触发Destroy链
 }
 
+void CUnit::OnCreate() {
+}
+
 std::weak_ptr<CBuff> CUnit::AddNewModifier(CUnit* _caster, CAbility* _ability, std::string _name, nlohmann::json _tab) {
     if (_caster->IsDeath()) {return {};}
+    if (_name==""){return {};}//buff为空
     return Global::buffManager->AddNewModifier(this,_caster,_ability,_name,_tab);
 }
 

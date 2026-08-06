@@ -69,6 +69,7 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     Global::spriteList->Append(unit);//添加精灵表
     Global::unitManager->Append(unit);//添加到单位管理器
     // std::cout << "thinker添加到精灵表" << std::endl;
+    unit->OnCreate();
     return unit;
 }
 //获取当前时间 单位秒

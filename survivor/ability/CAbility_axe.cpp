@@ -8,9 +8,7 @@
 #include "../func/Global.h"
 #include "../unit/CUnit.h"
 #include "Core/CVector2.h"
-#include "Graphics/CEffect.h"
-#include "ResourceManager/CEffectManager.h"
-#include "ResourceManager/CSoundManager.h"
+
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 

@@ -20,5 +20,5 @@ void CAbility_KingBook::OnSpellStart() {
     CreateModifierThinker(mCaster,this,"CBuff_KingBook",json{{"duration", 5}},mCaster->GetPos()+CVector2(0,length),1);
     CreateModifierThinker(mCaster,this,"CBuff_KingBook",json{{"duration", 5}},mCaster->GetPos()+CVector2(length,0),1);
     CreateModifierThinker(mCaster,this,"CBuff_KingBook",json{{"duration", 5}},mCaster->GetPos()+CVector2(-length,0),1);
-    
+
 }

@@ -4,20 +4,17 @@
 
 #include "CAbility.h"
 
-#include <iostream>
-
 #include "../func/CBuffManager.h"
 #include "../func/Global.h"
 #include "../unit/CUnit.h"
-#include "Core/CVector2.h"
-#include "Graphics/CEffect.h"
-#include "ResourceManager/CEffectManager.h"
-#include "ResourceManager/CSoundManager.h"
+
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-void CAbility::OnSpellStart() {
 
+CAbility::~CAbility() {
+    auto buff = mIntrinsicModifier.lock();
+    if (buff) {buff->Destroy();}
 }
 
 bool CAbility::IsCooldownReady() {
@@ -25,4 +22,10 @@ bool CAbility::IsCooldownReady() {
         return true;
     }
     return false;
+}
+
+void CAbility::OnCreated() {
+    mIntrinsicModifier = mCaster->AddNewModifier(mCaster, this, GetIntrinsicModifierName(), json{});
+    auto buff = mIntrinsicModifier.lock();
+    if (buff) {buff->isPassive = true;}
 }

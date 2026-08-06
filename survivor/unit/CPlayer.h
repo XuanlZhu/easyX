@@ -12,6 +12,7 @@ class CPlayer : public CUnit
 public:
     // using CUnit::CUnit;
     CPlayer(std::string _name);
+    void OnCreate() override;
     void Update(float _deltaTime) override;
     void AddExperience(int _v);
     void OnLevelUp();

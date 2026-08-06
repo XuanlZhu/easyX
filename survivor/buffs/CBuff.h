@@ -77,7 +77,8 @@ public:
     float think_interval = -1;//思考间隔
     float mElapsedTime = 0;//逝去时间
     float mDuration = -1;//持续时间
-    bool mDestroying = false;
+    bool mDestroying = false;//销毁中
+    bool isPassive = false;//被动
     // bool isDestroying = false;
     std::string effect_name = "";//特效名
     //记录

@@ -1,5 +1,5 @@
 //
-// Created by admin on 2026/7/31.
+// Created by admin on 2026/8/7.
 //
 #pragma once
 
@@ -15,4 +15,10 @@ enum ModifierState {
     MODIFIER_STATE_INVULNERABLE = 8,
     MODIFIER_STATE_MAGIC_IMMUNE = 9,
     MODIFIER_STATE_PROVIDES_VISION = 10,
+};
+enum DAMAGE_TYPES {
+    DAMAGE_TYPE_PHYSICAL = 1,
+    DAMAGE_TYPE_MAGICAL = 2,
+    DAMAGE_TYPE_PURE = 3
+
 };

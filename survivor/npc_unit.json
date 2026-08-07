@@ -1,12 +1,18 @@
 {
+    "unit_base": {
+        "hp": 100,
+        "mSpeed":70,
+        "BountyXP":5
+    },
     "creep": {
+        "BaseClass":"unit_base",
         "img": "creep2",
         "hp": 100,
 		"mSpeed":70,
         "BountyXP":5
     },
     "player": {
-        "class": "CPlayer",
+        "BaseClass":"unit_base",
         "img": "player2",
         "hp": 100,
 		"mSpeed":100

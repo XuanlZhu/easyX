@@ -11,6 +11,7 @@
 #include "ResourceManager/CUnitManager.h"
 #include "Scene/CScene.h"
 #include "sprite/CXpGem.h"
+#include "UI/UIManager.h"
 #include "unit/CPlayer.h"
 
 CMyGame::CMyGame() {
@@ -36,6 +37,7 @@ void CMyGame::Setup() {
     Global::spriteList = &Global::scene->mSpriteList;//精灵表
     Global::unitManager = new CUnitManager();//单位管理器
     Global::buffManager = new CBuffManager();//buff管理器
+    Global::uiManager = new UIManager();//UI管理器
 
     //生成玩家
     Global::player = std::dynamic_pointer_cast<CPlayer>(CreateUnitByName("player", CVector2(5000,5000), nullptr, 1).lock());

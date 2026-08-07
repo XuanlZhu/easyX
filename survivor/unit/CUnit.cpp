@@ -85,7 +85,7 @@ void CUnit::OnDeath() {//触发时机：是Update时
     }
     this->mIsDeath = true;//标记死亡
     //创建宝石
-    std::cout << GetName() << std::endl;
+    // std::cout << GetName() << std::endl;
     if (GetName()!="CUnit_thinker") {
         auto it = CreateCSprite("CXpGem",mPos).lock();
         std::dynamic_pointer_cast<CXpGem>(it)->BountyXP = jsonKV.value("BountyXP", 0);//设置经验

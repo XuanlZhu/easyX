@@ -12,7 +12,7 @@ class CAttributeSystem;
 class CEffect;
 class CAbility;
 class CUnit;
-#include "../func/GameDefine.h"
+#include "../func/ConstantTable.h"
 
 // #define DECLARE_ATTRIBUTE(name) \
 // virtual float GetAttribute_##name() { return 0; } \

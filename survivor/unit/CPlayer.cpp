@@ -45,29 +45,6 @@ void CPlayer::Update(float _deltaTime) {
     mPos.x += mChangeX * _deltaTime;mPos.y += mChangeY * _deltaTime;//运动
     if (mChangeX ==0 && mChangeY ==0) {}else{mLookat = CVector2(mChangeX,mChangeY).Normalize();}//朝向
 
-    //攻击
-    attack_cd -= _deltaTime;
-    if (attack_cd<=0) {
-        // attack_cd = 1.7;
-        auto units = FindUnitsInRadius(3, GetPos(),200,0);
-        if (units.size()>0) {
-            auto target = units[0].lock().get();
-            auto tab =TrackingProjectileContext{
-                nullptr,
-                this,
-                target,
-                CVector2(),
-                200,
-                "CEffect_gem",
-                {}
-            };
-            CreateTrackingProjectile(tab);
-            EmitSoundOn("ice_proj");
-            attack_cd = 1.7;
-        }
-
-    }
-
     //搜索宝石
     std::vector<std::shared_ptr<CXpGem>> result;
     for(auto& sprite : Global::spriteList->mSprites)
@@ -86,7 +63,37 @@ void CPlayer::Update(float _deltaTime) {
             gem->Pickup();
         }
     }
+    //攻击
+    attack_cd -= _deltaTime;
+    if (attack_cd<=0) {
+        // attack_cd = 1.7;
+        auto units = FindUnitsInRadius(3, GetPos(),300,1);
+        if (units.size()>0) {
+            auto target = units[0].lock().get();
+            DoAttack(target);
+        }
+    }
 
+}
+//发射子弹
+void CPlayer::DoAttack(CUnit* target) {
+    auto tab =TrackingProjectileContext{
+        nullptr,
+        this,
+        target,
+        CVector2(),
+        200,
+        "",
+        {}
+    };
+    CreateTrackingAttackProjectile(tab);
+    EmitSoundOn("ice_proj");
+    attack_cd = 1.7;
+}
+//计算伤害
+void CPlayer::ProcessAttack(CUnit* target) {
+    if (!target){return;}
+    ApplyDamage(DamageContext{this,target,GetAttribute("AttackDamage"),DAMAGE_TYPE_PHYSICAL});
 }
 
 
@@ -123,4 +130,5 @@ void CPlayer::OnLevelUp() {
     mAttributeSystem.ModifyBase("agility",2.6);
     mAttributeSystem.ModifyBase("intellect",2.6);
 }
+
 

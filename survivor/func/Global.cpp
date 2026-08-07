@@ -22,6 +22,8 @@
 #include "../sprite/CProjectile.h"
 #include "../unit/CUnit_thinker.h"
 #include "../sprite/CProjectile_Tracking.h"
+#include "../sprite/CProjectile_TrackingAttack.h"
+
 
 
 namespace fs = std::filesystem;
@@ -53,8 +55,7 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     // std::cout<<table<<std::endl;
     std::shared_ptr<CUnit> unit;
     // if(table[_unitName].contains("class"))//如果指定类
-    if(_unitName=="player")//如果指定类
-    {
+    if(_unitName=="player"){
         unit = std::make_shared<CPlayer>(_unitName);
     }else if (_unitName=="CUnit_thinker"){
         unit = std::make_shared<CUnit_thinker>(_unitName);
@@ -122,9 +123,9 @@ float CalcDistanceBetweenEntityOBB(CSprite* _s1, CSprite* _s2) {
 
 void ApplyDamage(DamageContext _context) {
     //攻击力需大于0，被攻击者需要活着
-    if(_context._damage>0 && !_context._victim->IsDeath()) {
-        _context._victim->mHp -= _context._damage;
-        SendOverheadEventMessage(_context._victim,std::to_string((int)_context._damage));
+    if(_context.damage>0 && !_context.victim->IsDeath()) {
+        _context.victim->mHp -= _context.damage;
+        SendOverheadEventMessage(_context.victim,std::to_string((int)_context.damage));
     }
 }
 
@@ -148,7 +149,27 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInRadius(int _team, CVector2 _pos, fl
             result.push_back(unit);
         }
     }
-    //排序还没实现
+    if (_order==0){return result;}//乱序直接返回
+    // 按距离从近到远排序
+    std::sort(result.begin(), result.end(),
+        [&](const std::weak_ptr<CUnit>& a, const std::weak_ptr<CUnit>& b)
+        {
+            auto unitA = a.lock();
+            auto unitB = b.lock();
+
+            if(!unitA) return false;
+            if(!unitB) return true;
+
+            float distA = (unitA->GetPos() - _pos).Length();
+            float distB = (unitB->GetPos() - _pos).Length();
+
+            if (_order==1) {
+                return distA < distB;
+            }else {
+                return distA > distB;
+            }
+        });
+
     return result;
 }
 std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team, CVector2 startPos, CVector2 endPos, float width) {
@@ -195,7 +216,10 @@ std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos) {
         sprite = std::make_shared<CProjectile>();
     }else if (_sprite=="CProjectile_Tracking") {
         sprite = std::make_shared<CProjectile_Tracking>();
+    }else if (_sprite=="CProjectile_TrackingAttack") {
+        sprite = std::make_shared<CProjectile_TrackingAttack>();
     }
+
 
     sprite->SetPosition(_pos);
     Global::spriteList->Append(sprite);
@@ -238,6 +262,26 @@ std::weak_ptr<CProjectile> CreateTrackingProjectile(TrackingProjectileContext _c
         projectile = std::dynamic_pointer_cast<CProjectile_Tracking>(it);
     }
     // std::cout << "定义CProjectile_Tracking" << std::endl;
+#pragma region//信息定义
+    projectile->Ability = _context.Source->GetSharedPtrAbility(_context.ability);
+    projectile->Source = Global::unitManager->GetSharedPtr(_context.Source);
+    projectile->Target = Global::unitManager->GetSharedPtr(_context.Target);
+
+    projectile->vSpawnOrigin = _context.vSpawnOrigin;
+    projectile->iMoveSpeed = _context.iMoveSpeed;
+    projectile->EffectName = _context.EffectName;
+    projectile->ExtraData = _context.ExtraData;
+#pragma endregion
+    // std::cout << "定义完成" << std::endl;
+    return projectile;
+}
+
+std::weak_ptr<CProjectile> CreateTrackingAttackProjectile(TrackingProjectileContext _context) {
+    std::shared_ptr<CProjectile_TrackingAttack> projectile;
+    //在Source处创建
+    auto it = CreateCSprite("CProjectile_TrackingAttack",_context.Source->GetPos()+_context.vSpawnOrigin).lock();
+    projectile = std::dynamic_pointer_cast<CProjectile_TrackingAttack>(it);
+
 #pragma region//信息定义
     projectile->Ability = _context.Source->GetSharedPtrAbility(_context.ability);
     projectile->Source = Global::unitManager->GetSharedPtr(_context.Source);

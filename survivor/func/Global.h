@@ -9,7 +9,9 @@
 
 #include "../ability/CAbility.h"
 #include "Core/CVector2.h"
+#include "ConstantTable.h"
 
+class UIManager;
 class CProjectile;
 class CAbility;
 class CBuffManager;
@@ -44,8 +46,11 @@ public:
     inline static SpriteList* spriteList = nullptr;//精灵表
     inline static CUnitManager* unitManager = nullptr;//单位管理器
     inline static CBuffManager* buffManager = nullptr;//buff管理器
+    inline static UIManager* uiManager = nullptr;//UI管理器
 };
-struct DamageContext { CUnit* _attacker; CUnit* _victim; float _damage; };//伤害结构体
+
+
+struct DamageContext { CUnit* attacker; CUnit* victim; float damage;int damage_type= DAMAGE_TYPE_MAGICAL;CAbility* ability=nullptr;int damage_flags=0;};//伤害结构体
 struct LinearProjectileContext { CAbility* ability; CUnit* Source;CVector2 vSpawnOrigin; float fStartRadius;float fEndRadius;float fDistance;CVector2 vVelocity;int iUnitTargetTeam;std::string EffectName;json ExtraData; };//线性投射物结构体
 struct TrackingProjectileContext { CAbility* ability;CUnit* Source;CUnit* Target; CVector2 vSpawnOrigin;float iMoveSpeed;std::string EffectName;json ExtraData; };//线性投射物结构体
 
@@ -66,4 +71,5 @@ std::vector<std::weak_ptr<CUnit>> FindUnitsInLine(int _team,CVector2 startPos,CV
 std::weak_ptr<CSprite> CreateCSprite(std::string _sprite,CVector2 _pos);//创建精灵，并下发到精灵表
 std::weak_ptr<CProjectile> CreateLinearProjectile(LinearProjectileContext _context);
 std::weak_ptr<CProjectile> CreateTrackingProjectile(TrackingProjectileContext _context);
+std::weak_ptr<CProjectile> CreateTrackingAttackProjectile(TrackingProjectileContext _context);
 std::weak_ptr<CUnit> CreateModifierThinker(CUnit* caster,CAbility* ability,std::string name,json table,CVector2 origin,int team);

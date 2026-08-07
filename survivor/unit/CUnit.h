@@ -9,7 +9,7 @@
 #include <nlohmann/json_fwd.hpp>
 
 #include "../func/CBuffSystem.h"
-#include "../func/GameDefine.h"
+#include "../func/ConstantTable.h"
 #include "../func/CAttributeSystem.h"
 
 class CAbility;
@@ -27,6 +27,7 @@ public:
     void OnDeath();//当死亡
     void OnDestroy();//当销毁
     virtual void OnCreate();//当创建
+    float GetAttribute(std::string key){ return mAttributeSystem.GetAttribute(key);};
 
     std::weak_ptr<CBuff> AddNewModifier(CUnit* _caster,CAbility* _ability,std::string _name, nlohmann::json _tab);
     std::shared_ptr<CAbility> GetSharedPtrAbility(CAbility* _ability);

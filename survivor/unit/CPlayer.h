@@ -16,6 +16,8 @@ public:
     void Update(float _deltaTime) override;
     void AddExperience(int _v);
     void OnLevelUp();
+    void DoAttack(CUnit* target);
+    void ProcessAttack(CUnit* target);
 
     int mXP=0;
     int mLevel=1;

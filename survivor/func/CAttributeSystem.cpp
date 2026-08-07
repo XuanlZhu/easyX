@@ -13,7 +13,7 @@ CAttributeSystem::CAttributeSystem(CUnit *_unit) {
     }
 }
 
-float CAttributeSystem::Get(std::string _key) {
+float CAttributeSystem::GetAttribute(std::string _key) {
     if (dirty[_key]) {//如果脏数据
         self:RecalculateKey(_key);//重算
     }

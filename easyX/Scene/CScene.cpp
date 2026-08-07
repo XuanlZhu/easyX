@@ -7,6 +7,7 @@
 // using namespace std;
 #include "../survivor/func/Global.h"
 #include "ResourceManager/CEffectManager.h"
+#include "UI/UIManager.h"
 
 CScene::CScene() {
     // mCTileMap = CTileMap("Project/map1.csv");
@@ -37,7 +38,7 @@ void CScene::Draw()
     mCTileMap.Draw(mCamera);//瓦片地图绘制
     mSpriteList.Draw(mCamera);//精灵表绘制，还没做裁切
     Global::effectManager->Draw(mCamera);//特效绘制
-    //UI绘制
+    Global::uiManager->Draw(mCamera);//UI绘制
 }
 //设置玩家
 void CScene::SetPlayer(CSprite *_player) {

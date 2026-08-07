@@ -21,7 +21,7 @@ void CEffect::Update(float _deltaTime)
     mAge += _deltaTime;
 }
 //绘制
-void CEffect::Draw(CCamera &_camera) {
+void CEffect::Draw(CCamera& _camera) {
     if(IsDead())return;
     CVector2 screenPos = _camera.WorldToScreen(mPos);
     outtextxy(screenPos.x,screenPos.y,L"Hello EasyX");

@@ -72,7 +72,6 @@ add_executable(easyX
         survivor/func/CBuffManager.h
         survivor/effects/CEffect_stunned.cpp
         survivor/effects/CEffect_stunned.h
-        survivor/func/GameDefine.h
         survivor/func/CAttributeSystem.cpp
         survivor/func/CAttributeSystem.h
         survivor/buffs/CBuff_test.cpp
@@ -133,6 +132,11 @@ add_executable(easyX
         survivor/ability/CAbility_water.h
         survivor/sprite/CProjectile_Tracking.cpp
         survivor/sprite/CProjectile_Tracking.h
+        survivor/sprite/CProjectile_TrackingAttack.cpp
+        survivor/sprite/CProjectile_TrackingAttack.h
+        survivor/func/ConstantTable.h
+        easyX/UI/UIManager.cpp
+        easyX/UI/UIManager.h
 )
 
 # EasyX库路径

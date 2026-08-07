@@ -33,7 +33,7 @@ int main()
         if (creep) {
             // creep->SetAttackTarget(player);
         }
-        player->mAttributeSystem.Print();
+        // player->mAttributeSystem.Print();
 
         return 1;
     },0);

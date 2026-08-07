@@ -4,6 +4,7 @@
 
 #include "CAttributeSystem.h"
 #include <algorithm>
+#include "../unit/CUnit.h"
 
 CAttributeSystem::CAttributeSystem(CUnit *_unit) {
     mOwner = _unit;
@@ -15,10 +16,16 @@ CAttributeSystem::CAttributeSystem(CUnit *_unit) {
 
 float CAttributeSystem::GetAttribute(std::string _key) {
     if (dirty[_key]) {//如果脏数据
-        self:RecalculateKey(_key);//重算
+        RecalculateKey(_key);//重算
     }
     return cache[_key].final;
 }
+
+void CAttributeSystem::SetAttributeBase(std::string key) {
+    base[key] = mOwner->jsonKV[key];
+    dirty[key] = true;
+}
+
 //重算某个值
 float CAttributeSystem::RecalculateKey(std::string _key) {
     auto& value = cache[_key];

@@ -21,5 +21,4 @@ public:
 
     int mXP=0;
     int mLevel=1;
-    float attack_cd=0;
 };

@@ -28,6 +28,16 @@ public:
     void OnDestroy();//当销毁
     virtual void OnCreate();//当创建
     float GetAttribute(std::string key){ return mAttributeSystem.GetAttribute(key);};
+    void SetAttributeBase(std::string key) {mAttributeSystem.SetAttributeBase(key);};
+    float GetMoveSpeed(){return mAttributeSystem.GetAttribute("MovementSpeed");};//获取移速
+    float GetAttackDamage(){return mAttributeSystem.GetAttribute("AttackDamage");};//获取攻击力
+    float GetAttackSpeed(){return mAttributeSystem.GetAttribute("AttackSpeed");};//获取攻击速度
+    float GetAttackRange(){return mAttributeSystem.GetAttribute("AttackRange");};//获取攻击距离
+    float GetProjectileSpeed(){return mAttributeSystem.GetAttribute("ProjectileSpeed");};//获取弹道速度
+    float GetStrength(){return mAttributeSystem.GetAttribute("Strength");};//获取力量
+    float GetAgility(){return mAttributeSystem.GetAttribute("Agility");};//获取敏捷
+    float GetIntellect(){return mAttributeSystem.GetAttribute("Intellect");};//获取智力
+    float GetAttackInterval() {return GetAttribute("AttackRate")/(1+(GetAttackSpeed()-100)/100);};//获取攻击间隔
 
     std::weak_ptr<CBuff> AddNewModifier(CUnit* _caster,CAbility* _ability,std::string _name, nlohmann::json _tab);
     std::shared_ptr<CAbility> GetSharedPtrAbility(CAbility* _ability);
@@ -37,13 +47,12 @@ public:
 
     json jsonKV={};
     float mHp = 100;//生命值
-    float mAttackRange=35;//攻击距离
-    float mAttackInterval = 1;//攻击间隔
+    float attack_cd=0;
+
     float mAttackDamage=4;//攻击力
     int mAttackType=1;//0无攻击，1近战，2远程
     int mTeam=3;//队伍
     bool mIsDeath = false;//是否死亡
-    float mLastAttackTime = 0;//上次攻击时间
     bool mCanRespawn = false;//无法重生，死亡后移除
     bool mInvincible = false;//无敌
 

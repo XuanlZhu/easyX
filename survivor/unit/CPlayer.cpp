@@ -18,13 +18,16 @@ CPlayer::CPlayer(std::string _name) : CUnit(_name){
     int xp = 10;
     for (int i = 0; i < 100; i++) {
         xp_table.push_back(xp);
-        xp += 10;
+        // xp += 10;
     }
 }
 
 void CPlayer::OnCreate() {
+    //主属性buff
+    AddNewModifier(this, nullptr, "CBuff_AttributePrimary", {});
+
     // this->AddAbility("CAbility_water");
-    // this->AddAbility("CAbility_KingBook");
+    this->AddAbility("CAbility_KingBook");
     // this->AddAbility("CAbility_stamp");
     // this->AddAbility("CAbility_flyingKnife");
     this->SetContextThink("auto_cast",[&] {
@@ -42,7 +45,7 @@ void CPlayer::OnCreate() {
 
 void CPlayer::Update(float _deltaTime) {
     if (IsDeath())return;
-    mPos.x += mChangeX * _deltaTime;mPos.y += mChangeY * _deltaTime;//运动
+    mPos.x += mChangeX * GetMoveSpeed() * _deltaTime;mPos.y += mChangeY * GetMoveSpeed() * _deltaTime;//运动
     if (mChangeX ==0 && mChangeY ==0) {}else{mLookat = CVector2(mChangeX,mChangeY).Normalize();}//朝向
 
     //搜索宝石
@@ -67,7 +70,7 @@ void CPlayer::Update(float _deltaTime) {
     attack_cd -= _deltaTime;
     if (attack_cd<=0) {
         // attack_cd = 1.7;
-        auto units = FindUnitsInRadius(3, GetPos(),300,1);
+        auto units = FindUnitsInRadius(3, GetPos(),GetAttackRange(),1);
         if (units.size()>0) {
             auto target = units[0].lock().get();
             DoAttack(target);
@@ -82,18 +85,18 @@ void CPlayer::DoAttack(CUnit* target) {
         this,
         target,
         CVector2(),
-        200,
+        GetProjectileSpeed(),
         "",
         {}
     };
     CreateTrackingAttackProjectile(tab);
     EmitSoundOn("ice_proj");
-    attack_cd = 1.7;
+    attack_cd = GetAttackInterval();
 }
 //计算伤害
 void CPlayer::ProcessAttack(CUnit* target) {
     if (!target){return;}
-    ApplyDamage(DamageContext{this,target,GetAttribute("AttackDamage"),DAMAGE_TYPE_PHYSICAL});
+    ApplyDamage(DamageContext{this,target,GetAttackDamage(),DAMAGE_TYPE_PHYSICAL});
 }
 
 
@@ -125,10 +128,9 @@ void CPlayer::AddExperience(int _v) {
 //当升级
 void CPlayer::OnLevelUp() {
     //属性提升，直接修改base
-    // mAttributeSystem.base["attack_damage"];
-    mAttributeSystem.ModifyBase("strength",2.6);
-    mAttributeSystem.ModifyBase("agility",2.6);
-    mAttributeSystem.ModifyBase("intellect",2.6);
+    mAttributeSystem.ModifyBase("Strength",jsonKV["AttributeStrengthGain"]);
+    mAttributeSystem.ModifyBase("Agility",jsonKV["AttributeAgilityGain"]);
+    mAttributeSystem.ModifyBase("Intellect",jsonKV["AttributeIntellectGain"]);
 }
 
 

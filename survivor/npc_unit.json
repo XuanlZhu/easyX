@@ -1,23 +1,59 @@
 {
     "unit_base": {
         "hp": 100,
-        "mSpeed":70,
-        "BountyXP":5
+		"BountyXP":5,
+		"BountyGold": 5,
+		"AttributePrimary":"DOTA_ATTRIBUTE_STRENGTH",
+		"AttributeStrengthGain":0,
+		"AttributeAgilityGain":0,
+		"AttributeIntellectGain":0,
+		"AttackType": 1,
+
+
+
+		"Strength": 0,
+		"Agility": 0,
+		"Intellect": 0,
+		"AttackDamage": 0,
+		"MovementSpeed": 70,
+		"Health": 100,
+		"HealthRegen": 0,
+		"AttackRate": 1,
+		"AttackSpeed":100,
+		"AttackRange": 35,
+		"ProjectileSpeed": 150
+
     },
     "creep": {
         "BaseClass":"unit_base",
         "img": "creep2",
-        "hp": 100,
-		"mSpeed":70,
-        "BountyXP":5
-    },
+
+		"AttackDamage": 4,
+		"Health": 100,
+		"AttackRange": 35
+	},
     "player": {
         "BaseClass":"unit_base",
         "img": "player2",
-        "hp": 100,
-		"mSpeed":100
-    },
+		"AttackType": 2,
+		"AttributeStrengthGain":2.6,
+		"AttributeAgilityGain":3.4,
+		"AttributeIntellectGain":1.9,
+
+		"Strength": 18,
+		"Agility": 21,
+		"Intellect": 19,
+		"AttackDamage":50,
+		"MovementSpeed":100,
+		"Health": 100,
+		"HealthRegen": 0,
+		"AttackRate": 1.7,
+		"AttackSpeed":100,
+		"AttackRange": 300,
+		"ProjectileSpeed": 200
+	},
     "CUnit_thinker": {
+		"BaseClass":"unit_base",
         "hp": 100
     }
 }

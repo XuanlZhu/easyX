@@ -137,6 +137,8 @@ add_executable(easyX
         survivor/func/ConstantTable.h
         easyX/UI/UIManager.cpp
         easyX/UI/UIManager.h
+        survivor/buffs/CBuff_AttributePrimary.cpp
+        survivor/buffs/CBuff_AttributePrimary.h
 )
 
 # EasyX库路径

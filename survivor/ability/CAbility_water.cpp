@@ -13,9 +13,10 @@
 using json = nlohmann::json;
 
 void CAbility_water::OnSpellStart() {
+    // std::cout << "施法开始" << std::endl;
     mLastCastTime = GetNowTime();//记录施法时间
 
     // EmitSoundOn("whirling_ranged_cast");
     CreateModifierThinker(mCaster,this,"CBuff_damage_aura",json{{"duration", 5}},mCaster->GetPos(),1);
-
+    // std::cout << "施法结束" << std::endl;
 }

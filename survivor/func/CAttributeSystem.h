@@ -18,6 +18,7 @@ class CAttributeSystem {
 public:
     CAttributeSystem(CUnit* _unit);
     float GetAttribute(std::string _key);//获取属性
+    void SetAttributeBase(std::string key);//设置基础属性
     float RecalculateKey(std::string _key);
     void RegisterModifier(CBuff* _buff);//注册buff
     void UnregisterModifier(CBuff* _buff);//注销buff
@@ -34,10 +35,10 @@ public:
     CUnit* mOwner;
     std::unordered_map<std::string, std::vector<CBuff*>> mAffectedBuffs;//受影响buff
     std::unordered_map<std::string,float> base{
-        {"AttackDamage", 56},
-        {"strength", 23},
-        {"agility", 17},
-        {"intellect", 19},
+        // {"AttackDamage", 56},
+        // {"strength", 23},
+        // {"agility", 17},
+        // {"intellect", 19},
     };//基础数值
     std::unordered_map<std::string,AttributeStruct> cache{
         // {"attack_damage", AttributeStruct()},

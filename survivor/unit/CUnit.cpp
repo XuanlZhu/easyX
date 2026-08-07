@@ -26,9 +26,25 @@
 
 using json = nlohmann::json;
 
-// CUnit::CUnit() {
-// }
-//
+json LoadUnitJson(const json& allUnits, const std::string& name)
+{
+    json result;
+    // 找不到对象
+    if(!allUnits.contains(name))return result;
+
+    const json& current = allUnits[name];
+    // 先加载父类
+    if(current.contains("BaseClass")){
+        result = LoadUnitJson(allUnits, current["BaseClass"]);
+    }
+    // 子类覆盖父类
+    for(auto& [key, value] : current.items()){
+        if(key == "BaseClass")continue;
+        result[key] = value;
+    }
+    return result;
+}
+
 CUnit::CUnit(std::string _name) {
     auto& table= Global::unitJson;
     // std::cout<<table<<std::endl;
@@ -37,14 +53,27 @@ CUnit::CUnit(std::string _name) {
         std::cout<<"单位不存在:"<<_name<<std::endl;
         return;
     }
-    json data = table[_name];
+    jsonKV = LoadUnitJson(table,_name);
     // cout<<data<<endl;
-    if (data.contains("img")) {
-        std::string img = "PNG/" + data["img"].get<std::string>() + ".png";
+    if (jsonKV.contains("img")) {
+        std::string img = "PNG/" + jsonKV["img"].get<std::string>() + ".png";
         mImage = Global::imgManager->GetImage(img);
     }
-    if(data.contains("mSpeed")){mSpeed = data["mSpeed"].get<float>();}
+    // if(jsonKV.contains("mSpeed")){mSpeed = jsonKV["mSpeed"].get<float>();}
+    SetAttributeBase("Strength");
+    SetAttributeBase("Agility");
+    SetAttributeBase("Intellect");
+    SetAttributeBase("AttackDamage");
+    SetAttributeBase("MovementSpeed");
+    SetAttributeBase("Health");
+    SetAttributeBase("HealthRegen");
+    SetAttributeBase("AttackRate");
+    SetAttributeBase("AttackSpeed");
+    SetAttributeBase("AttackRange");
+    SetAttributeBase("ProjectileSpeed");
 }
+
+
 
 
 
@@ -53,22 +82,23 @@ void CUnit::SetAttackTarget(std::weak_ptr<CUnit> _unit) {
 }
 
 void CUnit::Update(float _deltaTime) {
+    attack_cd -= _deltaTime;
     if (IsDeath()) {OnDeath();return;};//当前帧需清除
     if (IsStunned()) {return;};
+
 
     auto target = mAttackTarget.lock();
     if(target)
     {
         if (CalcDistanceBetweenEntityOBB(this,target.get())>10) {
-            mPos = mPos+(target->mPos-mPos).Normalize()*mSpeed*_deltaTime;
+            mPos = mPos+(target->mPos-mPos).Normalize()*GetMoveSpeed()*_deltaTime;
         }
-        // std::cout << "移动" << std::endl;
         //如果在攻击范围内
-        if (CalcDistanceBetweenEntityOBB(this,target.get())<=mAttackRange && (GetNowTime()-mLastAttackTime)>=mAttackInterval && !target->IsDeath()) {
+        if (CalcDistanceBetweenEntityOBB(this,target.get())<=GetAttackRange() && attack_cd<=0 && !target->IsDeath()) {
             //攻击目标
             Global::soundManager->Play("injuried");
             ApplyDamage(DamageContext{this,target.get(),mAttackDamage});
-            mLastAttackTime = GetNowTime();
+            attack_cd = GetAttackInterval();
         }
     }
 }

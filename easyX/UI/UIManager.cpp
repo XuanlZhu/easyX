@@ -15,11 +15,16 @@ void UIManager::Update(float _deltaTime) {
 }
 
 void UIManager::Draw(CCamera& _camera) {
-    printPos = CVector2();
+    printPos = CVector2(0,500);
     PrintAttribute("AttackDamage");
-    PrintAttribute("strength");
-    PrintAttribute("agility");
-    PrintAttribute("intellect");
+    PrintAttribute("Strength");
+    PrintAttribute("Agility");
+    PrintAttribute("Intellect");
+    PrintAttribute("MovementSpeed");
+    // PrintAttribute("HealthRegen");
+    PrintAttribute("AttackSpeed");
+    PrintAttribute("AttackRange");
+    std::string str = "mLevel:" + to_string(Global::player->mLevel);std::wstring value(str.begin(), str.end());outtextxy(0,printPos.y,value.c_str());printPos.y += 12;
 }
 void UIManager::PrintAttribute(std::string key) {
     auto player = Global::player;

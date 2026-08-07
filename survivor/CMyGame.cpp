@@ -56,16 +56,16 @@ void CMyGame::OnKeyPress(int _key) {
     CSprite& player = *mCurrentScene->mPlayer;
     //移动
     if (_key == EKey::A){
-        player.mChangeX = -player.mSpeed;
+        player.mChangeX = -1;
     }
     else if (_key == EKey::D){
-        player.mChangeX = +player.mSpeed;
+        player.mChangeX = 1;
     }
     else if (_key == EKey::W){
-        player.mChangeY = -player.mSpeed;
+        player.mChangeY = -1;
     }
     else if (_key == EKey::S){
-        player.mChangeY = player.mSpeed;
+        player.mChangeY = 1;
     }
 }
 

@@ -19,10 +19,7 @@ class CUnit;
 // virtual float GetAttributePercent_##name() { return 0; }
 
 #define ATTRIBUTE_LIST \
-X(attack_damage) \
-X(strength) \
-X(agility) \
-X(intellect)
+X(AttackDamage) \
 
 #define X(name) \
 virtual float GetAttribute_##name() { return 0; } \

@@ -50,7 +50,7 @@ json LoadJson(std::string _path)
 
 //创建单位
 std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location, CUnit* _owner, int _team) {
-    // json data= Global::unitJson[_unitName];
+
     auto& table= Global::unitJson;
     // std::cout<<table<<std::endl;
     std::shared_ptr<CUnit> unit;
@@ -62,7 +62,6 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     }else {
         unit = std::make_shared<CUnit>(_unitName);
     }
-    unit->jsonKV= table[_unitName];//设置json信息
 
     unit->mTeam = _team;//队伍1：好人，队伍2：敌对，队伍3：中立
     unit->SetPosition(_location);//设置位置
@@ -71,6 +70,7 @@ std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName, CVector2 _location,
     Global::unitManager->Append(unit);//添加到单位管理器
     // std::cout << "thinker添加到精灵表" << std::endl;
     unit->OnCreate();
+    // std::cout << "CreateUnitByName结束" << std::endl;
     return unit;
 }
 //获取当前时间 单位秒
@@ -297,9 +297,11 @@ std::weak_ptr<CProjectile> CreateTrackingAttackProjectile(TrackingProjectileCont
 }
 
 std::weak_ptr<CUnit> CreateModifierThinker(CUnit* caster, CAbility* ability, std::string name, json table,CVector2 origin, int team) {
+    // std::cout << "CreateModifierThinker开始" << std::endl;
     auto thinker = CreateUnitByName("CUnit_thinker",origin,caster,3).lock();
     thinker->mInvincible = true;//设置无敌
+    // std::cout << "CreateUnitByName结束" << std::endl;
     std::dynamic_pointer_cast<CUnit_thinker>(thinker)->thinker_buff = thinker->AddNewModifier(caster, ability, name, table);
-
+    // std::cout << "添加buff结束" << std::endl;
     return thinker;
 }

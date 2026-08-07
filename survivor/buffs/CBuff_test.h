@@ -15,6 +15,4 @@ public:
             "attack_damage",
         };
     };
-    float GetAttribute_attack_damage() override{ return 10; };
-    float GetAttributePercent_attack_damage() override{ return 100; };
 };

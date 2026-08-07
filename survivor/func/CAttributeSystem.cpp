@@ -23,7 +23,7 @@ float CAttributeSystem::GetAttribute(std::string _key) {
 
 void CAttributeSystem::SetAttributeBase(std::string key) {
     base[key] = mOwner->jsonKV[key];
-    dirty[key] = true;
+    MarkDirty(key);
 }
 
 //重算某个值
@@ -52,7 +52,7 @@ void CAttributeSystem::RegisterModifier(CBuff* _buff) {
     for (auto& x : _buff->AffectingAttributes())
     {
         mAffectedBuffs[x].push_back(_buff);
-        dirty[x] = true;
+        MarkDirty(x);
     }
 
 }
@@ -65,7 +65,25 @@ void CAttributeSystem::UnregisterModifier(CBuff *_buff) {
     {
         auto it = std::find(mAffectedBuffs[x].begin(), mAffectedBuffs[x].end(), _buff);
         mAffectedBuffs[x].erase(it);//移除指针
-        dirty[x] = true;
+        MarkDirty(x);
     }
+}
+
+void CAttributeSystem::MarkDirty(std::string _attribute) {
+    if (dirty[_attribute])return;// 已经标记过，说明已经传播过
+    dirty[_attribute] = true;// 当前属性标记脏
+    // 查找依赖属性
+    auto it = mDependency.find(_attribute);
+
+    if (it == mDependency.end())return;
+    // 递归传播
+    for (auto& child : it->second)
+    {
+        MarkDirty(child);
+    }
+}
+
+void CAttributeSystem::ModifyBase(std::string _key, float _value) {
+    base[_key] += _value;MarkDirty(_key);
 }
 

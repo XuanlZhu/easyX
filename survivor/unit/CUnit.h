@@ -28,6 +28,7 @@ public:
     void OnDestroy();//当销毁
     virtual void OnCreate();//当创建
     float GetAttribute(std::string key){ return mAttributeSystem.GetAttribute(key);};
+    float GetCacheAttribute(std::string key){ return mAttributeSystem.GetCacheAttribute(key);};
     void SetAttributeBase(std::string key) {mAttributeSystem.SetAttributeBase(key);};
     float GetMoveSpeed(){return mAttributeSystem.GetAttribute("MovementSpeed");};//获取移速
     float GetAttackDamage(){return mAttributeSystem.GetAttribute("AttackDamage");};//获取攻击力

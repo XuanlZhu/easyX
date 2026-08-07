@@ -28,7 +28,7 @@ void UIManager::Draw(CCamera& _camera) {
 }
 void UIManager::PrintAttribute(std::string key) {
     auto player = Global::player;
-    std::string str = key + ":" + to_string((int)player->GetAttribute(key));
+    std::string str = key + ":" + to_string((int)player->GetCacheAttribute(key));
     std::wstring value(str.begin(), str.end());
     outtextxy(printPos.x,printPos.y,value.c_str());
     printPos.y += 12;

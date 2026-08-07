@@ -51,8 +51,8 @@ public:
     };//缓存数值
     std::unordered_map<std::string,bool> dirty;//脏数据表
     std::unordered_map<std::string,std::vector<std::string>> mDependency={
-        {"Strength", {"AttackDamage"}},
-        // {"Agility", {"AttackDamage"}},
-        // {"Intellect", {"AttackDamage"}},
+        {"Strength", {"AttackDamage","Health"}},
+        {"Agility", {"AttackDamage","Armor"}},
+        {"Intellect", {"AttackDamage"}},
     };//属性依赖表
 };

@@ -24,7 +24,7 @@ CPlayer::CPlayer(std::string _name) : CUnit(_name){
 
 void CPlayer::OnCreate() {
     //主属性buff
-    AddNewModifier(this, nullptr, "CBuff_AttributePrimary", {});
+    // AddNewModifier(this, nullptr, "CBuff_AttributePrimary", {});
 
     // this->AddAbility("CAbility_water");
     this->AddAbility("CAbility_KingBook");

@@ -26,22 +26,39 @@
 
 using json = nlohmann::json;
 
+void MergeJson(json& _base, const json& _override)
+{
+    for(auto& [key, value] : _override.items())
+    {
+        // 两边都是对象，递归合并
+        if(_base.contains(key)&& _base[key].is_object()&& value.is_object())
+        {
+            MergeJson(_base[key], value);
+        }
+        else
+        {
+            _base[key] = value;// 子类覆盖
+        }
+    }
+}
 json LoadUnitJson(const json& allUnits, const std::string& name)
 {
     json result;
-    // 找不到对象
     if(!allUnits.contains(name))return result;
-
     const json& current = allUnits[name];
-    // 先加载父类
-    if(current.contains("BaseClass")){
-        result = LoadUnitJson(allUnits, current["BaseClass"]);
+    // 加载父类
+    if(current.contains("BaseClass"))
+    {
+        result = LoadUnitJson(
+            allUnits,
+            current["BaseClass"]
+        );
     }
-    // 子类覆盖父类
-    for(auto& [key, value] : current.items()){
-        if(key == "BaseClass")continue;
-        result[key] = value;
-    }
+    // 合并子类
+    MergeJson(result, current);
+    // 删除BaseClass
+    result.erase("BaseClass");
+
     return result;
 }
 
@@ -60,17 +77,10 @@ CUnit::CUnit(std::string _name) {
         mImage = Global::imgManager->GetImage(img);
     }
     // if(jsonKV.contains("mSpeed")){mSpeed = jsonKV["mSpeed"].get<float>();}
-    SetAttributeBase("Strength");
-    SetAttributeBase("Agility");
-    SetAttributeBase("Intellect");
-    SetAttributeBase("AttackDamage");
-    SetAttributeBase("MovementSpeed");
-    SetAttributeBase("Health");
-    SetAttributeBase("HealthRegen");
-    SetAttributeBase("AttackRate");
-    SetAttributeBase("AttackSpeed");
-    SetAttributeBase("AttackRange");
-    SetAttributeBase("ProjectileSpeed");
+    for (auto& [key, value] :jsonKV["Attribute"].items()) {
+        SetAttributeBase(key);
+    }
+    mHp = GetMaxHealth();//设置生命值
 }
 
 
@@ -186,3 +196,23 @@ std::shared_ptr<CAbility> CUnit::GetSharedPtrAbility(CAbility *_ability) {
     }
     return nullptr;
 }
+
+
+// json LoadUnitJson(const json& allUnits, const std::string& name)
+// {
+//     json result;
+//     // 找不到对象
+//     if(!allUnits.contains(name))return result;
+//
+//     const json& current = allUnits[name];
+//     // 先加载父类
+//     if(current.contains("BaseClass")){
+//         result = LoadUnitJson(allUnits, current["BaseClass"]);
+//     }
+//     // 子类覆盖父类
+//     for(auto& [key, value] : current.items()){
+//         if(key == "BaseClass")continue;
+//         result[key] = value;
+//     }
+//     return result;
+// }

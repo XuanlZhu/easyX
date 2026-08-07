@@ -35,7 +35,7 @@ int main()
         }
         // player->mAttributeSystem.Print();
 
-        return 0.3;
+        return 1;
     },0);
     // CreateEffect("CEffect_levelup",player->GetPos(),nullptr);
 

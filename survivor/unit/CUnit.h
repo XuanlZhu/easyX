@@ -38,6 +38,9 @@ public:
     float GetStrength(){return mAttributeSystem.GetAttribute("Strength");};//获取力量
     float GetAgility(){return mAttributeSystem.GetAttribute("Agility");};//获取敏捷
     float GetIntellect(){return mAttributeSystem.GetAttribute("Intellect");};//获取智力
+    float GetMaxHealth(){return mAttributeSystem.GetAttribute("Health");};//获取最大生命值
+    float GetArmor(){return mAttributeSystem.GetAttribute("Armor");};//获取护甲
+
     float GetAttackInterval() {return GetAttribute("AttackRate")/(1+(GetAttackSpeed()-100)/100);};//获取攻击间隔
 
     std::weak_ptr<CBuff> AddNewModifier(CUnit* _caster,CAbility* _ability,std::string _name, nlohmann::json _tab);

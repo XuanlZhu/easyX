@@ -10,27 +10,31 @@
 		"AttackType": 1,
 
 
-		
-		"Strength": 0,
-		"Agility": 0,
-		"Intellect": 0,
-		"AttackDamage": 0,
-		"MovementSpeed": 70,
-		"Health": 100,
-		"HealthRegen": 0,
-		"AttackRate": 1,
-		"AttackSpeed":100,
-		"AttackRange": 35,
-		"ProjectileSpeed": 150
-
+		"Attribute":{
+			"Strength": 0,
+			"Agility": 0,
+			"Intellect": 0,
+			"AttackDamage": 0,
+			"MovementSpeed": 70,
+			"Health": 100,
+			"HealthRegen": 0,
+			"AttackRate": 1,
+			"AttackSpeed":100,
+			"AttackRange": 35,
+			"ProjectileSpeed": 150,
+			"Armor":0
+		}
     },
     "creep": {
         "BaseClass":"unit_base",
         "img": "creep2",
-
-		"AttackDamage": 4,
-		"Health": 100,
-		"AttackRange": 35
+		
+		"Attribute":{
+			"AttackDamage": 4,
+			"Health": 100,
+			"AttackRange": 35,
+			"Armor":10
+		}
 	},
     "player": {
         "BaseClass":"unit_base",
@@ -39,18 +43,21 @@
 		"AttributeStrengthGain":2.6,
 		"AttributeAgilityGain":3.4,
 		"AttributeIntellectGain":1.9,
-
-		"Strength": 18,
-		"Agility": 21,
-		"Intellect": 19,
-		"AttackDamage":50,
-		"MovementSpeed":100,
-		"Health": 100,
-		"HealthRegen": 0,
-		"AttackRate": 1.7,
-		"AttackSpeed":100,
-		"AttackRange": 300,
-		"ProjectileSpeed": 200
+		
+		"Attribute":{
+			"Strength": 18,
+			"Agility": 21,
+			"Intellect": 19,
+			"AttackDamage":50,
+			"MovementSpeed":100,
+			"Health": 300,
+			"HealthRegen": 0,
+			"AttackRate": 1.7,
+			"AttackSpeed":100,
+			"AttackRange": 300,
+			"ProjectileSpeed": 200,
+			"Armor":1
+		}
 	},
     "CUnit_thinker": {
 		"BaseClass":"unit_base",

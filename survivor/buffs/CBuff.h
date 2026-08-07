@@ -20,6 +20,10 @@ class CUnit;
 
 #define ATTRIBUTE_LIST \
 X(AttackDamage) \
+X(Armor) \
+X(Health) \
+
+
 
 #define X(name) \
 virtual float GetAttribute_##name() { return 0; } \
@@ -41,12 +45,7 @@ public:
         };
     };//状态注册
     virtual std::vector<std::string> AffectingAttributes() {
-        return std::vector<std::string>{
-            "attack_damage",
-            "strength",
-            "agility",
-            "intellect",
-        };
+        return std::vector<std::string>{};
     };//声明
     ATTRIBUTE_LIST//创建getter
     #undef X

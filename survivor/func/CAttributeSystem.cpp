@@ -22,7 +22,7 @@ float CAttributeSystem::GetAttribute(std::string _key) {
 }
 
 void CAttributeSystem::SetAttributeBase(std::string key) {
-    base[key] = mOwner->jsonKV[key];
+    base[key] = mOwner->jsonKV["Attribute"][key];
     MarkDirty(key);
 }
 

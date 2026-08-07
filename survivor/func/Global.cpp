@@ -123,10 +123,19 @@ float CalcDistanceBetweenEntityOBB(CSprite* _s1, CSprite* _s2) {
 
 void ApplyDamage(DamageContext _context) {
     //攻击力需大于0，被攻击者需要活着
-    if(_context.damage>0 && !_context.victim->IsDeath()) {
-        _context.victim->mHp -= _context.damage;
-        SendOverheadEventMessage(_context.victim,std::to_string((int)_context.damage));
+    if(_context.damage <= 0 || _context.victim->IsDeath())return;
+
+    float damage = _context.damage;
+
+    if(_context.damage_type == DAMAGE_TYPE_PHYSICAL)
+    {
+        float armor = _context.victim->GetArmor();
+
+        damage = damage*100/(100+armor*6);
     }
+
+    _context.victim->mHp -= damage;
+    SendOverheadEventMessage(_context.victim,std::to_string((int)damage));
 }
 
 void EmitSoundOn(std::string _name) {

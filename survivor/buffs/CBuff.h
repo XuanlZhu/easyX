@@ -13,6 +13,7 @@ class CEffect;
 class CAbility;
 class CUnit;
 #include "../func/ConstantTable.h"
+#include "../func/Global.h"
 
 // #define DECLARE_ATTRIBUTE(name) \
 // virtual float GetAttribute_##name() { return 0; } \
@@ -22,6 +23,9 @@ class CUnit;
 X(AttackDamage) \
 X(Armor) \
 X(Health) \
+X(ArmorMagic) \
+
+
 
 
 
@@ -68,6 +72,8 @@ public:
         return 0;
     }
     #undef ATTRIBUTE_LIST
+    virtual int GetAttribute_AbsoluteNoDamagePhysical(const ModifierAttackEvent tab){return 0;};//物理免疫
+
 
     float think_time = 0;//思考时间
     float think_interval = -1;//思考间隔
@@ -75,7 +81,6 @@ public:
     float mDuration = -1;//持续时间
     bool mDestroying = false;//销毁中
     bool isPassive = false;//被动
-    // bool isDestroying = false;
     std::string effect_name = "";//特效名
     //记录
     std::weak_ptr<CUnit> mOwner;

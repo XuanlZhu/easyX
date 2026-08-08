@@ -22,3 +22,8 @@ enum DAMAGE_TYPES {
     DAMAGE_TYPE_PURE = 3
 
 };
+enum DamageCategory {
+    DAMAGE_CATEGORY_SPELL = 0,
+    DAMAGE_CATEGORY_ATTACK = 1
+};
+

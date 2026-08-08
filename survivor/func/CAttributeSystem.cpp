@@ -26,6 +26,8 @@ void CAttributeSystem::SetAttributeBase(std::string key) {
     MarkDirty(key);
 }
 
+
+
 //重算某个值
 float CAttributeSystem::RecalculateKey(std::string _key) {
     auto& value = cache[_key];
@@ -85,5 +87,16 @@ void CAttributeSystem::MarkDirty(std::string _attribute) {
 
 void CAttributeSystem::ModifyBase(std::string _key, float _value) {
     base[_key] += _value;MarkDirty(_key);
+}
+
+int CAttributeSystem::Recalculat_AbsoluteNoDamagePhysical(ModifierAttackEvent tab) {
+    auto _key = "AbsoluteNoDamagePhysical";auto& value = cache[_key];value.flat = 0;value.pct = 0;value.base = base[_key];
+    for (auto buff : mAffectedBuffs[_key])
+    {
+        value.flat += buff->GetAttribute_AbsoluteNoDamagePhysical(tab);
+        // value.pct += buff->GetAttributePercentFunc(_key);
+    }
+    value.final = value.base * (1 + value.pct*0.01)+ value.flat;dirty[_key] = false;
+    return value.final;
 }
 

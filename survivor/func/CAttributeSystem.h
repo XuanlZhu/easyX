@@ -8,6 +8,7 @@
 #include "../buffs/CBuff.h"
 
 
+struct ModifierAttackEvent;
 class CUnit;
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -37,22 +38,17 @@ public:
     {
         mDependency[_source].push_back(_target);
     }
+    //
+    int Recalculat_AbsoluteNoDamagePhysical(ModifierAttackEvent tab);//重算物理免疫
 
     CUnit* mOwner;
     std::unordered_map<std::string, std::vector<CBuff*>> mAffectedBuffs;//受影响buff
-    std::unordered_map<std::string,float> base{
-        // {"AttackDamage", 56},
-        // {"Strength", 23},
-        // {"Agility", 17},
-        // {"Intellect", 19},
-    };//基础数值
-    std::unordered_map<std::string,AttributeStruct> cache{
-        // {"attack_damage", AttributeStruct()},
-    };//缓存数值
+    std::unordered_map<std::string,float> base{};//基础数值
+    std::unordered_map<std::string,AttributeStruct> cache{};//缓存数值
     std::unordered_map<std::string,bool> dirty;//脏数据表
     std::unordered_map<std::string,std::vector<std::string>> mDependency={
         {"Strength", {"AttackDamage","Health"}},
         {"Agility", {"AttackDamage","Armor"}},
-        {"Intellect", {"AttackDamage"}},
+        {"Intellect", {"AttackDamage","ArmorMagic"}},
     };//属性依赖表
 };

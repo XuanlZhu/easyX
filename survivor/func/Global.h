@@ -50,10 +50,10 @@ public:
 };
 
 
-struct DamageContext { CUnit* attacker; CUnit* victim; float damage;int damage_type= DAMAGE_TYPE_MAGICAL;CAbility* ability=nullptr;int damage_flags=0;};//伤害结构体
+struct DamageContext { CUnit* attacker; CUnit* victim; float damage;int damage_type= DAMAGE_TYPE_MAGICAL;CAbility* ability=nullptr;int damage_category= DAMAGE_CATEGORY_SPELL;int damage_flags=0;};//伤害结构体
 struct LinearProjectileContext { CAbility* ability; CUnit* Source;CVector2 vSpawnOrigin; float fStartRadius;float fEndRadius;float fDistance;CVector2 vVelocity;int iUnitTargetTeam;std::string EffectName;json ExtraData; };//线性投射物结构体
 struct TrackingProjectileContext { CAbility* ability;CUnit* Source;CUnit* Target; CVector2 vSpawnOrigin;float iMoveSpeed;std::string EffectName;json ExtraData; };//线性投射物结构体
-
+struct ModifierAttackEvent { CUnit* attacker; CUnit* victim; float damage;float original_damage;int damage_type= DAMAGE_TYPE_MAGICAL;int damage_category = DAMAGE_CATEGORY_SPELL;CAbility* ability=nullptr;int damage_flags=0;};//Modifier伤害事件
 
 json LoadJson(std::string _path);
 std::weak_ptr<CUnit> CreateUnitByName(std::string _unitName,CVector2 _location,CUnit* _owner,int _team);

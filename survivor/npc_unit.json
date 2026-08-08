@@ -22,7 +22,8 @@
 			"AttackSpeed":100,
 			"AttackRange": 35,
 			"ProjectileSpeed": 150,
-			"Armor":0
+			"Armor":0,
+			"ArmorMagic":10
 		}
     },
     "creep": {
@@ -53,7 +54,7 @@
 			"Health": 300,
 			"HealthRegen": 0,
 			"AttackRate": 1.7,
-			"AttackSpeed":100,
+			"AttackSpeed":500,
 			"AttackRange": 300,
 			"ProjectileSpeed": 200,
 			"Armor":1
@@ -62,5 +63,15 @@
     "CUnit_thinker": {
 		"BaseClass":"unit_base",
         "hp": 100
-    }
+    },
+	"target_creep": {
+		"BaseClass":"unit_base",
+		"img": "creep",
+
+		"Attribute":{
+			"Health": 100000,
+			"AttackRange": 35,
+			"Armor":10
+		}
+	}
 }

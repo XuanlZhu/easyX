@@ -126,12 +126,33 @@ void ApplyDamage(DamageContext _context) {
     if(_context.damage <= 0 || _context.victim->IsDeath())return;
 
     float damage = _context.damage;
-
+    auto tab = ModifierAttackEvent {
+        _context.attacker,
+        _context.victim,
+        damage,
+        _context.damage,
+        _context.damage_type,
+        _context.damage_category,
+        _context.ability};
+    //物理伤害计算护甲
     if(_context.damage_type == DAMAGE_TYPE_PHYSICAL)
     {
         float armor = _context.victim->GetArmor();
+        damage = damage*100/(100+armor*6);tab.damage = damage;
+        //如果物理免疫
+        // if (_context.victim->mAttributeSystem.Recalculat_AbsoluteNoDamagePhysical(tab)>0) {damage = 0;}
+        for (auto& x : Global::unitManager->mUnits) {
+            auto value =  x->mAttributeSystem.Recalculat_AbsoluteNoDamagePhysical(tab);
+            if(x.get()==_context.victim && value>0){damage = 0;}
+        }
 
-        damage = damage*100/(100+armor*6);
+    }
+    //魔法伤害计算魔抗
+    if(_context.damage_type == DAMAGE_TYPE_MAGICAL)
+    {
+        float armor = _context.victim->GetArmorMagic();
+
+        damage = damage*100/(100+armor*6);tab.damage = damage;
     }
 
     _context.victim->mHp -= damage;

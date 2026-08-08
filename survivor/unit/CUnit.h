@@ -6,11 +6,12 @@
 #include "Graphics/CSprite.h"
 #include <string>
 #include <memory>
-#include <nlohmann/json_fwd.hpp>
+#include <nlohmann/json.hpp>
 
 #include "../func/CBuffSystem.h"
 #include "../func/ConstantTable.h"
 #include "../func/CAttributeSystem.h"
+#include "../func/Global.h"
 
 class CAbility;
 
@@ -30,16 +31,17 @@ public:
     float GetAttribute(std::string key){ return mAttributeSystem.GetAttribute(key);};
     float GetCacheAttribute(std::string key){ return mAttributeSystem.GetCacheAttribute(key);};
     void SetAttributeBase(std::string key) {mAttributeSystem.SetAttributeBase(key);};
-    float GetMoveSpeed(){return mAttributeSystem.GetAttribute("MovementSpeed");};//获取移速
-    float GetAttackDamage(){return mAttributeSystem.GetAttribute("AttackDamage");};//获取攻击力
-    float GetAttackSpeed(){return mAttributeSystem.GetAttribute("AttackSpeed");};//获取攻击速度
-    float GetAttackRange(){return mAttributeSystem.GetAttribute("AttackRange");};//获取攻击距离
-    float GetProjectileSpeed(){return mAttributeSystem.GetAttribute("ProjectileSpeed");};//获取弹道速度
-    float GetStrength(){return mAttributeSystem.GetAttribute("Strength");};//获取力量
-    float GetAgility(){return mAttributeSystem.GetAttribute("Agility");};//获取敏捷
-    float GetIntellect(){return mAttributeSystem.GetAttribute("Intellect");};//获取智力
-    float GetMaxHealth(){return mAttributeSystem.GetAttribute("Health");};//获取最大生命值
-    float GetArmor(){return mAttributeSystem.GetAttribute("Armor");};//获取护甲
+    float GetMoveSpeed(){return GetAttribute("MovementSpeed");};//获取移速
+    float GetAttackDamage(){return GetAttribute("AttackDamage");};//获取攻击力
+    float GetAttackSpeed(){return GetAttribute("AttackSpeed");};//获取攻击速度
+    float GetAttackRange(){return GetAttribute("AttackRange");};//获取攻击距离
+    float GetProjectileSpeed(){return GetAttribute("ProjectileSpeed");};//获取弹道速度
+    float GetStrength(){return GetAttribute("Strength");};//获取力量
+    float GetAgility(){return GetAttribute("Agility");};//获取敏捷
+    float GetIntellect(){return GetAttribute("Intellect");};//获取智力
+    float GetMaxHealth(){return GetAttribute("Health");};//获取最大生命值
+    float GetArmor(){return GetAttribute("Armor");};//获取护甲
+    float GetArmorMagic(){return GetAttribute("ArmorMagic");};//获取魔抗
 
     float GetAttackInterval() {return GetAttribute("AttackRate")/(1+(GetAttackSpeed()-100)/100);};//获取攻击间隔
 

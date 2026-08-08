@@ -24,10 +24,11 @@ CPlayer::CPlayer(std::string _name) : CUnit(_name){
 
 void CPlayer::OnCreate() {
     //主属性buff
-    // AddNewModifier(this, nullptr, "CBuff_AttributePrimary", {});
+    auto buff = AddNewModifier(this, nullptr, "CBuff_AttributePrimary", {});
+    buff.lock()->isPassive = true;//设置为被动
 
     // this->AddAbility("CAbility_water");
-    this->AddAbility("CAbility_KingBook");
+    // this->AddAbility("CAbility_KingBook");
     // this->AddAbility("CAbility_stamp");
     // this->AddAbility("CAbility_flyingKnife");
     this->SetContextThink("auto_cast",[&] {
@@ -40,6 +41,8 @@ void CPlayer::OnCreate() {
         }
         return 0.5;
     },0);
+
+    // std::cout << "绝对物理免疫："<<GetAbsoluteNoDamagePhysical() << std::endl;
 }
 
 
@@ -89,7 +92,7 @@ void CPlayer::DoAttack(CUnit* target) {
         "",
         {}
     };
-    CreateTrackingAttackProjectile(tab);
+    // CreateTrackingAttackProjectile(tab);
     EmitSoundOn("ice_proj");
     attack_cd = GetAttackInterval();
 }

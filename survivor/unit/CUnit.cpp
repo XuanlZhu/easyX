@@ -107,7 +107,7 @@ void CUnit::Update(float _deltaTime) {
         if (CalcDistanceBetweenEntityOBB(this,target.get())<=GetAttackRange() && attack_cd<=0 && !target->IsDeath()) {
             //攻击目标
             Global::soundManager->Play("injuried");
-            ApplyDamage(DamageContext{this,target.get(),mAttackDamage});
+            ApplyDamage(DamageContext{this,target.get(),mAttackDamage,DAMAGE_TYPE_PHYSICAL,nullptr,DAMAGE_CATEGORY_ATTACK});
             attack_cd = GetAttackInterval();
         }
     }

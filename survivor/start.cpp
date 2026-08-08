@@ -38,6 +38,7 @@ int main()
         return 1;
     },0);
     // CreateEffect("CEffect_levelup",player->GetPos(),nullptr);
+    CreateUnitByName("target_creep", player->GetPos(), nullptr, 3);
 
     // auto it = CreateEffect("CEffect_gem",player->GetPos(),player.get()).lock();//创建特效
     // it->SetParticleControl(0,CVector2(0,0));

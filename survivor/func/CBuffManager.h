@@ -17,7 +17,9 @@ public:
     void Update(float _deltaTime);//更新
     std::weak_ptr<CBuff> AddNewModifier(CUnit* _target,CUnit* _caster,CAbility* _ability,std::string _name,json _tab);//添加buff
     void ClearList();//清理表
-    // void RemoveBuff(_buff);
+    void RegisterModifier(CBuff* _buff);//注册buff
+    void UnregisterModifier(CBuff* _buff);//注销buff
 
     std::vector<std::shared_ptr<CBuff>> mBuffTable;
+    std::unordered_map<std::string, std::vector<CBuff*>> mAffectedBuffs;//受影响buff
 };

@@ -80,9 +80,31 @@ std::weak_ptr<CBuff> CBuffManager::AddNewModifier(CUnit* _target, CUnit* _caster
     mBuffTable.push_back(buff);
     _target->mBuffSystem.AddBuff(buff.get());//添加buff到单位
     _target->mAttributeSystem.RegisterModifier(buff.get());//添加到属性系统
+    RegisterModifier(buff.get());//自己注册
 
     buff->OnCreated();//触发OnCreated
     // std::cout << "添加buff到单位" << std::endl;
     return buff;
+}
+
+//注册buff
+void CBuffManager::RegisterModifier(CBuff* _buff) {
+    if (_buff == nullptr)return;
+    //标记该buff影响的属性
+    for (auto& x : _buff->AffectingAttributes())
+    {
+        mAffectedBuffs[x].push_back(_buff);
+    }
+
+}
+//注销buff
+void CBuffManager::UnregisterModifier(CBuff *_buff) {
+    if (_buff == nullptr)return;
+    //移除该buff影响的属性
+    for (auto& x : _buff->AffectingAttributes())
+    {
+        auto it = std::find(mAffectedBuffs[x].begin(), mAffectedBuffs[x].end(), _buff);
+        mAffectedBuffs[x].erase(it);//移除指针
+    }
 }
 

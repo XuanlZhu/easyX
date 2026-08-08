@@ -9,6 +9,7 @@
 #include "../func/Global.h"
 #include "../unit/CUnit.h"
 #include "Graphics/CEffect.h"
+#include "../func/CBuffManager.h"
 
 CBuff::~CBuff() {
     // std::cout << "CBuff开始析构" << std::endl;
@@ -41,6 +42,7 @@ void CBuff::Destroy() {
     OnDestroy();
     mBuffSystem->DestroyBuff(this);//buff系统移除
     mAttributeSystem->UnregisterModifier(this);//属性系统移除
+    Global::buffManager->UnregisterModifier(this);//buff管理器移除
 
     mDestroying = true;
     // std::cout << "buff销毁完成" << std::endl;

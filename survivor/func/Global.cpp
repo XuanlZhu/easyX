@@ -13,6 +13,7 @@
 // #include "./Graphics/CSprite.h"
 
 
+#include "CBuffManager.h"
 #include "Core/CVector2.h"
 #include "ResourceManager/CEffectManager.h"
 #include "../survivor/effects/CEffectNumber.h"
@@ -140,11 +141,19 @@ void ApplyDamage(DamageContext _context) {
         float armor = _context.victim->GetArmor();
         damage = damage*100/(100+armor*6);tab.damage = damage;
         //如果物理免疫
-        // if (_context.victim->mAttributeSystem.Recalculat_AbsoluteNoDamagePhysical(tab)>0) {damage = 0;}
-        for (auto& x : Global::unitManager->mUnits) {
-            auto value =  x->mAttributeSystem.Recalculat_AbsoluteNoDamagePhysical(tab);
-            if(x.get()==_context.victim && value>0){damage = 0;}
-        }
+        if (_context.victim->mAttributeSystem.Recalculat_AbsoluteNoDamagePhysical(tab)>0) {damage = 0;}
+        //全局分发
+        // float value=0;
+        // for (auto& x : Global::buffManager->mAffectedBuffs["AbsoluteNoDamagePhysical"]) {
+        //     auto value2 =  x->GetAttribute_AbsoluteNoDamagePhysical(tab);
+        //     if (x->mOwner.lock().get()==_context.victim){value+=value2;}
+        // }
+        // if(value>0){damage = 0;}
+        //全局分发事件
+        // for (auto& x : Global::unitManager->mUnits) {
+        //     auto value =  x->mAttributeSystem.Recalculat_AbsoluteNoDamagePhysical(tab);
+        //     if(x.get()==_context.victim && value>0){damage = 0;}
+        // }
 
     }
     //魔法伤害计算魔抗
